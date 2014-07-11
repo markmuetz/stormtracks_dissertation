@@ -1,9 +1,10 @@
-*.aux
-*.log
-*.bbl
-*.blg
-*.pdf
-*-blx.bib
-*.run.xml
+_build
+//*.aux
+//*.log
+//*.bbl
+//*.blg
+//*.pdf
+//*-blx.bib
+//*.run.xml
 
 .*.swp
