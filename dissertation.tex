@@ -26,10 +26,9 @@
 \newcommand{\ts}{\textsuperscript}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
+% Harvard style references.
 \usepackage[backend=biber,style=authoryear,sorting=nyt,dashed=false]{biblatex}
 \renewcommand*{\nameyeardelim}{\addcomma\space}
-% \usepackage[style=authoryear]{biblatex}
-% \usepackage[backend=biber,sorting=nyt,style=authoryear-ibd]{biblatex}
 \addbibresource{references/references.bib} % note the .bib is required
 
 %\newcommand{\coo}{\ce{CO2}}
@@ -63,13 +62,16 @@
 
 \title{Objective Tracking and Categorisation of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
+
 \date{29 August, 2014}
+
+% TODO: this is not working.
+%\chead{Mark Muetzelfeldt - Objective Tracking and Categorisation of Hurricanes}
 
 \begin{document}
 
-\input{./title.tex}
 
-\chead{Mark Muetzelfeldt - Objective Tracking and Categorisation of Hurricanes}
+\input{./title.tex}
 
 % Should be ~400 words.
 % Not included in word count.
@@ -91,6 +93,7 @@ Meeting Dr. Kevin Hodges (Reading University) was useful for [tracking help].
 Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and sounding out various ideas.
 
 \newpage
+
 
 \tableofcontents
 
@@ -121,10 +124,12 @@ Section text.
 \chapter{Conclusions}
 
 % Not included in word count.
+\addcontentsline{toc}{chapter}{Auto-critique}
 \chapter*{Auto-critique}
 
 % Harvard style bibliography.
-\printbibliography
+\addcontentsline{toc}{chapter}{References}
+\printbibliography[title={References}]
 
 %appendix 
 
