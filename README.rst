@@ -1,1 +1,3 @@
-Tex files/figures for UCL Environmental Modelling dissertation.
+Tex files/figures/tools for UCL Environmental Modelling dissertation.
+
+PDF will be put in _build.

@@ -1,0 +1,133 @@
+\documentclass[pdftex,12pt,a4paper]{report}
+
+% Some useful packages.
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{mhchem}
+\usepackage{textcomp}
+\usepackage{setspace}
+
+% Reduces margins substantially.
+\usepackage{geometry}
+\newgeometry{margin=3.0cm}
+
+% Allows headers and footers.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% Get rid of annoying line under header.
+\renewcommand{\headrulewidth}{0pt}
+
+\lhead{}
+\chead{}
+\rhead{}
+
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\usepackage[backend=biber,style=authoryear,sorting=nyt,dashed=false]{biblatex}
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+% \usepackage[style=authoryear]{biblatex}
+% \usepackage[backend=biber,sorting=nyt,style=authoryear-ibd]{biblatex}
+\addbibresource{references/references.bib} % note the .bib is required
+
+%\newcommand{\coo}{\ce{CO2}}
+
+% 12,000 words max.
+
+% overall structure:
+% Abstract
+% Intro
+% Methods
+% Results
+% Conclustion
+% Appendices
+% References
+
+% Rem: \lp
+% TODO: get \lp working again!
+% WG1AR5_ALL_FINAL
+% WG1AR5_AnnexI_FINAL
+% WG1AR5_Chapter02_FINAL: Observations: Atmosphere and Surface
+% WG1AR5_Chapter06_FINAL: Carbon and Other Biogeochemical Cycles
+% WG1AR5_Chapter08_FINAL: Anthropogenic and Natural Radiative Forcing
+% WG1AR5_Chapter09_FINAL: Evaluation of Climate Models
+% WG1AR5_Chapter14_FINAL: Climate Phenomena and their Relevance for Future Regional Climate Change
+% WG1AR5_SPM_FINAL
+% WG1AR5_TS_FINAL
+% SREX-All_FINAL
+% ar4_wg1_full_report
+% RCP_Guide
+% SREX-Ch3-Supplement_FINAL
+
+\title{Objective Tracking and Categorisation of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
+\author{Mark Muetzelfeldt - UCL Department of Geography}
+\date{29 August, 2014}
+
+\begin{document}
+
+\input{./title.tex}
+
+\chead{Mark Muetzelfeldt - Objective Tracking and Categorisation of Hurricanes}
+
+% Should be ~400 words.
+% Not included in word count.
+\onehalfspacing
+\section*{Abstract}
+
+From an ...
+
+\begin{center}
+\textbf{Word count:} XXX
+\end{center}
+
+\section*{Acknowledgements}
+
+I would like to thank Dr. Chris Brierley for his guidance and assistance in this dissertation.
+Technical expertise from Qinling Wu proved useful in setting the direction for this project. 
+Talking to Josh Studholme helped to provide context for the field and ideas for analysis. % CLUMSY
+Meeting Dr. Kevin Hodges (Reading University) was useful for [tracking help]. 
+Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and sounding out various ideas.
+
+\newpage
+
+\tableofcontents
+
+% Everything from here to auto-critique is included in word count.
+\chapter{Introduction}
+% Introduction, presenting the research problem, rationale, context and outline objectives, aims/objectives (possibly as a formal hypothesis).
+
+\section{Research Problem}
+
+According to \parencite{yin2012individual} it has been established that \dots
+However \textcite{marengo2010future} have found that \dots
+Section text.
+
+\subsection{Rationale}
+
+\subsection{Context}
+
+
+\chapter{Methods}
+
+% Methods, including data sources and acquisition, data processing.
+
+\chapter{Results}
+% Data analysis and results.
+
+\chapter{Discussion}
+
+\chapter{Conclusions}
+
+% Not included in word count.
+\chapter*{Auto-critique}
+
+% Harvard style bibliography.
+\printbibliography
+
+%appendix 
+
+%section{Additional information}
+
+\end{document}
