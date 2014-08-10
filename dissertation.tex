@@ -116,10 +116,65 @@ Section text.
 \chapter{Methods}
 % Methods, including data sources and acquisition, data processing.
 
+\section{Data Processing}
+
+\subsection{Wind Fields and Vorticity}
+
+In the 20CRP data, the longitudinal and latitudinal wind fields, u and v respectively, were used to calculate the vorticity and wind speeds. These are available at three different pressure levels: \SI{995}{hPa}, \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were only used to determine whether or not they were suitable for tracking of hurricanes, and it was found that they did not produce suitable tracks, and were not further used (see Section \ref{sec:results_tracking}). The formula for vorticity is given by:
+
+% TODO: check!
+\begin{equation}
+    vorticity = \frac{\partial v}{\partial \phi} - \frac{\partial u}{\partial \lambda}
+    \label{eqn:vorticity}
+\end{equation}
+
+This was approximated using a 2\ts{nd} order approximation:
+
+% TODO: check!
+\begin{equation}
+    vorticity \approx \frac{\Delta v}{2 \Delta \phi} - \frac{\Delta u}{2 \Delta \lambda} = \frac{v_{i,j+1} - v_{i,j-1}}{2 \Delta \phi} - \frac{u_{i+1,j} - u_{i-1,j}}{2 \Delta \lambda}
+    \label{eqn:vorticity_2nd_order}
+\end{equation}
+
+The vorticities at the \SI{995}{hPa} and \SI{850}{hPa} levels were calculated.
+
+\subsection{Maxima and Minima detection}
+\label{sec:methods_maxima_minima}
+
+For the vorticity fields, maxima are of primary interest as these represent grid cells where the wind is rotating most strongly. Conversely, for the PSL field, minima are of primary interest. A maxima or minima was defined as a cell whose value was greater or less than all eight of its surrounding cells. Vorticity maxima play a vital role in deriving tracks from the 20CRP data, and pressure minima are useful both for comparison with the best tracks data and categorisation of the tracks.
+
+\subsection{Upscaling of data}
+
+Following \textcite{TODOhodgesXXX}, the vorticity field was upscaled to a finer resolution. This was done so as when tracks were derived from these data, the so called ``staircase effect'', whereby tracks are seen to follow the grid cells at the resolution of the 20CRP data, was minimised. This upscaling was accomplished using a cubic spline interpolation, and the data were upscaled to two and three times their original resolutions. The efficacy of this upscaling will be demonstrated in Section \ref{sec:results_tracking}.
+
+\section{Tracking}
+
+From both initial experimentation, and reading the literature \parencite{TODOmultiple}, it was found that tracking on minima of the pressure field did not produce suitable tracks for identifying hurricane tracks. This was due to the pressure field being subject to synoptic scale disturbances that mean that minima may not be present due to the surrounding gradient of this field. Whilst it is possible to apply high pass filtering to remove these disturbances, it was decided to follow \textcite{TODOmutliple} and produce derived tracks from the 20CRP data based on vorticity maxima.
+
+For each timestep, the vorticity maxima were produced, as per Section \ref{sec:methods_maxima_minima}. This was done for both the \SI{995}{hPa} and \SI{850}{hPa} pressure levels, and for the one, two and three times the actual 20CRP resolution, yielding a total of six possibly configurations for the tracking. These various configurations were compared, and the results can be seen in Section \ref{sec:results_tracking}.
+
+The tracking algorithm used was a simple nearest neighbour tracking algorithm, with a modification that counted two vorticity maxima that were sufficiently close as belonging to the strongest of these maxima. This cutoff distance was set as eight times the distance between the cells at 0\textdegree N, or approximately \SI{1800}{km}. This distance was found to reduce problems of vorticity maxima merging and splitting. The algorithm worked as follows:
+
+\begin{enumerate}
+    \item Detect all vorticity maxima for the first timestep. If two maxima are less than the cutoff distance apart, combine both maxima, taking the strength and position of the strongest of the two maxima
+    \item Make each of the vorticity maxima in the first timestep the beginning of a derived track (whose length could end up being only one)
+    \item Detect all vorticity maxima in the second timestep, combining close weaker maxima into stronger.
+    \item Calculate nearest neighbour in the second timestep to first timestep, and set this as the next member of the derived track
+    \item Move onto the third timestep and repeat the process
+\end{enumerate}
+
+Whilst this algorithm is considerably less sophisticated that that of \textcite{hodges1994}, it was found to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS dataset, and almost all of the best tracks that were hurricanes (Section  \ref{sec:results_tracking}). A discussion of other tracking algorithms can be found in Section \ref{sec:discussion_tracking_algs}.
+
 \chapter{Results}
 % Data analysis and results.
 
+\section{Tracking}
+\label{sec:results_tracking}
+
 \chapter{Discussion}
+
+\section{Tracking Algorithms}
+\label{sec:discussion_tracking_algs}.
 
 \chapter{Conclusions}
 
