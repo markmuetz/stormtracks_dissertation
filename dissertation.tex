@@ -125,19 +125,20 @@ The International Best Track Archive for Climate Stewardship (IBTrACS) \parencit
 
 \subsection{Wind Fields and Vorticity}
 
-In the 20CRP data, the longitudinal and latitudinal wind fields, u and v respectively, were used to calculate the vorticity and wind speeds. These are available at three different pressure levels: \SI{995}{hPa}, \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were only used to determine whether or not they were suitable for tracking of hurricanes, and it was found that they did not produce suitable tracks, and were not further used (see Section \ref{sec:results_tracking}). The formula for vorticity is given by:
+In the 20CRP data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used to calculate the vorticity and wind speeds. These are available at three different pressure levels: \SI{995}{hPa}, \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were only used to determine whether or not they were suitable for tracking of hurricanes, and it was found that they did not produce suitable tracks, and were not further used (see Section \ref{sec:results_tracking}). The formula for vorticity, $\omega$, is given by:
 
-% TODO: check!
 \begin{equation}
-    vorticity = \frac{\partial v}{\partial \phi} - \frac{\partial u}{\partial \lambda}
+    \omega = \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}
     \label{eqn:vorticity}
 \end{equation}
 
-This was approximated using a 2\ts{nd} order approximation:
+The surface of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$ denote the latitude and longitude coordinates. $u_{i, j}$ denotes the longitudinal wind speed at grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using a 2\ts{nd} order approximation: %CLUMSY
 
-% TODO: check!
+% Calculation in code is a little different because it uses degrees instead of radians:
+% More like vorticity = du / (2 * dlon * cos(lat * pi / 180) * Earth_circ / 360) - dv / ((2 * dlat) * Earth_circ / 360)
+
 \begin{equation}
-    vorticity \approx \frac{\Delta v}{2 \Delta \phi} - \frac{\Delta u}{2 \Delta \lambda} = \frac{v_{i,j+1} - v_{i,j-1}}{2 \Delta \phi} - \frac{u_{i+1,j} - u_{i-1,j}}{2 \Delta \lambda}
+    \omega \approx \frac{\Delta v}{2 \Delta x} - \frac{\Delta u}{2 \Delta y} = \frac{v_{i,j+1} - v_{i,j-1}}{2 R_e \cos{\phi} \Delta \lambda} - \frac{u_{i+1,j} - u_{i-1,j}}{2 R_e \Delta \phi }
     \label{eqn:vorticity_2nd_order}
 \end{equation}
 
