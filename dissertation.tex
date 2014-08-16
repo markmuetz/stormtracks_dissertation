@@ -190,8 +190,21 @@ vorticity and pressure field taken from around Hurricane Katrina, and the corres
 the vorticity and minima for the pressure fields. TODO: say interesting things about these figures.
 
 % Figure XX: progression from raw u/v fields to vorticity to downscaled vorticity.
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/katrina_data_proc}
+    \caption{Caption goes here.}
+    \label{fig:katrina_data_proc}
+\end{figure}
 
 % Figure XX: 2x2 showing vorticity + maxima/ pressure + minima.
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/katrina_max_mins}
+    \caption{Caption goes here.}
+    \label{fig:katrina_max_mins}
+\end{figure}
+
 
 \section{Tracking}
 
@@ -254,8 +267,23 @@ are shown in Figure XX2. This shows a typical hurricane that makes landfall. Som
 from this figure are TODO.
 
 % Figure TODO XX1: Individual ensemble member/best track match.
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/katrina_individual_match_em7}
+    \caption{Individual match between best track (red) and derived track (blue dashed) for Hurricane 
+             Katrina. Derived track was generated from the \SI{850}{hPa} pressure level using the
+             original resolution. The match between the best track and the derived track is shown using
+             yellow lines, which show the distance between the two tracks at each timestep. }
+    \label{fig:katrina_individual_match_em7}
+\end{figure}
 
 % Figure TODO XX2: 6x configuration plots for Hurricane Katrina.
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/katrina_six_tracking_configs}
+    \caption{Caption goes here.}
+    \label{fig:katrina_six_tracking_configs}
+\end{figure}
 
 To judge the tracking ability of the different tracking configurations, this matching across all
 best tracks and derived tracks was done for each year in the ten year period 2000-2009. For each
@@ -271,6 +299,7 @@ is which is better: the \SI{995}{hPa} or the \SI{850}{hPa} pressure levels. TODO
 
 % Figure XX: Comparison of wins/losses of different tracking configurations.
 
+\newpage
 \section{Extra Field Collection}
 
 Up until this point in the processing, only the u and v wind fields have been utilised. From these,
