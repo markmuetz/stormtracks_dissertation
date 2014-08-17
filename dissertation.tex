@@ -35,8 +35,6 @@
 \renewcommand*{\nameyeardelim}{\addcomma\space}
 \addbibresource{references/references.bib} % note the .bib is required
 
-%\newcommand{\coo}{\ce{CO2}}
-
 % 12,000 words max.
 
 % overall structure:
@@ -47,6 +45,9 @@
 % Conclusion
 % Appendices
 % References
+
+% Common typos:
+% possibly
 
 \title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
@@ -335,6 +336,124 @@ the IBTrACS dataset. Reasons as to why this might be so are examined further in 
 
 \section{Classification}
 
+% Description of the goal of classification and how it applies in this setting. Set out terminology
+% that I am going to use. 
+% standard by which the various classifiers can be trained/judged.
+Now that for each ensemble member a number of tracks have been derived from the 20CRP data, and that
+extra fields have been collected using the track's positions at different timesteps, it is possible
+to use this information to classify each point of each track as either being a hurricane or not.
+These points will be knows as cyclone data points (CDPs) and for a typical year there are around 2
+million of these points, spread across the 56 ensemble members. 
+
+Classification is the process of taking a dataset and splitting it up into various categories based
+on the attributes of each item in the dataset. For the purposes of hurricane classification, this is
+a binary classification, i.e. a CDP is either a hurricane or it is not. More fine-grained approaches
+are possible, such as splitting each CDP into a category from the Saffir-Simpson hurricane scale,
+but in this analysis the only concern was trying to correctly categorise whether or not a given CDP
+was a hurricane.
+
+Given that each derived track has also been matched to a best track, it is also possible to use the
+information from the best tracks dataset about whether the point on the best track is a hurricane or
+not as an objective standard for whether or not the corresponding point on the derived track
+represents a hurricane. This is represented visually in Figure TODO, which shows every CDP for the
+year TODO, as well as whether the individual point has been matched to a hurricane in the best
+tracks dataset or not. In classification terminology, this matching represents the gold standard by
+which the classification algorithms can be trained, and by which their performance can be validated.
+This allows classification algorithms to take the information derived from the 20CRP and perform
+classification based on this information.
+
+% Figure showing CDP with training set info included.
+
+\subsubsection{Classification Successes and Errors}
+
+% Explanation of FPs and FNs, TPs and TNs. Talk about Gold standard and how I am using IBTrACS as a
+% gold standard. Relationship to Type I/II errors (maybe). Venn diagram showing FP/FN/TP/TN.
+
+When classifying data with a binary classifier for which a gold standard exists, there are four
+possible results of an individual classification. These are:
+
+\begin{itemize}
+    \item \textbf{True Positive:} The classification predicts that the CDP is a hurricane and
+        this is verified by the best tracks information.
+    \item \textbf{True Negative:} The classification predicts that the CDP is not a hurricane
+        and this is verified by the best tracks information.
+    \item \textbf{False Positive:} The classification predicts that the CDP is a hurricane and
+        this is refuted by the best tracks information.
+    \item \textbf{False Negative:} The classification predicts that the CDP is not a hurricane
+        and this is refuted by the best tracks information.
+\end{itemize}
+
+When classifying a dataset, the collection of these results can be represented visually with a Venn
+diagram, as shown in Figure TODO. They can also be represented in tabular form in an Error Matrix
+(also called a Contingency Table or Confusion Matrix). An example of an Error Matrix can be seen in
+Table TODO, which shows the successes and failures of a simple classifier for a subset of the data.
+
+\subsubsection{Sensitivity, Positive Predictive Value and False Positive Rate}
+
+From the success and error results, various metrics are defined that give a measure of how well a
+particular classifier performs at various tasks. Of these metrics, three will be considered in this
+project:
+
+\begin{enumerate}
+    \item \textbf{Sensitivity:} This is defined as $\frac{TP}{TP + FN}$. In this context, it gives a
+        measure of how many hurricanes are correctly detected from all the actual hurricanes. 1
+        represents a perfect sensitivity.
+    \item \textbf{Positive Predictive Value:} This is defined as $\frac{TP}{TP + FP}$. In this
+        context, it gives a measure of how many of the predicted hurricanes from the classification
+        algorithm are actually hurricanes. 1 represents a perfect PPV.
+    \item \textbf{False Positive Rate:} This is defined as $\frac{FP}{FP + TN}$. In this
+        context, it gives a measure of the detection rate of all actual hurricanes. 0 represents a
+        perfect FPR.
+\end{enumerate}
+
+Sensitivity is often plotted against FPR to make a Receiver Operator Characteristic plot (ROC plot).
+ROC plots are useful for determining which particular classifier performs best over a given training
+and validation dataset. The top left corner of this plot represents perfect classification.  Another
+plot which will be utilised in this project is a plot of Sensitivity against PPV, which will again
+be used to determine which of the classifiers performs best. This plot is more useful in the context
+of this project, as for the given datasets, very high values of TP detection are seen, which means
+that the FPR will typically be very low, and less information can be gleaned from this particular
+metric. Also, as will be explained in the next section, the Sensitivity and the PPV can be used to
+obtain an estimate of the number of actual hurricanes. Examples of these plots can be seen in
+Figures TODO and TODO.
+
+\subsubsection{Estimate of the Number of Actual Hurricanes}
+
+When any of the classifiers is run on a dataset, it will produce a prediction of which of the
+members of that dataset are hurricanes, $H_{predicted}$. The PPV value derived for that particular classifier will
+allow an estimate of the number of TPs for that prediction. Likewise, from the estimated number of
+TPs, the sensitivity will allow a means of estimating the number of actual hurricanes, $H_{est. actual}$,
+in the dataset. The equation for this is:
+
+\begin{equation}
+    H_{est. actual} = \frac{PPV \times H_{predicted}}{sensitivity}
+    \label{eqn:n_actual_hurricane}
+\end{equation}
+
+\subsection{Classifiers}
+
+\subsubsection{Cutoff Classifier}
+
+% How this is related to a Decision Tree classifier, how it was optimised.
+
+\subsubsection{Linear/Quadratic Discriminant Analysis Classifiers}
+
+% How these work.
+
+\subsubsection{Stochastic Gradient Descent Classifiers}
+
+% How this works.
+
+\subsection{Classifier Performance}
+
+% Explain how 20 years worth of data were split into a training/validation dataset.
+
+% Figures showing performance of various classifiers in terms of FP/FN/TP/TN for 3 variables plotted
+% against vorticity for training set. Discussion of performance differences.
+
+\subsubsection{Training Set}
+
+\subsubsection{Validation Set}
 
 \chapter{20\ts{th} Century Analysis Results}
 % Data analysis and results.
