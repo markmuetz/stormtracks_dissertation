@@ -42,43 +42,24 @@
 % overall structure:
 % Abstract
 % Intro
-% Methods
-% Results
-% Conclustion
+% Data Sources
+% Development of the Hurricane Detection Algorithm
+% Conclusion
 % Appendices
 % References
-
-% Rem: \lp
-% TODO: get \lp working again!
-% WG1AR5_ALL_FINAL
-% WG1AR5_AnnexI_FINAL
-% WG1AR5_Chapter02_FINAL: Observations: Atmosphere and Surface
-% WG1AR5_Chapter06_FINAL: Carbon and Other Biogeochemical Cycles
-% WG1AR5_Chapter08_FINAL: Anthropogenic and Natural Radiative Forcing
-% WG1AR5_Chapter09_FINAL: Evaluation of Climate Models
-% WG1AR5_Chapter14_FINAL: Climate Phenomena and their Relevance for Future Regional Climate Change
-% WG1AR5_SPM_FINAL
-% WG1AR5_TS_FINAL
-% SREX-All_FINAL
-% ar4_wg1_full_report
-% RCP_Guide
-% SREX-Ch3-Supplement_FINAL
 
 \title{Objective Tracking and Categorisation of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
 
 \date{29 August, 2014}
 
-% TODO: this is not working.
-%\chead{Mark Muetzelfeldt - Objective Tracking and Categorisation of Hurricanes}
-
 \begin{document}
-
 
 \input{./title.tex}
 
-% Should be ~400 words.
+% Should be >= 400 words.
 % Not included in word count.
+
 \onehalfspacing
 \section*{Abstract}
 
@@ -95,7 +76,7 @@ Technical expertise from Qinling Wu proved useful in setting the direction for t
 Talking to Joshua Studholme helped to provide context for the field and ideas for analysis. % CLUMSY
 Meeting Dr. Kevin Hodges (Reading University) was useful for [tracking help]. 
 Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and 
-sounding out various ideas.
+for sounding out various ideas.
 
 \newpage
 
@@ -119,8 +100,8 @@ However \textcite{walshObjective1997} have found that \dots
 
 \chapter{Data Sources}
 
-\section{20th Century Reanalysis Project}
-The 20th Century Reanalysis Project (20CRP) is a project whose aim is to produce a best estimate of
+\section{20\ts{th} Century Reanalysis Project}
+The 20\ts{th} Century Reanalysis Project (20CRP) is a project whose aim is to produce a best estimate of
 the state of the atmosphere by including information from a variety of different sources using data
 assimilation \parencite{compoTwentieth2011}.
 
@@ -139,7 +120,7 @@ The International Best Track Archive for Climate Stewardship (IBTrACS)
 In the 20CRP data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used
 to calculate the vorticity and wind speeds. These are available at three different pressure levels:
 \SI{995}{hPa}, \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were only used to determine
-wether or not they were suitable for tracking of hurricanes, and it was found that they did not
+whether or not they were suitable for tracking of hurricanes, and it was found that they did not
 produce suitable tracks, and were not further used (see Section \ref{sec:results_tracking}). The
 formula for vorticity, $\omega$, is given by:
 
@@ -168,7 +149,7 @@ The vorticities at the \SI{995}{hPa} and \SI{850}{hPa} levels were calculated.
 
 For the vorticity fields, maxima are of primary interest as these represent grid cells where the
 wind is rotating most strongly. Conversely, for the PSL field, minima are of primary interest. A
-maxima or minima was defined as a cell whose value was greater or less than all eight of its
+maximum or minimum was defined as a cell whose value was greater or less than all eight of its
 surrounding cells. Vorticity maxima play a vital role in deriving tracks from the 20CRP data, and
 pressure minima are useful both for comparison with the best tracks data and categorisation of the
 tracks.
@@ -177,19 +158,20 @@ tracks.
 
 Following \textcite{TODOhodgesXXX}, the vorticity field was downscaled to a finer resolution. This was
 done so as when tracks were derived from these data, the so called ``staircase effect'', whereby
-tracks are seen to follow the grid cells at the resolution of the 20CRP data, was minimised. This
+tracks are seen to follow the grid cells at the resolution of the 20CRP data, was minimised (an
+example of this ``staircase effect'' can be seen in Figure \ref{fig:katrina_individual_match_em7}). This
 downscaling was accomplished using a cubic spline interpolation, and the data were downscaled to two and
 three times their original resolutions. The efficacy of this downscaling will be demonstrated in
 Section \ref{sec:results_tracking}.
 
 \subsection{Data Processing Results}
 
-Figure XX shows the progression of the data from its raw form, to a derived vorticity, and then a
-downscaled to three times the original resolution vorticity field. Figure XX shows an example
-vorticity and pressure field taken from around Hurricane Katrina, and the corresponding maxima for
-the vorticity and minima for the pressure fields. TODO: say interesting things about these figures.
+Figure \ref{fig:katrina_data_proc} shows the progression of the data from its raw form, to a derived
+vorticity, and then a downscaled to three times the original resolution vorticity field. Figure
+\ref{fig:katrina_max_mins} shows an example vorticity and pressure field taken from around Hurricane
+Katrina, and the corresponding maxima for the vorticity and minima for the pressure fields. TODO:
+say interesting things about these figures.
 
-% Figure XX: progression from raw u/v fields to vorticity to downscaled vorticity.
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\textwidth]{figures/katrina_data_proc}
@@ -197,7 +179,6 @@ the vorticity and minima for the pressure fields. TODO: say interesting things a
     \label{fig:katrina_data_proc}
 \end{figure}
 
-% Figure XX: 2x2 showing vorticity + maxima/ pressure + minima.
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\textwidth]{figures/katrina_max_mins}
@@ -205,29 +186,30 @@ the vorticity and minima for the pressure fields. TODO: say interesting things a
     \label{fig:katrina_max_mins}
 \end{figure}
 
-
 \section{Tracking}
 
 From both initial experimentation, and reading the literature \parencite{TODOmultiple}, it was found
 that tracking on minima of the pressure field did not produce suitable tracks for identifying
-hurricane tracks. This was due to the pressure field being subject to synoptic scale disturbances
+storm systems. This was due to the pressure field being subject to synoptic scale disturbances
 that mean that minima may not be present due to the surrounding gradient of this field. Whilst it is
 possible to apply high pass filtering to remove these disturbances, it was decided to follow
 \textcite{TODOmutliple} and produce derived tracks from the 20CRP data based on vorticity maxima.
 
-For each timestep, the vorticity maxima were produced, as per Section
+
+% This section is confusing on re-reading it. I think I need to make it clearer that I'm going to
+% compare different configurations.
+For each timestep, the vorticity maxima were calculated, as per Section
 \ref{sec:methods_maxima_minima}. This was done for both the \SI{995}{hPa} and \SI{850}{hPa} pressure
 levels, and for the one, two and three times the actual 20CRP resolution, yielding a total of six
-possibly configurations for the tracking. These various configurations were compared, and the
+possible configurations for the tracking. These various configurations were compared, and the
 results can be seen in Section \ref{sec:results_tracking}. Maxima that were below a threshold value
-% TODO: vort threshold.
-of \SI{999}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
-that are unlikely to be part of even tropical storms. This point is revisited in Section TODO where
-some justification is given for this choice.
+of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
+that are unlikely to be part of even tropical storms. This choice is revisited in Section TODO where
+some justification is given for this value.
 
 The tracking algorithm used was a simple nearest neighbour tracking algorithm, with a modification
-% belonging?
-that counted two vorticity maxima that were sufficiently close as belonging to the strongest of
+that counted two or more vorticity maxima that were sufficiently close as being part of the same storm
+system, with the location and strength of the maximum given by the strongest of
 these maxima. This cutoff distance was set as eight times the distance between the cells at
 0\textdegree N, or approximately \SI{1800}{km}. This distance was found to reduce problems of
 vorticity maxima merging and splitting. The algorithm worked as follows:
@@ -240,7 +222,7 @@ vorticity maxima merging and splitting. The algorithm worked as follows:
     \item Make each of the vorticity maxima in the first timestep the beginning of a derived track
         (whose length could end up being only one)
     \item Detect all vorticity maxima in the second timestep, combining close weaker maxima into
-        stronger.
+        stronger. % TODO: not totally clear that I'm talking about the combining step here.
     \item Calculate nearest neighbour in the second timestep to first timestep, and set this as the
         next member of the derived track
     \item Move onto the third timestep and repeat the process
@@ -255,29 +237,32 @@ discussion of other tracking algorithms can be found in Section \ref{sec:discuss
 \label{sec:results_tracking}
 
 Once tracks have been derived from the 20CRP, it is possible to match them to the corresponding best
-tracks. The corresponding best track must be close the derived track in space, and its duration must
-overlap the duration of the derived track. In this project, an overlap of 6 timesteps, or one and a
-half days, was required for there to be a match between a derived track and a best track.
-Additionally, the average distance from the derived track and the best track had to be lower than a
-given threshold, taken as \SI{9999}{km}. An example of a matching derived track taken from one
-ensemble member and best track is shown in Figure TODO XX1. This shows how the average distance
-between a derived track (from one ensemble member) and a best track is calculated. All matching
-tracks across all the ensemble members for each of the different configurations for Hurricane Katrina 
-are shown in Figure XX2. This shows a typical hurricane that makes landfall. Some noticeable points
-from this figure are TODO.
+tracks. The corresponding best track must be close the derived track in space, and its temporal
+duration must overlap the duration of the derived track. In this project, an overlap of 6 timesteps,
+or one and a half days, was required for there to be a match between a derived track and a best
+track.  Additionally, the average distance from the derived track and the best track had to be lower
+than a given threshold, taken as \SI{500}{km}. An example of a matching derived track taken from
+one ensemble member and best track is shown in Figure \ref{fig:katrina_individual_match_em7}. 
+% N.B. em7 is counting from 0.
+This shows how the cumulative and mean distances between a derived track (from ensemble member 8)
+and a best track are calculated. All matching tracks across all the ensemble members for each of the
+different configurations for Hurricane Katrina are shown in Figure
+\ref{fig:katrina_six_tracking_configs}. This shows a typical hurricane that makes landfall. Some
+noticeable points from this figure are TODO.
 
-% Figure TODO XX1: Individual ensemble member/best track match.
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\linewidth]{figures/katrina_individual_match_em7}
-    \caption{Individual match between best track (red) and derived track (blue dashed) for Hurricane 
-             Katrina. Derived track was generated from the \SI{850}{hPa} pressure level using the
-             original resolution. The match between the best track and the derived track is shown using
-             yellow lines, which show the distance between the two tracks at each timestep. }
+    \caption{Individual match between best track (red) and derived track (blue dashed) for Hurricane
+        Katrina. The derived track was generated from the \SI{850}{hPa} pressure level using the
+        original resolution and ensemble member 8. The match between the best track and the derived
+        track is shown using yellow lines, which show the distance between the two tracks at each
+        timestep. The cumulative distance is the sum of these distances, and the mean distance is
+        the cumulative distance divided by the number of matches.
+    }
     \label{fig:katrina_individual_match_em7}
 \end{figure}
 
-% Figure TODO XX2: 6x configuration plots for Hurricane Katrina.
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\linewidth]{figures/katrina_six_tracking_configs}
@@ -286,10 +271,11 @@ from this figure are TODO.
 \end{figure}
 
 To judge the tracking ability of the different tracking configurations, this matching across all
-best tracks and derived tracks was done for each year in the ten year period 2000-2009. For each
-year, the combined average distance between each derived track and best track was calculated. This
-number was divided by the total number of matches, so as a particular configuration that achieved
-relatively few matches would be penalised. This produces a metric by which the various
+best tracks and derived tracks was done for each year in the ten year period 2000-2009.  
+% TODO: switch to cumoveroverlap as it is much easier to describe.
+For each year, the combined average distance between each derived track and best track was
+calculated. This number was divided by the total number of matches, so as a particular configuration
+that achieved relatively few matches would be penalised. This produces a metric by which the various
 configurations can be judged, and each of the configurations was then compared the others to see how
 they performed on this metric. The results of this comparison can be seen in Figure XX3. It is clear
 that higher resolution, downscaled data produces better tracks that the unscaled data. This suggests
@@ -302,16 +288,16 @@ is which is better: the \SI{995}{hPa} or the \SI{850}{hPa} pressure levels. TODO
 \newpage
 \section{Extra Field Collection}
 
-Up until this point in the processing, only the u and v wind fields have been utilised. From these,
-the vorticity has been calculated and tracks have been derived from the maxima of these fields.
-However, to successfully categorise part of a track as a hurricane, it is necessary to collect more
-fields. These fields will help to distinguish hurricanes from non-hurricanes. To this end, the
-latitude, longitude, date and ensemble member were used to obtain further variables from the 20CRP
-dataset. These variables were:
+Up until this point in the processing, only the $u$ and $v$ wind fields have been utilised. From
+these, the vorticity has been calculated and tracks have been derived from the maxima of these
+fields.  However, to successfully categorise part of a track as being of hurricane strength, it is
+necessary to collect more fields. These fields will help to distinguish hurricanes from
+non-hurricanes. To this end, the latitude, longitude, date and ensemble member were used to obtain
+further variables from the 20CRP dataset. These variables were:
 
 \begin{enumerate}
-    \item \textbf{Minimum pressure:} the pressure minimum within \SI{9999}{km} was found and the distance
-        from the vorticity maxima to this minima was also stored.
+    \item \textbf{Minimum pressure:} the pressure minimum within \SI{1000}{km} of the vorticity
+        maximum was found and the distance from the vorticity maximum to this minimum was also stored.
     \item \textbf{Ambient pressure difference:} the difference in pressure between the minimum
         pressure and the local mean pressure, as calculated by taking the surrounding 121 grid cells
         and averaging their pressures.
