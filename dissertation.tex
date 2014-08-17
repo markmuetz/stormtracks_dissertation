@@ -48,7 +48,7 @@
 % Appendices
 % References
 
-\title{Objective Tracking and Categorisation of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
+\title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
 
 \date{29 August, 2014}
@@ -96,7 +96,8 @@ However \textcite{walshObjective1997} have found that \dots
 
 \subsection{Context}
 
-% Methods, including data sources and acquisition, data processing.
+% Finish with a run-down of the structure of the rest of the dissertation, including why it deviates
+% from the traditional Intro/Methods/Results/Discussion/Conclusion structure.
 
 \chapter{Data Sources}
 
@@ -111,7 +112,12 @@ The International Best Track Archive for Climate Stewardship (IBTrACS)
 
 % TODO: chapter title?
 \chapter{Development of the Hurricane Detection Algorithm}
+
 % Overall description to go here, with flow chart.
+% Mention: 
+% * project URLs
+% * choice of tracking then classification vs classifying individual CDPs
+% * amount of processing required
 
 \section{Data Processing}
 
@@ -151,7 +157,7 @@ For the vorticity fields, maxima are of primary interest as these represent grid
 wind is rotating most strongly. Conversely, for the PSL field, minima are of primary interest. A
 maximum or minimum was defined as a cell whose value was greater or less than all eight of its
 surrounding cells. Vorticity maxima play a vital role in deriving tracks from the 20CRP data, and
-pressure minima are useful both for comparison with the best tracks data and categorisation of the
+pressure minima are useful both for comparison with the best tracks data and classification of the
 tracks.
 
 \subsection{Downscaling of Data}
@@ -290,7 +296,7 @@ is which is better: the \SI{995}{hPa} or the \SI{850}{hPa} pressure levels. TODO
 
 Up until this point in the processing, only the $u$ and $v$ wind fields have been utilised. From
 these, the vorticity has been calculated and tracks have been derived from the maxima of these
-fields.  However, to successfully categorise part of a track as being of hurricane strength, it is
+fields.  However, to successfully classify part of a track as being of hurricane strength, it is
 necessary to collect more fields. These fields will help to distinguish hurricanes from
 non-hurricanes. To this end, the latitude, longitude, date and ensemble member were used to obtain
 further variables from the 20CRP dataset. These variables were:
@@ -328,7 +334,7 @@ the IBTrACS dataset. Reasons as to why this might be so are examined further in 
 
 % Figure XX: plot showing poor correlation between Katrina derived and best.
 
-\section{Categorisation}
+\section{Classification}
 
 
 \chapter{20\ts{th} Century Analysis Results}
