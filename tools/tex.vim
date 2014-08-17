@@ -1,3 +1,7 @@
+" Set line width to 100 chars and turn on spelling.
+setlocal tw=100
+setlocal spell spelllang=en_gb
+
 " N.B. Should be copied to ~/.vim/plugin/
 let g:Tex_Outdir='_build' 
 
