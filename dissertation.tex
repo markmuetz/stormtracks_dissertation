@@ -19,9 +19,10 @@
 % Get rid of annoying line under header.
 \renewcommand{\headrulewidth}{0pt}
 
+% Properly fixed by installing texlive-fonts-recommended
 % Temporary fix for missing font problem.
 % N.B. I know this is wrong, but there is a problem with missing fonts otherwise.
-\renewcommand{\textdegree}{$^{\circ}$ }
+% \renewcommand{\textdegree}{$^{\circ}$ }
 
 \lhead{}
 \chead{}
@@ -58,12 +59,11 @@
 
 \input{./title.tex}
 
-% Should be >= 400 words.
-% Not included in word count.
-
 \onehalfspacing
 \section*{Abstract}
 
+% Should be >= 400 words.
+% Not included in word count.
 % 255 words so far.
 A procedure for the detection of hurricanes in the 20\ts{th} Century Reanalysis Project dataset is
 developed. Tracks are derived from the dataset by tracking vorticity maxima over time. These
@@ -115,12 +115,49 @@ for sounding out various ideas.
 % ----------
 
 % Impacts of hurricanes.
-% Effects of GW on frequency/intensity.
+Hurricanes are one of nature's most impressive and devastating extreme weather events. The costliest
+hurricane this century, hurricane Katrina, was responsible for 1833 deaths and caused \$108
+billion USD in damage \parencite{TODOCITE}. Hurricanes are therefore of great importance socially,
+economically and, in hurricane Katrina's case, even politically.
+
+% Heat transport by hurricanes.
+Hurricanes, and more generally tropical cyclones, are also known to be a major contributor to the
+poleward heat flux that evens out the temperatures between the poles and the tropics, carrying an
+estimated \SI{1.4e15}{W} towards the poles \parencite{emanuelContribution2012}. This
+contribution is large enough that it may affect the thermohaline circulation
+\parencite{huEffect2009}, a major component of the coupled atmosphere-ocean system of the Earth. So
+coupled with their socio-economic impact, understanding hurricanes is of intrinsic scientific
+interest too, in helping to understand the Earth's climate and producing more accurate General
+Circulation Models.
+
+% Effects of global warming on frequency/intensity.
+From a theoretical perspective, increasing global mean temperatures are predicted to lead to an
+increase in the intensity of hurricanes \parencite{emanuelDependence1987}. This is backed up by 
+computer modelling, which predicts a 6\% increase in maximum wind speed under conditions of a rise
+in global temperatures over the next 80 years \parencite{knutsonImpact2004}. Given that a
+hurricane's destructive potential varies as the maximum wind speed cubed
+\parencite{emanuelIncreasing2005}, this would lead to a 20\% increase in hurricanes' destructive
+potential. In line with the theory, this destructive potential is found to have risen ``markedly''
+since the 1970s \parencite{emanuelIncreasing2005}. As well as increases in the intensity of
+hurricanes, increases in their frequency have been detected \parencite{goldbergRecent2001,
+websterChanges2005, hollandHeightened2007}.
+
 % Trends in hurricanes over time leading on to...
+Most studies into hurricane frequency and intensity tend to rely on best tracks databases as their
+primary data source, such as the IBTrACS database used in this study
+\parencite{knappInternational2010}, or the tropical cyclone database from the National Hurricane
+Center \parencite{jarvinianTropical1984}. These databases suffer from some problems when going into
+the middle and early 20\ts{th} century, such as the lack of satellite data before the 1970s, and the
+lack of reliable aeroplane data before around the 1930s. Accordingly, in this study, the approach
+taken is a different one. Instead of using the numbers compiled by various agencies as the primary
+source of information into hurricanes, the primary data will be taken from reanalysis data,
+specifically the 20\ts{th} Century Reanalysis Project (20CRP). Hurricanes will be detected in these
+data, and the detection procedure will be trained and validated on recent data (from 1990 to 2009),
+where reliable best tracks exist. Once the detection procedure has been trained, it can be used to
+run over the whole of the 20\ts{th} century, providing an objective measure of the number of
+hurricanes in each year.
 
-% Research problem.
-% -----------------
-
+\section{Research Problem}
 % Detection of hurricanes in 20CRP dataset.
 % * Reason: spans 20th C.
 % * List other reanalyses that do not.
