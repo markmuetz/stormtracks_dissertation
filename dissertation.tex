@@ -21,7 +21,7 @@
 
 % Temporary fix for missing font problem.
 % N.B. I know this is wrong, but there is a problem with missing fonts otherwise.
-\renewcommand{\textdegree}{$^{\circ}$ } 
+\renewcommand{\textdegree}{$^{\circ}$ }
 
 \lhead{}
 \chead{}
@@ -71,7 +71,7 @@ derived tracks are matched against best tracks taken from the IBTrACS best track
 different tracking configurations are evaluated: using the vorticity at the \SI{995}{hPa} and
 \SI{850}{hPa} pressure levels and using the original resolution data, data downscaled to two and
 three times the original resolution. It is found that using downscaling to three times the
-resolution provides a better match between the derived tracks and the best tracks. Tracks 
+resolution provides a better match between the derived tracks and the best tracks. Tracks
 at the different pressure levels produce similar results, and the \SI{850}{hPa} pressure level is
 chosen on theoretical grounds.
 
@@ -95,9 +95,9 @@ It is found that\dots
 \section*{Acknowledgements}
 
 I would like to thank Dr. Chris Brierley for his guidance and assistance in this dissertation.
-Technical expertise from Qinling Wu proved useful in setting the direction for this project. 
+Technical expertise from Qinling Wu proved useful in setting the direction for this project.
 Talking to Joshua Studholme helped to provide context for the field and ideas for analysis. % CLUMSY
-Meeting Dr. Kevin Hodges (Reading University) was useful for [tracking help]. 
+Meeting Dr. Kevin Hodges (Reading University) was useful for [tracking help].
 Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and
 for sounding out various ideas.
 
@@ -107,17 +107,44 @@ for sounding out various ideas.
 
 % Everything from here to auto-critique is included in word count.
 \chapter{Introduction}
+% From the dissertation handbook:
 % Introduction, presenting the research problem, rationale, context and outline objectives,
 % aims/objectives (possibly as a formal hypothesis).
 
-\section{Research Problem}
+% Rationale.
+% ----------
 
-However \textcite{walshObjective1997} have found that \dots
+% Impacts of hurricanes.
+% Effects of GW on frequency/intensity.
+% Trends in hurricanes over time leading on to...
 
-\subsection{Rationale}
+% Research problem.
+% -----------------
 
-\subsection{Context}
+% Detection of hurricanes in 20CRP dataset.
+% * Reason: spans 20th C.
+% * List other reanalyses that do not.
+% * Problems with this dataset: low resolution, despite trying to make it objective, it will likely
+% change over time, making trend detection tricky (laying groundwork for talking about this in
+% discussion).
 
+% Context.
+% --------
+
+% Tracking/detection: Literature review. Lots and lots of references.
+% Tracking: why it's a good idea to track then detect. Links to Hodges 1 and 2.
+% Detection: GCM:
+% Talk about role of resolution
+% Talk about
+% Discuss different approaches.
+% Detection: Reanalyses.
+% List some previous attempts to detect hurr/tropical cyclones in reanalyses.
+% Talk about the primary difference: the existence of best tracks datasets.
+
+% Objectives/Project Structure.
+% -----------------------------
+
+% Outline of objectives for this project.
 % Finish with a run-down of the structure of the rest of the dissertation, including why it deviates
 % from the traditional Intro/Methods/Results/Discussion/Conclusion structure.
 
@@ -129,14 +156,14 @@ the state of the atmosphere by including information from a variety of different
 assimilation \parencite{compoTwentieth2011}.
 
 \section{IBTrACS Best Tracks Dataset}
-The International Best Track Archive for Climate Stewardship (IBTrACS) 
-\parencite{knappInternational2010} is a 
+The International Best Track Archive for Climate Stewardship (IBTrACS)
+\parencite{knappInternational2010} is a
 
 % TODOIMPROVE: chapter title?
 \chapter{Development of the Hurricane Detection Algorithm}
 
 % Overall description to go here, with flow chart.
-% Mention: 
+% Mention:
 % * project URLs
 % * choice of tracking then classification vs classifying individual CDPs
 % * amount of processing required
@@ -157,7 +184,7 @@ formula for vorticity, $\omega$, is given by:
     \label{eqn:vorticity}
 \end{equation}
 
-The surface of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$ 
+The surface of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$
 denote the latitude and longitude coordinates. $u_{i, j}$ denotes the longitudinal wind speed at
 grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using a 2\ts{nd} order
 approximation: %CLUMSY
@@ -270,7 +297,7 @@ duration must overlap the duration of the derived track. In this project, an ove
 or one and a half days, was required for there to be a match between a derived track and a best
 track.  Additionally, the average distance from the derived track and the best track had to be lower
 than a given threshold, taken as \SI{500}{km}. An example of a matching derived track taken from
-one ensemble member and best track is shown in Figure \ref{fig:katrina_individual_match_em7}. 
+one ensemble member and best track is shown in Figure \ref{fig:katrina_individual_match_em7}.
 % N.B. em7 is counting from 0.
 This shows how the cumulative and mean distances between a derived track (from ensemble member 8)
 and a best track are calculated. All matching tracks across all the ensemble members for each of the
@@ -299,7 +326,7 @@ noticeable points from this figure are TODOWRITE.
 \end{figure}
 
 To judge the tracking ability of the different tracking configurations, this matching across all
-best tracks and derived tracks was done for each year in the ten year period 2000-2009.  
+best tracks and derived tracks was done for each year in the ten year period 2000-2009.
 % TODOIMPROVE: switch to cumoveroverlap as it is much easier to describe.
 For each year, the combined average distance between each derived track and best track was
 calculated. This number was divided by the total number of matches, so as a particular configuration
@@ -346,7 +373,7 @@ Katrina track (taken from ensemble member YY). Figure XX shows the different fie
 timestep that Katrina was tracked for. Figure XX shows the derived pressure and maximum wind speed
 for Katrina, plotted with the equivalent variables for the matching best track. From this figure, it
 is clear that there is very little correlation in these two variable between the derived track and
-% Check this\dots 
+% Check this\dots
 the best track. This is surprising, not least because the 20CRP assimilates the pressure data from
 the IBTrACS dataset. Reasons as to why this might be so are examined further in XXX.
 
@@ -364,13 +391,13 @@ the IBTrACS dataset. Reasons as to why this might be so are examined further in 
 % TODOWRITE: mention that CDPs are equivalent to samples in machine learning terminology.
 
 % Description of the goal of classification and how it applies in this setting. Set out terminology
-% that I am going to use. 
+% that I am going to use.
 % standard by which the various classifiers can be trained/judged.
 Now that for each ensemble member a number of tracks have been derived from the 20CRP data, and that
 extra fields have been collected using the track's positions at different timesteps, it is possible
 to use this information to classify each point of each track as either being a hurricane or not.
 These points will be knows as cyclone data points (CDPs) and for a typical year there are around
-100000 of these points, spread across the 56 ensemble members. 
+100000 of these points, spread across the 56 ensemble members.
 
 Classification is the process of taking a dataset and splitting it up into various categories based
 on the attributes of each item in the dataset. For the purposes of hurricane classification, this is
@@ -503,14 +530,14 @@ variances. QDA is similar except that the dividing surface is governed by a quad
 thus affords greater discriminating power between the two groups.
 
 These algorithms were not implemented from scratch; instead the implementations in the Python
-library scikit-learn were used \parencite{scikitLearn2011}. 
+library scikit-learn were used \parencite{scikitLearn2011}.
 
 \subsubsection{Stochastic Gradient Descent Classifiers}
 % How this works.
 Stochastic Gradient Descent (SGD) classifiers are an efficient class of classifiers that can scale
 to 2 million samples, and are thus suitable for the problem in this project. This makes them more
 suitable than e.g. a Support Vector Machine categoriser, which scales to around \SI{10e5}{} samples.
-They work by TODOWRITE. 
+They work by TODOWRITE.
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
 This particular classifier is sensitive to feature scaling, therefore the input features must be
 scaled before the classifier is trained with this dataset, and likewise any data to be classified
@@ -562,7 +589,7 @@ independent. It had a similar number of samples as the training dataset: TODOCHE
 \addcontentsline{toc}{chapter}{References}
 \printbibliography[title={References}]
 
-%\appendix 
+%\appendix
 %\section{Additional information}
 
 \end{document}
