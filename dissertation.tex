@@ -132,7 +132,7 @@ Circulation Models.
 
 % Effects of global warming on frequency/intensity.
 From a theoretical perspective, increasing global mean temperatures are predicted to lead to an
-increase in the intensity of hurricanes \parencite{emanuelDependence1987}. This is backed up by 
+increase in the intensity of hurricanes \parencite{emanuelDependence1987}. This is backed up by
 computer modelling, which predicts a 6\% increase in maximum wind speed under conditions of a rise
 in global temperatures over the next 80 years \parencite{knutsonImpact2004}. Given that a
 hurricane's destructive potential varies as the maximum wind speed cubed
@@ -151,11 +151,11 @@ the middle and early 20\ts{th} century, such as the lack of satellite data befor
 lack of reliable aeroplane data before around the 1930s. Accordingly, in this study, the approach
 taken is a different one. Instead of using the numbers compiled by various agencies as the primary
 source of information into hurricanes, the primary data will be taken from reanalysis data,
-specifically the 20\ts{th} Century Reanalysis Project (20CRP). Hurricanes will be detected in these
-data, and the detection procedure will be trained and validated on recent data (from 1990 to 2009),
-where reliable best tracks exist. Once the detection procedure has been trained, it can be used to
-run over the whole of the 20\ts{th} century, providing an objective measure of the number of
-hurricanes in each year.
+specifically the 20\ts{th} Century Reanalysis Project (20CRP) \parencite{compoTwentieth2011}.
+Hurricanes will be detected in these data, and the detection procedure will be trained and validated
+on recent data (from 1990 to 2009), where reliable best tracks exist. Once the detection procedure
+has been trained, it can be used to run over the whole of the 20\ts{th} century, providing an
+objective measure of the number of hurricanes in each year.
 
 \section{Research Problem}
 % Detection of hurricanes in 20CRP dataset.
@@ -165,9 +165,27 @@ hurricanes in each year.
 % change over time, making trend detection tricky (laying groundwork for talking about this in
 % discussion).
 
+% Mention NCEP/NCAR Reanalysis 1
+% Mention ERA-40
+% Mention JRA-55
+
+% BRIEF description of what reanalysis is,
+A reanalysis project is an attempt to reconstruct the complete historical state of the atmosphere at
+a given spatial and temporal resolution, working on an incomplete series of measurements of
+atmospheric variables (a more complete description is given in Section \ref{sec:20crp}). Several
+reanalysis projects exist, such as NCEP/NCAR Reanalysis 1 \parencite{TODOCITE}, ECMWF ERA-40
+\parencite{uppalaEra2006} and the JRA-55 \parencite{TODOCITE}. These reanalysis only run for 66, 40
+and 55 years respectively, and so would not be useful for looking into hurricanes at the start of
+the 20\ts{th} century. The 20CRP on the other hand covers over 140 years, from 1871 to 2012, and is
+therefore suitable for studying the number of hurricanes across the entire 20\ts{th} century.  It
+contains an estimate of the state of the atmosphere on a 2\textdegree spatial resolution and at
+6-hourly timesteps, with variables such as the longitudinal and latitudinal wind speeds at the
+\SI{995}{hPa} pressure level and the temperature at the \SI{850}{hPa} pressure level recorded.
+
 % Context.
 % --------
 
+\section{Existing Tracking and Detection Algorithms}
 % Tracking/detection: Literature review. Lots and lots of references.
 % Tracking: why it's a good idea to track then detect. Links to Hodges 1 and 2.
 % Detection: GCM:
@@ -188,11 +206,13 @@ hurricanes in each year.
 \chapter{Data Sources}
 
 \section{20\ts{th} Century Reanalysis Project}
+\label{sec:20crp}
 The 20\ts{th} Century Reanalysis Project (20CRP) is a project whose aim is to produce a best estimate of
 the state of the atmosphere by including information from a variety of different sources using data
 assimilation \parencite{compoTwentieth2011}.
 
 \section{IBTrACS Best Tracks Dataset}
+\label{sec:ibtracs}
 The International Best Track Archive for Climate Stewardship (IBTrACS)
 \parencite{knappInternational2010} is a
 
