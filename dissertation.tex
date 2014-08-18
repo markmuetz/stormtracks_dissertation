@@ -64,7 +64,29 @@
 \onehalfspacing
 \section*{Abstract}
 
-From an ...
+% 255 words so far.
+A procedure for the detection of hurricanes in the 20\ts{th} Century Reanalysis Project dataset is
+developed. Tracks are derived from the dataset by tracking vorticity maxima over time. These
+derived tracks are matched against best tracks taken from the IBTrACS best tracks dataset. Six
+different tracking configuration are evaluated: using the vorticity at the \SI{995}{hPa} and
+\SI{850}{hPa} pressure levels and using the original resolution data, and data downscaled to two and
+three times the original resolution. It is found that using downscaling to three times the
+resolution provides a better match between the derived tracks and the best tracks. Tracks 
+at the different pressure levels produce similar results, and the \SI{850}{hPa} pressure level is
+chosen as the pressure level to use due to\dots
+
+The derived tracks are used to obtain extra fields from the 20\ts{th} Century Reanalysis
+Project dataset, such as the local minimum pressure and the temperature at the \SI{850}{hPa}
+pressure level. These extra fields, along with the information obtained by matching the derived
+tracks to the best tracks, are used to produce training and validation datasets for supervised
+machine learning classification algorithms. Different classification algorithms are evaluated based
+on classification success and error metrics. It is found that a Stochastic Gradient Descent
+classifier combined with a simple cutoff classifier produces the highest combined score on these
+metrics.
+
+The developed procedure is run over the course of the 20\ts{th} Century, and a comparison between
+the estimated number of hurricanes and the number as recorded in the IBTrACS dataset is performed.
+It is found that\dots
 
 \begin{center}
 \textbf{Word count:} TODO
