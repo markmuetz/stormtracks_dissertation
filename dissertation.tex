@@ -171,16 +171,18 @@ objective measure of the number of hurricanes in each year.
 
 % BRIEF description of what reanalysis is,
 A reanalysis project is an attempt to reconstruct the complete historical state of the atmosphere at
-a given spatial and temporal resolution, working on an incomplete series of measurements of
-atmospheric variables (a more complete description is given in Section \ref{sec:20crp}). Several
-reanalysis projects exist, such as NCEP/NCAR Reanalysis 1 \parencite{TODOCITE}, ECMWF ERA-40
-\parencite{uppalaEra2006} and the JRA-55 \parencite{TODOCITE}. These reanalysis only run for 66, 40
-and 55 years respectively, and so would not be useful for looking into hurricanes at the start of
-the 20\ts{th} century. The 20CRP on the other hand covers over 140 years, from 1871 to 2012, and is
-therefore suitable for studying the number of hurricanes across the entire 20\ts{th} century.  It
-contains an estimate of the state of the atmosphere on a 2\textdegree spatial resolution and at
-6-hourly timesteps, with variables such as the longitudinal and latitudinal wind speeds at the
-\SI{995}{hPa} pressure level and the temperature at the \SI{850}{hPa} pressure level recorded.
+a given spatial and temporal resolution, assimilating an incomplete series of measurements of
+atmospheric variables. This is done by running a General Circulation Model (GCM), using the
+available measurements as constraints on the model (a more complete description is given in Section
+\ref{sec:20crp}). Several reanalysis projects exist, such as NCEP/NCAR Reanalysis 1
+\parencite{TODOCITE}, ECMWF ERA-40 \parencite{uppalaEra2006} and the JRA-55 \parencite{TODOCITE}.
+These reanalysis only run for 66, 40 and 55 years respectively, and so would not be useful for
+looking into hurricanes at the start of the 20\ts{th} century. The 20CRP on the other hand covers
+over 140 years, from 1871 to 2012, and is therefore suitable for studying the number of hurricanes
+across the entire 20\ts{th} century.  It contains an estimate of the state of the atmosphere on a
+T63 (2\textdegree) spatial resolution and at 6-hourly timesteps, with variables such as the
+longitudinal and latitudinal wind speeds at the \SI{995}{hPa} pressure level and the temperature at
+the \SI{850}{hPa} pressure level recorded.
 
 \section{Existing Tracking and Detection Algorithms}
 % Context.
@@ -195,14 +197,84 @@ contains an estimate of the state of the atmosphere on a 2\textdegree spatial re
 % Detection: Reanalyses.
 % List some previous attempts to detect hurr/tropical cyclones in reanalyses.
 % Talk about the primary difference: the existence of best tracks datasets.
+Several reasons exist for wanting to detect hurricanes in the output of GCMs. Often the goal is to
+look into the effects of climate change with a warming climate \parencite{bengtsson1996, sugi2002,
+yoshimura2006}. When running this sort of analysis, there is no objective measure of whether or not
+an individual detection of a hurricane is correct or not, although often tests are done to make sure
+that the resulting climatologies are realistic. This is in contrast to running the detection using
+the output of a GCM that is part of a historical reanalysis dataset, where it is possible to match
+the detected hurricane to a given tracks in a given best track database, as was done by
+\textcite{walsh1995}.
 
+There are two closely related approaches to detecting hurricanes in the output of GCMs. The first is
+to examine the output of the GCM at every timestep, looking for a cell or cells which meet certain
+criteria, and then produce tracks based on combining cells that meet these in criteria in different
+timesteps. These criteria are normally involve vorticity at the \SI{850}{hPa} pressure level,
+maximum wind speed, and temperature anomalies at different pressure levels. Additionally, the tracks
+produced have to be longer than a certain time duration, typically 1.5 to 2 days. Examples of
+studies that take this approach are \textcite{TODOCITEmultiple}. 
+
+The second approach of detecting hurricanes is to first track some feature from one timestep to the
+next (typically vorticity maxima), and then apply a set of criteria to each point in these tracks to
+see whether they represent hurricanes or not. Normally, a time duration of the tracks must be longer
+than a certain duration as well, again typically 1.5 days. This approach yields extra information
+about the hurricanes, such as where their were formed, which is important in deriving details about
+cyclogenesis \parencite{TODOCITE}. Useful information about the fate of the cyclone can also be
+found, such as whether it undergoes an extra tropical transition \parencite{TODOCITE}. This is the
+approach taken by \textcite{TODOCITE, hodges, camargo}, and is also the approach that will be used
+in this study.
+
+Both these approaches rely on thresholds being set for the criteria in advance of running the
+detection procedure, although there may be some sensitivity analysis done on these thresholds as in
+\textcite{walsh1995}. These thresholds can be somewhat arbitrary and can vary with resolution
+\parencite{walsh2007}. Two studies that have looked at T63 resolution (the same as the 20CRP
+dataset), have used values of \SI{6e-5}{s^{-1}} as a threshold value for hurricanes in the
+\SI{850}{hPa} vorticity \parencite{bengtsson2006, bengtsson2007}.  Therefore any value used in this
+study should be of a similar magnitude to this number.  The thresholds can also vary from basin to
+basin \parencite{camargo}, and thus need to be chosen quite carefully. 
+
+This study takes a different approach to choosing these thresholds. Instead of deciding what they
+should be before running the analysis, the analysis is run, and as the values of e.g. vorticity and
+temperature at the \SI{850}{hPa} pressure level are recorded for each point. Due to the matching of
+the tracks derived from the 20CRP data and the best tracks, it is then possible to see which values
+of these fields correspond to hurricanes, and which do not. This allows for setting of the
+thresholds \textit{after} the bulk of the processing has been done, thus greatly speeding up the
+process of finding optimum values for these thresholds. It also permits the use of machine learning
+classification algorithms, which it is hoped will improve the accuracy of the hurricane detection,
+as measured by the number of true and false positives. This is a similar approach to
+\textcite{walsh1995}, who analysed the numbers of false and missing tropical cyclones over September
+1989 and October 1992, and results of this study will be compared against these. It bears repeating
+that this approach is only possible because this study is running the hurricane detection over a
+historical reanalysis dataset, otherwise this would not be possible.
 
 % Objectives/Project Structure.
 % -----------------------------
-
 % Outline of objectives for this project.
 % Finish with a run-down of the structure of the rest of the dissertation, including why it deviates
 % from the traditional Intro/Methods/Results/Discussion/Conclusion structure.
+The objectives of this study are to develop a tracking algorithm that is capable of producing tracks
+derived from the 20CRP dataset that can be successfully matched to the tracks in the IBTrACS best
+tracks database. Following from this, these derived tracks will be used to collect extra information for
+each of the points in the track, such as temperature at \SI{850}{hPa}. This information will then
+used, along with the information about whether a particular point corresponds with a hurricane or
+not, to train different classification algorithms to correctly predict whether each point is a
+hurricane or not. The classification algorithm which performs best on success and error metrics will
+be chosen, and this process will form the hurricane detection procedure. This will then be run
+over the course of the 20\ts{th} century, and aggregate statistics about the number of hurricanes
+over this duration will be presented, along with a comparison between the estimated number of
+hurricanes from the 20CRP dataset and the IBTrACS database.
+
+This following chapter will present more detail on the two data sources used in this study: the
+20CRP dataset and the IBTrACS database. Chapter \ref{chap:development} will then detail the steps
+taken to develop the detection procedure, presenting a logical progression of the development along
+with results pertinent to the following sections of the development. Chapter
+\ref{chap:results_analysis} will then look into the results of running the procedure over the course
+of the 20\ts{th} century. Chapter \ref{chap:discussion} will then discuss these results in the wider
+context of hurricane detection and trends over the 20\ts{th} century, and Chapter
+\ref{chap:conclusion} will provide a summary and conclusion of the findings. This deviates slightly
+from the traditional thesis structure due to the time spent working on the detection procedure, and
+the desire to present this development in a logical manner where the subsequent sections depend on
+the results of the previous sections.
 
 \chapter{Data Sources}
 
@@ -219,6 +291,7 @@ The International Best Track Archive for Climate Stewardship (IBTrACS)
 
 % TODOIMPROVE: chapter title?
 \chapter{Development of the Hurricane Detection Algorithm}
+\label{chap:development}
 
 % Overall description to go here, with flow chart.
 % Mention:
@@ -630,14 +703,17 @@ odd years between 1991 and 2009. This ensured that the training and validation d
 independent. It had a similar number of samples as the training dataset: TODOCHECK million samples.
 
 \chapter{20\ts{th} Century Analysis Results}
+\label{chap:results_analysis}
 % Data analysis and results.
 
 \chapter{Discussion}
+\label{chap:discussion}
 
 \section{Tracking Algorithms}
 \label{sec:discussion_tracking_algs}.
 
 \chapter{Conclusions}
+\label{chap:conclusion}
 
 % Not included in word count.
 \addcontentsline{toc}{chapter}{Auto-critique}
