@@ -70,10 +70,10 @@ developed. Tracks are derived from the dataset by tracking vorticity maxima over
 tracks are matched against best tracks taken from the International Best Track Archive for Climate
 Stewardship (IBTrACS) best tracks dataset. Six different tracking configurations are evaluated:
 using the vorticity at the \SI{995}{hPa} and \SI{850}{hPa} pressure levels and using the original
-resolution data, data downscaled to two and three times the original resolution. It is found that
-using downscaling to three times the resolution provides a better match between the derived tracks
-and the best tracks. Tracks at the different pressure levels produce similar results, and the
-\SI{850}{hPa} pressure level is chosen on theoretical grounds.
+resolution data, data downscaled by cubic interpolation to two and three times the original
+resolution. It is found that using downscaling to three times the resolution provides a better match
+between the derived tracks and the best tracks. Tracks at the different pressure levels produce
+similar results, and the \SI{850}{hPa} pressure level is chosen on theoretical grounds.
 
 The derived tracks are used to obtain extra fields from the 20\ts{th} Century Reanalysis
 Project dataset, such as the local minimum pressure and the temperature at the \SI{850}{hPa}
@@ -118,7 +118,8 @@ for sounding out various ideas.
 % Impacts of hurricanes.
 Hurricanes are one of nature's most impressive and devastating extreme weather events. The costliest
 hurricane this century, hurricane Katrina, was responsible for 1833 deaths and caused \$108
-billion USD in damage \parencite{TODOCITE}. Hurricanes are therefore of great importance socially,
+billion USD in damage \parencite{TODOCITE}. % TODO: Need another sentence here.
+Hurricanes are therefore of great importance socially,
 economically and, in hurricane Katrina's case, even politically.
 
 % Heat transport by hurricanes.
@@ -126,9 +127,9 @@ Hurricanes, and more generally tropical cyclones, are also known to be a major c
 poleward heat flux that evens out the temperatures between the poles and the tropics, carrying an
 estimated \SI{1.4e15}{W} towards the poles \parencite{emanuelContribution2012}. This
 contribution is large enough that it may affect the thermohaline circulation
-\parencite{huEffect2009}, a major component of the coupled atmosphere-ocean system of the Earth. So
+\parencite{huEffect2009}, a major component of the coupled atmosphere-ocean system of the Earth. So,
 coupled with their socio-economic impact, understanding hurricanes is of intrinsic scientific
-interest too, in helping to understand the Earth's climate and producing more accurate General
+interest too, helping to understand the Earth's climate and to produce more accurate General
 Circulation Models.
 
 % Effects of global warming on frequency/intensity.
@@ -149,7 +150,8 @@ primary data source, such as the IBTrACS database used in this study
 \parencite{knappInternational2010}, or the tropical cyclone database from the National Hurricane
 Center \parencite{jarvinianTropical1984}. These databases suffer from some problems when going into
 the middle and early 20\ts{th} century, such as the lack of satellite data before the 1970s, and the
-lack of reliable aeroplane data before around the 1930s. Accordingly, in this study, the approach
+lack of reliable aeroplane data before around the 1930s. % TODO: check date.
+Accordingly, in this study, the approach
 taken is a different one. Instead of using the numbers compiled by various agencies as the primary
 source of information into hurricanes, the primary data will be taken from reanalysis data,
 specifically the 20\ts{th} Century Reanalysis (20CR) Project \parencite{compoTwentieth2011}.
@@ -171,9 +173,9 @@ objective measure of the number of hurricanes in each year.
 % Mention JRA-55
 
 % BRIEF description of what reanalysis is,
-A reanalysis project is an attempt to reconstruct the complete historical state of the atmosphere at
-a given spatial and temporal resolution, assimilating an incomplete series of measurements of
-atmospheric variables (a more complete description is given in Section
+A global reanalysis project is an attempt to reconstruct the complete historical state of the
+atmosphere at a given spatial and temporal resolution, assimilating an incomplete series of
+measurements of atmospheric variables (a more complete description is given in Section
 \ref{sec:20crp}). Several reanalysis projects exist, such as NCEP/NCAR Reanalysis 1
 \parencite{TODOCITE}, ECMWF ERA-40 \parencite{uppalaEra2006} and the JRA-55 \parencite{TODOCITE}.
 These reanalysis only run for 66, 40 and 55 years respectively, and so would not be useful for
@@ -198,7 +200,7 @@ the \SI{850}{hPa} pressure level recorded.
 % List some previous attempts to detect hurr/tropical cyclones in reanalyses.
 % Talk about the primary difference: the existence of best tracks datasets.
 
-% Needs a bit of re-writing due to not being on the output of a GCM for reanalyses.
+% TODO: Needs a bit of re-writing due to not being on the output of a GCM for reanalyses.
 Several reasons exist for wanting to detect hurricanes in the output of GCMs. Often the goal is to
 look into the effects of climate change with a warming climate \parencite{bengtsson1996, sugi2002,
 yoshimura2006}. When running this sort of analysis, there is no objective measure of whether or not
@@ -208,6 +210,7 @@ the output of a GCM that is part of a historical reanalysis dataset, where it is
 the detected hurricane to a given tracks in a given best track database, as was done by
 \textcite{walsh1995}.
 
+% TODO: Ditto, make it clear that it's acting on global atm. output, not nec. GCM output.
 There are two closely related approaches to detecting hurricanes in the output of GCMs. The first is
 to examine the output of the GCM at every timestep, looking for a cell or cells which meet certain
 criteria, and then produce tracks based on combining cells that meet these in criteria in different
@@ -219,7 +222,7 @@ studies that take this approach are \textcite{TODOCITEmultiple}.
 The second approach of detecting hurricanes is to first track some feature from one timestep to the
 next (typically vorticity maxima), and then apply a set of criteria to each point in these tracks to
 see whether they represent hurricanes or not. Normally, a time duration of the tracks must be longer
-than a certain duration as well, again typically 1.5 days. This approach yields extra information
+than a certain duration as well, again typically 1.5 days. These tracks can yield extra information
 about the hurricanes, such as where their were formed, which is important in deriving details about
 cyclogenesis \parencite{TODOCITE}. Useful information about the fate of the cyclone can also be
 found, such as whether it undergoes an extra tropical transition \parencite{TODOCITE}. This is the
@@ -236,14 +239,14 @@ study should be of a similar magnitude to this number.  The thresholds can also 
 basin \parencite{camargo}, and thus need to be chosen quite carefully. 
 
 This study takes a different approach to choosing these thresholds. Instead of deciding what they
-should be before running the analysis, the analysis is run, and as the values of e.g. vorticity and
-temperature at the \SI{850}{hPa} pressure level are recorded for each point. Due to the matching of
-the tracks derived from the 20CR data and the best tracks, it is then possible to see which values
-of these fields correspond to hurricanes, and which do not. This allows for setting of the
-thresholds \textit{after} the bulk of the processing has been done, thus greatly speeding up the
-process of finding optimum values for these thresholds. It also permits the use of machine learning
-classification algorithms, which it is hoped will improve the accuracy of the hurricane detection,
-as measured by the number of true and false positives. This is a similar approach to
+should be before running the analysis, the analysis is run, and the values of e.g. vorticity and
+temperature at the \SI{850}{hPa} pressure level are recorded for each point along each track. Due to
+the matching of the tracks derived from the 20CR data and the best tracks, it is then possible to
+see which values of these fields correspond to hurricanes, and which do not. This allows for setting
+of the thresholds \textit{after} the bulk of the processing has been done, thus greatly speeding up
+the process of finding optimum values for these thresholds. It also permits the use of machine
+learning classification algorithms, which it is hoped will improve the accuracy of the hurricane
+detection, as measured by the number of true and false positives. This is a similar approach to
 \textcite{walsh1995}, who analysed the numbers of false and missing tropical cyclones over September
 1989 and October 1992, and results of this study will be compared against these. It bears repeating
 that this approach is only possible because this study is running the hurricane detection over a
@@ -266,7 +269,7 @@ over the course of the 20\ts{th} century, and aggregate statistics about the num
 over this duration will be presented, along with a comparison between the estimated number of
 hurricanes from the 20CR dataset and the IBTrACS database.
 
-This following chapter will present more detail on the two data sources used in this study: the
+The following chapter will present more detail on the two data sources used in this study: the
 20CR dataset and the IBTrACS database. Chapter \ref{chap:development} will then detail the steps
 taken to develop the detection procedure, presenting a logical progression of the development along
 with results pertinent to the following sections of the development. Chapter
@@ -452,9 +455,9 @@ formula for vorticity, $\omega$, is given by:
 \end{equation}
 
 The surface of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$
-denote the latitude and longitude coordinates. $u_{i, j}$ denotes the longitudinal wind speed at
-grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using a 2\ts{nd} order
-approximation: %CLUMSY
+denote the latitude and longitude coordinates in radians. $u_{i, j}$ denotes the longitudinal wind
+speed at grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using a
+2\ts{nd} order approximation: %CLUMSY
 
 % Calculation in code is a little different because it uses degrees instead of radians:
 % More like vorticity = du / (2 * dlon * cos(lat * pi / 180) * Earth_circ / 360) - dv / ((2 * dlat) * Earth_circ / 360)
@@ -469,6 +472,7 @@ The vorticities at the \SI{995}{hPa} and \SI{850}{hPa} levels were calculated.
 \subsection{Maxima and Minima detection}
 \label{sec:methods_maxima_minima}
 
+% TODO: Define PSL higher up?
 For the vorticity fields, maxima are of primary interest as these represent grid cells where the
 wind is rotating most strongly. Conversely, for the PSL field, minima are of primary interest. A
 maximum or minimum was defined as a cell whose value was greater or less than all eight of its
@@ -527,7 +531,7 @@ possible configurations for the tracking. These various configurations were comp
 results can be seen in Section \ref{sec:results_tracking}. Maxima that were below a cutoff value
 of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
 that are unlikely to be part of even tropical storms. This choice is revisited in Section TODOREF where
-some justification is given for this value.
+some further justification is given for this value.
 
 The tracking algorithm used was a simple nearest neighbour tracking algorithm, with a modification
 that counted two or more vorticity maxima that were sufficiently close as being part of the same storm
@@ -562,7 +566,7 @@ Once tracks have been derived from the 20CR, it is possible to match them to the
 tracks. The corresponding best track must be close the derived track in space, and its temporal
 duration must overlap the duration of the derived track. In this project, an overlap of 6 timesteps,
 or one and a half days, was required for there to be a match between a derived track and a best
-track. Additionally, the average distance from the derived track and the best track had to be lower
+track. Additionally, the mean distance from the derived track and the best track had to be lower
 than a given threshold, taken as \SI{500}{km}. An example of a matching derived track taken from
 one ensemble member and best track is shown in Figure \ref{fig:katrina_individual_match_em7}.
 % N.B. em7 is counting from 0.
@@ -732,7 +736,7 @@ ROC plots are useful for determining which particular classifier performs best o
 and validation dataset. The top left corner of this plot represents perfect classification.  Another
 plot which will be utilised in this project is a plot of Sensitivity against PPV, which will again
 be used to determine which of the classifiers performs best. This plot is more useful in the context
-of this project, as for the given datasets, very high values of TP detection are seen, which means
+of this project, as for the given datasets, very high values of FP detection are seen, which means
 that the FPR will typically be very low, and less information can be gleaned from this particular
 metric. Also, as will be explained in the next section, the Sensitivity and the PPV can be used to
 obtain an estimate of the number of actual hurricanes. Examples of these plots can be seen in
@@ -774,8 +778,8 @@ in the results of these tests.
 The approach of using thresholds is very similar to the approach taken by
 \textcite{walshObjective1997}. The main difference between his approach and the one here is that in
 this case the thresholds are applied after the processing has been done, thereby allowing far more
-scope for experiment with changes to these threshold values (i.e. the whole processing step does not
-have to be run to experiment with different threshold values). This allows for a much faster
+scope for experimenting with changes to these threshold values (i.e. the whole processing step does
+not have to be run to experiment with different threshold values). This allows for a much faster
 retrieval of optimum thresholds with regard to a given metric, although it comes at a cost of having
 to run the data analysis in a way that gathers fields for all of the CDPs without being able to
 discard fields based on whether or not they pass a particular threshold test.
@@ -787,33 +791,37 @@ discard fields based on whether or not they pass a particular threshold test.
 % How these work.
 For binary classification, Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis
 (QDA) are two closely related classification algorithms that allow computationally cheap
-classification of data where a gold standard is available. \textcite{TODOCITE} gives a full account of
-both approaches, and a brief description of how they work will be given here. The principal idea is
-to calculate the mean and covariance for all the features of each group of data: $\mu_1$, $\sigma_1$
-and $\mu_2$, $\sigma_2$. $\mu_1$ will lie at the heart of the first group of features, and
-$\sigma_1$ will give a measure of the spread of this group amongst each of the feature axes, and
-likewise for the second group. LDA then finds the dividing surface between the two means (a plane in
-the same number of dimensions as there are features) based on the relative values of the two
-variances. QDA is similar except that the dividing surface is governed by a quadratic equation, and
-thus affords greater discriminating power between the two groups.
+classification of data where a gold standard is available under trained supervision.
+\textcite{TODOCITE} gives a full account of both approaches, and a brief description of how they
+work will be given here. The principal idea is to calculate the mean and covariance for all the
+features of each group of data: $\mu_1$, $\sigma_1$ and $\mu_2$, $\sigma_2$. $\mu_1$ will lie at the
+heart of the first group of features, and $\sigma_1$ will give a measure of the spread of this group
+amongst each of the feature axes, and likewise for the second group. LDA then finds the dividing
+surface between the two means (a plane in the same number of dimensions as there are features) based
+on the relative values of the two variances. QDA is similar except that the dividing surface is
+governed by a quadratic equation, and thus affords greater discriminating power between the two
+groups.
 
 These algorithms were not implemented from scratch; instead the implementations in the Python
 library scikit-learn were used \parencite{scikitLearn2011}.
 
 \subsubsection{Stochastic Gradient Descent Classifiers}
+% TODO: Need to explain what samples are higher up.
 % How this works.
 Stochastic Gradient Descent (SGD) classifiers are an efficient class of classifiers that can scale
 to 2 million samples, and are thus suitable for the problem in this project. This makes them more
-suitable than e.g. a Support Vector Machine classifier, which scales to around \SI{10e5}{} samples.
-They work by TODOWRITE.
+suitable than e.g. a Support Vector Machine classifier, which only scales to around \SI{10e5}{}
+samples.  They work by TODOWRITE.
+
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
+% TODO: Explain feature scaling.
 This particular classifier is sensitive to feature scaling, therefore the input features must be
 scaled before the classifier is trained with this dataset, and likewise any data to be classified
 must be scaled using this same scaling. Dataset scaling was provided by the scikit-learn library.
 
 \subsubsection{Combining Classifiers}
-With some of the classifiers, from examination of the output it was clear that they performed well
-apart from producing FPs in areas of e.g. low vorticity or high temperature at \SI{850}{hPa}.
+With some of the classifiers, it was clear from examination of the output that they performed well
+apart from producing FPs in areas of e.g. low vorticity or low temperature at \SI{850}{hPa}.
 Therefore it made sense to combine the output of e.g. an SGD classifier with a threshold classifier.
 The result of this is to reduce the number of FPs, and increase the number of TNs by the same
 amount. This has the effect of increasing the PPV and FPR, but has no effect on the sensitivity.
