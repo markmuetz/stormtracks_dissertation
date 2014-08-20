@@ -96,8 +96,9 @@ It is found that\dots
 
 I would like to thank Dr. Chris Brierley for his guidance and assistance in this dissertation.
 Technical expertise from Qinling Wu proved useful in setting the direction for this project.
-Talking to Joshua Studholme helped to provide context for the field and ideas for analysis. % CLUMSY
-Meeting Dr. Kevin Hodges (Reading University) was useful for [tracking help].
+Talking to Joshua Studholme helped to provide context for the field and ideas for analysis, as well
+as giving me some pointers on extra-tropical transitions. % CLUMSY
+Dr. Kevin Hodges (Reading University) provided many useful suggestions for the tracking algorithm.
 Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and
 for sounding out various ideas.
 
@@ -135,7 +136,7 @@ From a theoretical perspective, increasing global mean temperatures are predicte
 increase in the intensity of hurricanes \parencite{emanuelDependence1987}. This is backed up by
 computer modelling, which predicts a 6\% increase in maximum wind speed under conditions of a rise
 in global temperatures over the next 80 years \parencite{knutsonImpact2004}. Given that a
-hurricane's destructive potential varies as the maximum wind speed cubed
+hurricane's destructive potential varies as the maximum surface wind speed cubed
 \parencite{emanuelIncreasing2005}, this would lead to a 20\% increase in hurricanes' destructive
 potential. In line with the theory, this destructive potential is found to have risen ``markedly''
 since the 1970s \parencite{emanuelIncreasing2005}. As well as increases in the intensity of
@@ -151,7 +152,7 @@ the middle and early 20\ts{th} century, such as the lack of satellite data befor
 lack of reliable aeroplane data before around the 1930s. Accordingly, in this study, the approach
 taken is a different one. Instead of using the numbers compiled by various agencies as the primary
 source of information into hurricanes, the primary data will be taken from reanalysis data,
-specifically the 20\ts{th} Century Reanalysis Project (20CR) \parencite{compoTwentieth2011}.
+specifically the 20\ts{th} Century Reanalysis (20CR) Project \parencite{compoTwentieth2011}.
 Hurricanes will be detected in these data, and the detection procedure will be trained and validated
 on recent data (from 1990 to 2009), where reliable best tracks exist. Once the detection procedure
 has been trained, it can be used to run over the whole of the 20\ts{th} century, providing an
@@ -281,9 +282,97 @@ the results of the previous sections.
 
 \section{20\ts{th} Century Reanalysis Project}
 \label{sec:20crp}
-The 20\ts{th} Century Reanalysis Project (20CR) is a project whose aim is to produce a best estimate of
-the state of the atmosphere by including information from a variety of different sources using data
-assimilation \parencite{compoTwentieth2011}.
+
+% Key points:
+% * Global reanalysis 1871-2012
+% * Uses only SST, surf press, sea ice
+% * Relatively bias free because of above (compared to say ERA-40)
+% * spatio-temporal resolution
+% * includes uncertainty
+% * 56 ensemble members
+The 20\ts{th} Century Reanalysis Project (20CR) is a project whose aim is to produce a consistent
+best estimate of the state of the atmosphere by including information from a variety of different
+sources using data assimilation \parencite{compoTwentieth2011}. Sea Surface Temperature (SST) and
+sea ice data from the Hadley Centre Sea Ice and SST dataset \parencite{rayner2003} are used to drive
+a GCM - the NCEP Global Forecast System \parencite{TODOCITE}. This is combined with pressure
+observations from the International Surface Pressure Databank \parencite{TODOCITE}, which is
+assimilated with the forecasts provided by the GCM by means of an Ensemble Kalman Filter (EKF). It
+provides estimates at a 2\textdegree spatial resolution, and on a 6-hour timestep, from 1871 to 2012
+(more years will be added using the same process in due time). A level of consistency is ensured by
+using the same process from the beginning of the reanalysis to the end, and by using only SST, sea
+ice and pressure data. This avoids the problems seen in other reanalysis projects, such as ERA-40
+\parencite{TODOCITE}, which incorporate as much data as possible. This biases more recent years, as
+e.g. satellite data from the 1970s onwards provides far more observations than exist before this
+period. Due to the use of an EKF, it is also possible for the 20CR to provide estimates for the
+uncertainty of each of its estimates at each timestep, although this information is not used as part
+of this study.
+
+The GCM and EKF are run with 56 ensemble members, meaning that for every timestep there are 56
+estimates for the state of the atmosphere. According to \textcite{compoTwentieth2011}, individual
+tracking of storms is best done through tracking them in individual ensemble members, instead of
+looking at the ensemble mean. This is because the ensemble mean, in the presence of only a few
+observations, exhibits less synoptic variability. % TODO: unclear, explain better.
+Therefore the individual ensemble members were used in this study. Consequently, the analysis
+carried out in this study had to be repeated 56 times, and this provides that classification
+algorithms used in Section \ref{sec:classification} far more samples than would otherwise have been
+the case.
+
+\subsection{Technical Details}
+% How it works:
+
+The GCM used is the NCEP Global Forecast System. 
+% Technical details on GCM
+
+% Runs a GCM - NCEP GFS - to produce background fields
+The process by which estimates are produced involves three main steps: 
+
+\begin{enumerate}
+    \item spin up of GCM
+    \item assimilate pressure data using the EKF
+    \item use GCM to predict the state of the atmosphere at the next timestep
+\end{enumerate}
+
+56 individual GCMs are initialised with climatalogical states taken from 14 months before the start
+of the production period, i.e. the period over which estimates are produced. The GCMs are then run
+for 14 months, to ``reduce the effect of the initial condition in the lower layers of the land
+model.'' This makes use of the SST and sea ice data. At this point, the 56 different states of the
+atmosphere from the GCMs are used as background states for the EKF, which assimilates the pressure
+observations for the current timestep, to produce 56 estimates for the state of the atmosphere based on the
+GCM and the observations. These estimates are then used as the starting point for the GCMs, which
+predict what the state of the atmosphere will be in 6 hours time, and this is used as the background
+state for the EKF, which assimilates the pressure observations at the new timestep. 
+
+This continual predict and assimilate process repeats for 5 years, and the whole process is repeated
+over the full course of the reanalysis period. It should be noted that this 5 year period leads to a
+discontinuity in the data: every 5 years on the 1\ts{st} of January starting from 1876, the
+individual ensemble members will not be continuous. This is not important for this study, because
+there are very few hurricanes in the Atlantic over the December-January divide. However, it would be
+far more important if one were looking at tropical cyclones over the Pacific, when this is an active
+period.
+
+
+% Assimilates the observations and the output from the GCM using an EKF to provide an estimate as to the state of
+% the atmosphere at each timestep
+% Technical details EKF
+
+% Feeds this estimate back into the GCM to run another forecast
+
+% Results summary:
+
+% Usage for hurricane detection:
+% * compo2011
+% * neff2013
+% * emanuel2010
+
+% Caveats on its usage:
+% * necessity of analysing single EM (ref compo2011)
+% * consistency of each EM not an issue (ref compo2011)
+% * Assimilates best track info
+
+% Format and availability:
+% * NetCDF4
+% * (individual results available as GRIB)
+% * nersc portal
 
 \section{IBTrACS Best Tracks Dataset}
 \label{sec:ibtracs}
