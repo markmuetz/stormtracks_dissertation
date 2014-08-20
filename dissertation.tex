@@ -792,6 +792,7 @@ discard fields based on whether or not they pass a particular threshold test.
 \subsubsection{Linear/Quadratic Discriminant Analysis Classifiers}
 
 % How these work.
+% TODO: I need to check quadratic discriminant analysis.
 For binary classification, Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis
 (QDA) are two closely related classification algorithms that allow computationally cheap
 classification of data where a gold standard is available under trained supervision.
@@ -812,9 +813,9 @@ library scikit-learn were used \parencite{scikitLearn2011}.
 % TODO: Need to explain what samples are higher up.
 % How this works.
 Stochastic Gradient Descent (SGD) classifiers are an efficient class of classifiers that can scale
-to 2 million samples, and are thus suitable for the problem in this project. This makes them more
-suitable than e.g. a Support Vector Machine classifier, which only scales to around \SI{10e5}{}
-samples.  They work by TODOWRITE.
+to 2 million samples, and are thus suitable for the problem in this project
+\parencite{singer07pegasos}. This makes them more suitable than e.g. a Support Vector Machine
+classifier, which only scales to around \SI{10e5}{} samples. They work by TODOWRITE.
 
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
 % TODO: Explain feature scaling.
