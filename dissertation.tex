@@ -150,15 +150,14 @@ primary data source, such as the IBTrACS database used in this study
 \parencite{knappInternational2010}, or the tropical cyclone database from the National Hurricane
 Center \parencite{jarvinianTropical1984}. These databases suffer from some problems when going into
 the middle and early 20\ts{th} century, such as the lack of satellite data before the 1970s, and the
-lack of reliable aeroplane data before around the 1930s. % TODO: check date.
-Accordingly, in this study, the approach
-taken is a different one. Instead of using the numbers compiled by various agencies as the primary
-source of information into hurricanes, the primary data will be taken from reanalysis data,
-specifically the 20\ts{th} Century Reanalysis (20CR) Project \parencite{compoTwentieth2011}.
-Hurricanes will be detected in these data, and the detection procedure will be trained and validated
-on recent data (from 1990 to 2009), where reliable best tracks exist. Once the detection procedure
-has been trained, it can be used to run over the whole of the 20\ts{th} century, providing an
-objective measure of the number of hurricanes in each year.
+lack of reliable aeroplane reconnaissance data before the mid 1940s \parencite{changeNumber2007}.
+Accordingly, in this study, the approach taken is a different one. Instead of using the numbers
+compiled by various agencies as the primary source of information into hurricanes, the primary data
+will be taken from reanalysis data, specifically the 20\ts{th} Century Reanalysis (20CR) Project
+\parencite{compoTwentieth2011}.  Hurricanes will be detected in these data, and the detection
+procedure will be trained and validated on recent data (from 1990 to 2009), where reliable best
+tracks exist. Once the detection procedure has been trained, it can be used to run over the whole of
+the 20\ts{th} century, providing an objective measure of the number of hurricanes in each year.
 
 \section{Research Problem}
 % Detection of hurricanes in 20CR dataset.
@@ -419,7 +418,11 @@ dissipation index from derived from the 20CR reanalysis and the best tracks from
 \section{IBTrACS Best Tracks Dataset}
 \label{sec:ibtracs}
 The International Best Track Archive for Climate Stewardship (IBTrACS)
-\parencite{knappInternational2010} is a
+\parencite{knappInternational2010} aims to be a homogenised global collection of best tracks of
+tropical storms and tropical cyclones. It collects best tracks from numerous Regional Specialized
+Meteorological Centers (RSMCs) and Tropical Cyclone Warning Centres (TCWCs), and combines these
+together, removing duplicates and trying detect common discrepancies, such as dates being different
+by one day and the positions between tracks not being the same. 
 
 % TODOIMPROVE: chapter title?
 \chapter{Development of the Hurricane Detection Procedure}
