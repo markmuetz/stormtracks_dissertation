@@ -81,7 +81,7 @@ pressure level. These extra fields, along with the information obtained by match
 tracks to the best tracks, are used to produce training and validation datasets for supervised
 machine learning classification algorithms. Different classification algorithms are evaluated based
 on classification success and error metrics. It is found that a Stochastic Gradient Descent
-classifier combined with a simple cutoff classifier produces the highest combined score on these
+classifier combined with a simple threshold classifier produces the highest combined score on these
 metrics.
 
 The developed procedure is run over the course of the 20\ts{th} Century, and a comparison between
@@ -151,14 +151,14 @@ the middle and early 20\ts{th} century, such as the lack of satellite data befor
 lack of reliable aeroplane data before around the 1930s. Accordingly, in this study, the approach
 taken is a different one. Instead of using the numbers compiled by various agencies as the primary
 source of information into hurricanes, the primary data will be taken from reanalysis data,
-specifically the 20\ts{th} Century Reanalysis Project (20CRP) \parencite{compoTwentieth2011}.
+specifically the 20\ts{th} Century Reanalysis Project (20CR) \parencite{compoTwentieth2011}.
 Hurricanes will be detected in these data, and the detection procedure will be trained and validated
 on recent data (from 1990 to 2009), where reliable best tracks exist. Once the detection procedure
 has been trained, it can be used to run over the whole of the 20\ts{th} century, providing an
 objective measure of the number of hurricanes in each year.
 
 \section{Research Problem}
-% Detection of hurricanes in 20CRP dataset.
+% Detection of hurricanes in 20CR dataset.
 % * Reason: spans 20th C.
 % * List other reanalyses that do not.
 % * Problems with this dataset: low resolution, despite trying to make it objective, it will likely
@@ -176,7 +176,7 @@ atmospheric variables (a more complete description is given in Section
 \ref{sec:20crp}). Several reanalysis projects exist, such as NCEP/NCAR Reanalysis 1
 \parencite{TODOCITE}, ECMWF ERA-40 \parencite{uppalaEra2006} and the JRA-55 \parencite{TODOCITE}.
 These reanalysis only run for 66, 40 and 55 years respectively, and so would not be useful for
-looking into hurricanes at the start of the 20\ts{th} century. The 20CRP on the other hand covers
+looking into hurricanes at the start of the 20\ts{th} century. The 20CR on the other hand covers
 over 140 years, from 1871 to 2012, and is therefore suitable for studying the number of hurricanes
 across the entire 20\ts{th} century.  It contains an estimate of the state of the atmosphere on a
 T62 (2\textdegree) spatial resolution and at 6-hourly timesteps, with variables such as the
@@ -229,7 +229,7 @@ Both these approaches rely on thresholds being set for the criteria in advance o
 detection procedure, although there may be some sensitivity analysis done on these thresholds as in
 \textcite{walsh1995}. These thresholds can be somewhat arbitrary and can vary with resolution
 \parencite{walsh2007}. Two studies that have looked at T63 resolution (very close to the T62 used by
-the 20CRP dataset), have used values of \SI{6e-5}{s^{-1}} as a threshold value for hurricanes in the
+the 20CR dataset), have used values of \SI{6e-5}{s^{-1}} as a threshold value for hurricanes in the
 \SI{850}{hPa} vorticity \parencite{bengtsson2006, bengtsson2007}.  Therefore any value used in this
 study should be of a similar magnitude to this number.  The thresholds can also vary from basin to
 basin \parencite{camargo}, and thus need to be chosen quite carefully. 
@@ -237,7 +237,7 @@ basin \parencite{camargo}, and thus need to be chosen quite carefully.
 This study takes a different approach to choosing these thresholds. Instead of deciding what they
 should be before running the analysis, the analysis is run, and as the values of e.g. vorticity and
 temperature at the \SI{850}{hPa} pressure level are recorded for each point. Due to the matching of
-the tracks derived from the 20CRP data and the best tracks, it is then possible to see which values
+the tracks derived from the 20CR data and the best tracks, it is then possible to see which values
 of these fields correspond to hurricanes, and which do not. This allows for setting of the
 thresholds \textit{after} the bulk of the processing has been done, thus greatly speeding up the
 process of finding optimum values for these thresholds. It also permits the use of machine learning
@@ -254,7 +254,7 @@ historical reanalysis dataset, otherwise this would not be possible.
 % Finish with a run-down of the structure of the rest of the dissertation, including why it deviates
 % from the traditional Intro/Methods/Results/Discussion/Conclusion structure.
 The objectives of this study are to develop a tracking algorithm that is capable of producing tracks
-derived from the 20CRP dataset that can be successfully matched to the tracks in the IBTrACS best
+derived from the 20CR dataset that can be successfully matched to the tracks in the IBTrACS best
 tracks database. Following from this, these derived tracks will be used to collect extra information for
 each of the points in the track, such as temperature at \SI{850}{hPa}. This information will then
 used, along with the information about whether a particular point corresponds with a hurricane or
@@ -263,10 +263,10 @@ hurricane or not. The classification algorithm which performs best on success an
 be chosen, and this process will form the hurricane detection procedure. This will then be run
 over the course of the 20\ts{th} century, and aggregate statistics about the number of hurricanes
 over this duration will be presented, along with a comparison between the estimated number of
-hurricanes from the 20CRP dataset and the IBTrACS database.
+hurricanes from the 20CR dataset and the IBTrACS database.
 
 This following chapter will present more detail on the two data sources used in this study: the
-20CRP dataset and the IBTrACS database. Chapter \ref{chap:development} will then detail the steps
+20CR dataset and the IBTrACS database. Chapter \ref{chap:development} will then detail the steps
 taken to develop the detection procedure, presenting a logical progression of the development along
 with results pertinent to the following sections of the development. Chapter
 \ref{chap:results_analysis} will then look into the results of running the procedure over the course
@@ -281,7 +281,7 @@ the results of the previous sections.
 
 \section{20\ts{th} Century Reanalysis Project}
 \label{sec:20crp}
-The 20\ts{th} Century Reanalysis Project (20CRP) is a project whose aim is to produce a best estimate of
+The 20\ts{th} Century Reanalysis Project (20CR) is a project whose aim is to produce a best estimate of
 the state of the atmosphere by including information from a variety of different sources using data
 assimilation \parencite{compoTwentieth2011}.
 
@@ -304,7 +304,7 @@ The International Best Track Archive for Climate Stewardship (IBTrACS)
 
 \subsection{Wind Fields and Vorticity}
 
-In the 20CRP data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used
+In the 20CR data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used
 to calculate the vorticity and wind speeds. These are available at three different pressure levels:
 \SI{995}{hPa}, \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were only used to determine
 whether or not they were suitable for tracking of hurricanes, and it was found that they did not
@@ -337,7 +337,7 @@ The vorticities at the \SI{995}{hPa} and \SI{850}{hPa} levels were calculated.
 For the vorticity fields, maxima are of primary interest as these represent grid cells where the
 wind is rotating most strongly. Conversely, for the PSL field, minima are of primary interest. A
 maximum or minimum was defined as a cell whose value was greater or less than all eight of its
-surrounding cells. Vorticity maxima play a vital role in deriving tracks from the 20CRP data, and
+surrounding cells. Vorticity maxima play a vital role in deriving tracks from the 20CR data, and
 pressure minima are useful both for comparison with the best tracks data and classification of the
 tracks.
 
@@ -345,7 +345,7 @@ tracks.
 
 Following \textcite{TODOCITEhodgesXXX}, the vorticity field was downscaled to a finer resolution. This was
 done so as when tracks were derived from these data, the so called ``staircase effect'', whereby
-tracks are seen to follow the grid cells at the resolution of the 20CRP data, was minimised (an
+tracks are seen to follow the grid cells at the resolution of the 20CR data, was minimised (an
 example of this ``staircase effect'' can be seen in Figure \ref{fig:katrina_individual_match_em7}). This
 downscaling was accomplished using a cubic spline interpolation, and the data were downscaled to two and
 three times their original resolutions. The efficacy of this downscaling will be demonstrated in
@@ -381,15 +381,15 @@ that tracking on minima of the pressure field did not produce suitable tracks fo
 storm systems. This was due to the pressure field being subject to synoptic scale disturbances
 that mean that minima may not be present due to the surrounding gradient of this field. Whilst it is
 possible to apply high pass filtering to remove these disturbances, it was decided to follow
-\textcite{TODOCITEmultiple} and produce derived tracks from the 20CRP data based on vorticity maxima.
+\textcite{TODOCITEmultiple} and produce derived tracks from the 20CR data based on vorticity maxima.
 
 % TODOIMPROVE: This section is confusing on re-reading it. I think I need to make it clearer that I'm going to
 % compare different configurations.
 For each timestep, the vorticity maxima were calculated, as per Section
 \ref{sec:methods_maxima_minima}. This was done for both the \SI{995}{hPa} and \SI{850}{hPa} pressure
-levels, and for the one, two and three times the actual 20CRP resolution, yielding a total of six
+levels, and for the one, two and three times the actual 20CR resolution, yielding a total of six
 possible configurations for the tracking. These various configurations were compared, and the
-results can be seen in Section \ref{sec:results_tracking}. Maxima that were below a threshold value
+results can be seen in Section \ref{sec:results_tracking}. Maxima that were below a cutoff value
 of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
 that are unlikely to be part of even tropical storms. This choice is revisited in Section TODOREF where
 some justification is given for this value.
@@ -423,11 +423,11 @@ discussion of other tracking algorithms can be found in Section \ref{sec:discuss
 \subsection{Tracking Results}
 \label{sec:results_tracking}
 
-Once tracks have been derived from the 20CRP, it is possible to match them to the corresponding best
+Once tracks have been derived from the 20CR, it is possible to match them to the corresponding best
 tracks. The corresponding best track must be close the derived track in space, and its temporal
 duration must overlap the duration of the derived track. In this project, an overlap of 6 timesteps,
 or one and a half days, was required for there to be a match between a derived track and a best
-track.  Additionally, the average distance from the derived track and the best track had to be lower
+track. Additionally, the average distance from the derived track and the best track had to be lower
 than a given threshold, taken as \SI{500}{km}. An example of a matching derived track taken from
 one ensemble member and best track is shown in Figure \ref{fig:katrina_individual_match_em7}.
 % N.B. em7 is counting from 0.
@@ -480,7 +480,7 @@ these, the vorticity has been calculated and tracks have been derived from the m
 fields.  However, to successfully classify part of a track as being of hurricane strength, it is
 necessary to collect more fields. These fields will help to distinguish hurricanes from
 non-hurricanes. To this end, the latitude, longitude, date and ensemble member were used to obtain
-further variables from the 20CRP dataset. These variables were:
+further variables from the 20CR dataset. These variables were:
 
 \begin{enumerate}
     \item \textbf{Minimum pressure:} the pressure minimum within \SI{1000}{km} of the vorticity
@@ -506,7 +506,7 @@ timestep that Katrina was tracked for. Figure XX shows the derived pressure and 
 for Katrina, plotted with the equivalent variables for the matching best track. From this figure, it
 is clear that there is very little correlation in these two variable between the derived track and
 % Check this\dots
-the best track. This is surprising, not least because the 20CRP assimilates the pressure data from
+the best track. This is surprising, not least because the 20CR assimilates the pressure data from
 the IBTrACS dataset. Reasons as to why this might be so are examined further in XXX.
 
 % TODOFIG XX: one timestep per day showing wind/vorticity for Katrina.
@@ -525,7 +525,7 @@ the IBTrACS dataset. Reasons as to why this might be so are examined further in 
 % Description of the goal of classification and how it applies in this setting. Set out terminology
 % that I am going to use.
 % standard by which the various classifiers can be trained/judged.
-Now that for each ensemble member a number of tracks have been derived from the 20CRP data, and that
+Now that for each ensemble member a number of tracks have been derived from the 20CR data, and that
 extra fields have been collected using the track's positions at different timesteps, it is possible
 to use this information to classify each point of each track as either being a hurricane or not.
 These points will be knows as cyclone data points (CDPs) and for a typical year there are around
@@ -545,7 +545,7 @@ represents a hurricane. This is represented visually in Figure TODOFIG, which sh
 year TODOFIG, as well as whether the individual point has been matched to a hurricane in the best
 tracks dataset or not. In classification terminology, this matching represents the gold standard by
 which the classification algorithms can be trained, and by which their performance can be validated.
-This allows classification algorithms to take the information derived from the 20CRP and perform
+This allows classification algorithms to take the information derived from the 20CR and perform
 classification based on this information.
 
 % TODOFIG showing CDP with training set info included.
@@ -618,33 +618,34 @@ in the dataset. The equation for this is:
 
 \subsection{Classifiers}
 
-\subsubsection{Cutoff Classifier}
+\subsubsection{Threshold Classifier}
 % How this is related to a Decision Tree classifier, how it was optimised.
-The cutoff classifier is the simplest of the classifiers considered. It works by using different
-values for cutoffs for one or more of the collected fields for each CDP. Any CDPs which have field
-value which are e.g. higher than the specified cutoff are considered hurricanes, and any which are
-lower or equal to the cutoff are considered not hurricanes. Despite its simplicity, good results are
-possible with the cutoff classifier by judicious choice of the cutoffs for each of the fields. These
-cutoffs were first picked manually, then a simple brute force search was carried out for values on
-either side of the chosen values. The metric for success was the sum of the sensitivity and the PPV
-for the given categoriser, where a larger value is better (a value of 2 would be perfect for this
-metric). It is also very easy to configure this categoriser so as to increase the sensitivity or PPV,
-although there is a trade-off between these two metrics, as shown in Figure TODOFIG.
+The threshold classifier is the simplest of the classifiers considered. It works by using different
+values for thresholds for one or more of the collected fields for each CDP. Any CDPs which have
+field value which are e.g. higher than the specified threshold are considered hurricanes, and any
+which are lower or equal to the threshold are considered not hurricanes. Despite its simplicity,
+good results are possible with the threshold classifier by judicious choice of the thresholds for
+each of the fields. These thresholds were first picked manually, then a simple brute force search
+was carried out for values on either side of the chosen values. The metric for success was the sum
+of the sensitivity and the PPV for the given classifier, where a larger value is better (a value of
+2 would be perfect for this metric). It is also very easy to configure this classifier so as to
+increase the sensitivity or PPV, although there is a trade-off between these two metrics, as shown
+in Figure TODOFIG.
 
 This classifier is a simple version of a decision tree classifier, which passes the incoming data
 through a series of binary tests, determining which category a particular CDP should end up in based
 in the results of these tests.
 
-The approach of using cutoffs is very similar to the approach taken by
+The approach of using thresholds is very similar to the approach taken by
 \textcite{walshObjective1997}. The main difference between his approach and the one here is that in
-this case the cutoffs are applied after the processing has been done, thereby allowing far more
-scope for experiment with changes to these cutoff values (i.e. the whole processing step does not
-have to be run to experiment with different cutoff values). This allows for a much faster retrieval
-of optimum cutoffs with regard to a given metric, although it comes at a cost of having to run the
-data analysis in a way that gathers fields for all of the CDPs without being able to discard fields
-based on whether or not they pass a particular cutoff test.
+this case the thresholds are applied after the processing has been done, thereby allowing far more
+scope for experiment with changes to these threshold values (i.e. the whole processing step does not
+have to be run to experiment with different threshold values). This allows for a much faster
+retrieval of optimum thresholds with regard to a given metric, although it comes at a cost of having
+to run the data analysis in a way that gathers fields for all of the CDPs without being able to
+discard fields based on whether or not they pass a particular threshold test.
 
-% Plot of sens/PPV for varying vorticity cutoff.
+% Plot of sens/PPV for varying vorticity threshold.
 
 \subsubsection{Linear/Quadratic Discriminant Analysis Classifiers}
 
@@ -668,7 +669,7 @@ library scikit-learn were used \parencite{scikitLearn2011}.
 % How this works.
 Stochastic Gradient Descent (SGD) classifiers are an efficient class of classifiers that can scale
 to 2 million samples, and are thus suitable for the problem in this project. This makes them more
-suitable than e.g. a Support Vector Machine categoriser, which scales to around \SI{10e5}{} samples.
+suitable than e.g. a Support Vector Machine classifier, which scales to around \SI{10e5}{} samples.
 They work by TODOWRITE.
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
 This particular classifier is sensitive to feature scaling, therefore the input features must be
@@ -678,7 +679,7 @@ must be scaled using this same scaling. Dataset scaling was provided by the scik
 \subsubsection{Combining Classifiers}
 With some of the classifiers, from examination of the output it was clear that they performed well
 apart from producing FPs in areas of e.g. low vorticity or high temperature at \SI{850}{hPa}.
-Therefore it made sense to combine the output of e.g. an SGD classifier with a cutoff classifier.
+Therefore it made sense to combine the output of e.g. an SGD classifier with a threshold classifier.
 The result of this is to reduce the number of FPs, and increase the number of TNs by the same
 amount. This has the effect of increasing the PPV and FPR, but has no effect on the sensitivity.
 
@@ -692,16 +693,17 @@ amount. This has the effect of increasing the PPV and FPR, but has no effect on 
 \subsubsection{Training Dataset}
 For the training dataset, all tracks from all ensemble members from the even years between 1990 and
 2008 were taken. Given that each track is comprised of multiple (at least six) CDPs, this leads to a
-large number of samples. On average, there were TODOCHECK samples per year, leading to a total sample
-size of TODOCHECK million samples. This training dataset was used as a way of picking optimum values for
-the cutoff categoriser manually (as defined by a maximum combined value of sensitivity and PPV), and
-then using a brute force around the chosen values to verify that these values were indeed the local
-maximum. The training dataset was also used to train each of the LDA, QDA and SGD categorisers.
+large number of samples. On average, there were TODOCHECK samples per year, leading to a total
+sample size of TODOCHECK million samples. This training dataset was used as a way of picking optimum
+values for the threshold classifier manually (as defined by a maximum combined value of sensitivity
+and PPV), and then using a brute force around the chosen values to verify that these values were
+indeed the local maximum. The training dataset was also used to train each of the LDA, QDA and SGD
+classifier.
 
-\subsubsection{Validation Dataset}
-The validation dataset was similarly made up of all the tracks from all ensemble members from the
-odd years between 1991 and 2009. This ensured that the training and validation datasets were
-independent. It had a similar number of samples as the training dataset: TODOCHECK million samples.
+\subsubsection{Validation Dataset} The validation dataset was similarly made up of all the tracks
+from all ensemble members from the odd years between 1991 and 2009. This ensured that the training
+and validation datasets were independent. It had a similar number of samples as the training
+dataset: TODOCHECK million samples.
 
 \chapter{20\ts{th} Century Analysis Results}
 \label{chap:results_analysis}
