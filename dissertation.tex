@@ -50,15 +50,17 @@
 % Common typos:
 % possibly
 
-% TODOs: 61
+% TODOs: 75
 % TODO: 3
 % TODOCITE: 15
-% TODOWRITE: 14
-% TODOREF: 2
-% TODOFIG: 13
+% TODOWRITE: 18
+% TODOREF: 3
+% TODOFIGREF: 10
+% TODOFIG: 10
+% TODOTABLEREF: 1
 % TODOTABLE: 1
 % TODOCHECK: 4
-% TODOIMPROVE: 9
+% TODOIMPROVE: 10
 
 \title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
@@ -107,7 +109,7 @@ It is found that\dots
 I would like to thank Dr. Chris Brierley for his guidance and assistance in this dissertation.
 Technical expertise from Qinling Wu proved useful in setting the direction for this project.
 Talking to Joshua Studholme helped to provide context for the field and ideas for analysis, as well
-as giving me some pointers on extra-tropical transitions. % CLUMSY
+as giving me some pointers on extra-tropical transitions. % TODOIMPROVE: CLUMSY
 Dr. Kevin Hodges (Reading University) provided many useful suggestions for the tracking algorithm.
 Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and
 for sounding out various ideas.
@@ -406,12 +408,12 @@ analysed. The analysis finds that the hurricane is detectable through a minimum 
 field, even though the mean pressure field was used. They find that the track derived from the 20CR
 for this hurricane was systematically to the north-east of the corresponding best track (taken from
 the IBTrACS dataset). However, this study points to the fact that even hurricanes as far back as the
-beginning of the 20\ts{th} century are well represented. Figure \ref{fig:TODOFIG} shows the pressure
+beginning of the 20\ts{th} century are well represented. Figure \ref{TODOFIGREF} shows the pressure
 and vorticity fields for one ensemble member and one date of this hurricane. In this figure, the
 2\textdegree\ resolution of the data is clearly visible, as is the vorticity maximum and the pressure
 minimum.
 
-% Figure showing Galveston Hurricane.
+% TODOFIG showing Galveston Hurricane.
 
 In a more comprehensive study, \textcite{emanuel2010} used an earlier version of the 20CR dataset to
 look at tropical cyclone activity from 1908-1958. He used dynamical downscaling (i.e. using a
@@ -435,6 +437,10 @@ tropical storms and tropical cyclones. It collects best tracks from numerous Reg
 Meteorological Centers (RSMCs) and Tropical Cyclone Warning Centres (TCWCs), and combines these
 together, removing duplicates and trying detect common discrepancies, such as dates being different
 by one day and the positions between tracks not being the same. 
+
+% TODOWRITE:
+% Talk about usage for hurricane trending over 20th C, and problems with this.
+% Go into more detail generally.
 
 % TODOIMPROVE: chapter title?
 \chapter{Development of the Hurricane Detection Procedure}
@@ -472,7 +478,7 @@ formula for vorticity, $\omega$, is given by:
 The surface of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$
 denote the latitude and longitude coordinates in radians. $u_{i, j}$ denotes the longitudinal wind
 speed at grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using a
-2\ts{nd} order approximation: %CLUMSY
+2\ts{nd} order approximation: % TODOIMPROVE: CLUMSY
 
 % Calculation in code is a little different because it uses degrees instead of radians:
 % More like vorticity = du / (2 * dlon * cos(lat * pi / 180) * Earth_circ / 360) - dv / ((2 * dlat) * Earth_circ / 360)
@@ -545,8 +551,8 @@ levels, and for the one, two and three times the actual 20CR resolution, yieldin
 possible configurations for the tracking. These various configurations were compared, and the
 results can be seen in Section \ref{sec:results_tracking}. Maxima that were below a cutoff value
 of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
-that are unlikely to be part of even tropical storms. This choice is revisited in Section TODOREF where
-some further justification is given for this value.
+that are unlikely to be part of even tropical storms. This choice is revisited in Section
+\ref{TODOREF} where some further justification is given for this value.
 
 The tracking algorithm used was a simple nearest neighbour tracking algorithm, with a modification
 that counted two or more vorticity maxima that were sufficiently close as being part of the same storm
@@ -607,24 +613,24 @@ noticeable points from this figure are TODOWRITE.
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\linewidth]{figures/katrina_six_tracking_configs}
-    \caption{Caption goes here.}
+    \caption{TODOWRITE Caption goes here.}
     \label{fig:katrina_six_tracking_configs}
 \end{figure}
 
 To judge the tracking ability of the different tracking configurations, this matching across all
 best tracks and derived tracks was done for each year in the ten year period 2000-2009.
-% TODOIMPROVE: switch to cumoveroverlap as it is much easier to describe.
+% TODOWRITE: switch to cumoveroverlap as it is much easier to describe.
 For each year, the combined average distance between each derived track and best track was
 calculated. This number was divided by the total number of matches, so as a particular configuration
 that achieved relatively few matches would be penalised. This produces a metric by which the various
 configurations can be judged, and each of the configurations was then compared the others to see how
-they performed on this metric. The results of this comparison can be seen in Figure TODOFIG. It is clear
-that higher resolution, downscaled data produces better tracks that the unscaled data. This suggests
-that for tracking, scaling of three times the original resolution should be used. What is less clear
-is which is better: the \SI{995}{hPa} or the \SI{850}{hPa} pressure levels. TODOWRITE: why I picked
-\SI{850}{hPa}.
+they performed on this metric. The results of this comparison can be seen in Figure
+\ref{TODOFIGREF}. It is clear that higher resolution, downscaled data produces better tracks that
+the unscaled data. This suggests that for tracking, scaling of three times the original resolution
+should be used. What is less clear is which is better: the \SI{995}{hPa} or the \SI{850}{hPa}
+pressure levels. TODOWRITE: why I picked \SI{850}{hPa}.
 
-% TODOFIG XX: Comparison of wins/losses of different tracking configurations.
+% TODOFIG: Comparison of wins/losses of different tracking configurations.
 
 \newpage
 \section{Extra Field Collection}
@@ -654,20 +660,22 @@ further variables from the 20CR dataset. These variables were:
     \item \textbf{RH995:} TODOWRITE plus mention that is was found not to be that useful, and so dropped.
 \end{enumerate}
 
-Figure XX shows the pressure and vorticity fields surrounding the vorticity maxima for the Hurricane
-Katrina track (taken from ensemble member YY). Figure XX shows the different fields plotted for each
-timestep that Katrina was tracked for. Figure XX shows the derived pressure and maximum wind speed
-for Katrina, plotted with the equivalent variables for the matching best track. From this figure, it
-is clear that there is very little correlation in these two variable between the derived track and
+Figure \ref{TODOFIGREF} shows the pressure and vorticity fields surrounding the vorticity maxima for
+the Hurricane Katrina track (taken from ensemble member TODO). Figure \ref{TODOFIGREF} shows the
+different fields plotted for each timestep that Katrina was tracked for. Figure \ref{TODOFIGREF}
+shows the derived pressure and maximum wind speed for Katrina, plotted with the equivalent variables
+for the matching best track. From this figure, it is clear that there is very little correlation in
+these two variable between the derived track and
 % Check this\dots
 the best track. This is surprising, not least because the 20CR assimilates the pressure data from
-the IBTrACS dataset. Reasons as to why this might be so are examined further in XXX.
+the IBTrACS dataset. Reasons as to why this might be so are examined further in Section
+\ref{TODOREF}.
 
-% TODOFIG XX: one timestep per day showing wind/vorticity for Katrina.
+% TODOFIG: one timestep per day showing wind/vorticity for Katrina.
 
-% TODOFIG XX: plot of all collected fields for Katrina.
+% TODOFIG: plot of all collected fields for Katrina.
 
-% TODOFIG XX: plot showing poor correlation between Katrina derived and best.
+% TODOFIG: plot showing poor correlation between Katrina derived and best.
 
 \section{Classification}
 
@@ -695,12 +703,12 @@ was a hurricane.
 Given that each derived track has also been matched to a best track, it is also possible to use the
 information from the best tracks dataset about whether the point on the best track is a hurricane or
 not as an objective standard for whether or not the corresponding point on the derived track
-represents a hurricane. This is represented visually in Figure TODOFIG, which shows every CDP for the
-year TODOFIG, as well as whether the individual point has been matched to a hurricane in the best
-tracks dataset or not. In classification terminology, this matching represents the gold standard by
-which the classification algorithms can be trained, and by which their performance can be validated.
-This allows classification algorithms to take the information derived from the 20CR and perform
-classification based on this information.
+represents a hurricane. This is represented visually in Figure \ref{TODOFIGREF}, which shows every
+CDP for the year TODO, as well as whether the individual point has been matched to a hurricane in
+the best tracks dataset or not. In classification terminology, this matching represents the gold
+standard by which the classification algorithms can be trained, and by which their performance can
+be validated.  This allows classification algorithms to take the information derived from the 20CR
+and perform classification based on this information.
 
 % TODOFIG showing CDP with training set info included.
 
@@ -724,9 +732,14 @@ possible results of an individual classification. These are:
 \end{enumerate}
 
 When classifying a dataset, the collection of these results can be represented visually with a Venn
-diagram, as shown in Figure TODOFIG. They can also be represented in tabular form in an Error Matrix
-(also called a Contingency Table or Confusion Matrix). An example of an Error Matrix can be seen in
-Table TODOTABLE, which shows the successes and failures of a simple classifier for a subset of the data.
+diagram, as shown in Figure \ref{TODOFIGREF}. They can also be represented in tabular form in an
+Error Matrix (also called a Contingency Table or Confusion Matrix). An example of an Error Matrix
+can be seen in Table \ref{TODOTABLEREF}, which shows the successes and failures of a simple
+classifier for a subset of the data.
+
+% TODOFIG: Venn diagram
+
+% TODOTABLE: error matrix
 
 \subsubsection{Sensitivity, Positive Predictive Value and False Positive Rate}
 
@@ -755,7 +768,7 @@ of this project, as for the given datasets, very high values of FP detection are
 that the FPR will typically be very low, and less information can be gleaned from this particular
 metric. Also, as will be explained in the next section, the Sensitivity and the PPV can be used to
 obtain an estimate of the number of actual hurricanes. Examples of these plots can be seen in
-Figures TODOFIG and TODOFIG.
+Figures \ref{TODOFIGREF} and \ref{TODOFIGREF}.
 
 \subsubsection{Estimate of the Number of Actual Hurricanes}
 
@@ -783,8 +796,8 @@ each of the fields. These thresholds were first picked manually, then a simple b
 was carried out for values on either side of the chosen values. The metric for success was the sum
 of the sensitivity and the PPV for the given classifier, where a larger value is better (a value of
 2 would be perfect for this metric). It is also very easy to configure this classifier so as to
-increase the sensitivity or PPV, although there is a trade-off between these two metrics, as shown
-in Figure TODOFIG.
+increase either the sensitivity or PPV, although there is a trade-off between these two metrics, as
+shown in Figure \ref{TODOFIGREF}.
 
 This classifier is a simple version of a decision tree classifier, which passes the incoming data
 through a series of binary tests, determining which category a particular CDP should end up in based
@@ -799,7 +812,7 @@ retrieval of optimum thresholds with regard to a given metric, although it comes
 to run the data analysis in a way that gathers fields for all of the CDPs without being able to
 discard fields based on whether or not they pass a particular threshold test.
 
-% Plot of sens/PPV for varying vorticity threshold.
+% TODOFIG: Plot of sens/PPV for varying vorticity threshold.
 
 \subsubsection{Linear/Quadratic Discriminant Analysis Classifiers}
 
@@ -844,10 +857,13 @@ amount. This has the effect of increasing the PPV and FPR, but has no effect on 
 
 \subsection{Classifier Performance}
 
+% TODOWRITE:
 % Explain how 20 years worth of data were split into a training/validation dataset.
-
 % Figures showing performance of various classifiers in terms of FP/FN/TP/TN for 3 variables plotted
 % against vorticity for training set. Discussion of performance differences.
+
+% TODOFIG: ROC and sens vs PPV (training)
+% TODOFIG: ROC and sens vs PPV (validation)
 
 \subsubsection{Training Dataset}
 For the training dataset, all tracks from all ensemble members from the even years between 1990 and
