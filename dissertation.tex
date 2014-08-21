@@ -50,6 +50,16 @@
 % Common typos:
 % possibly
 
+% TODOs: 61
+% TODO: 3
+% TODOCITE: 15
+% TODOWRITE: 14
+% TODOREF: 2
+% TODOFIG: 13
+% TODOTABLE: 1
+% TODOCHECK: 4
+% TODOIMPROVE: 9
+
 \title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
 
@@ -89,7 +99,7 @@ the estimated number of hurricanes and the number as recorded in the IBTrACS dat
 It is found that\dots
 
 \begin{center}
-\textbf{Word count:} TODO
+\textbf{Word count:} 6116 % 21/08/14 9:00
 \end{center}
 
 \section*{Acknowledgements}
@@ -118,7 +128,7 @@ for sounding out various ideas.
 % Impacts of hurricanes.
 Hurricanes are one of nature's most impressive and devastating extreme weather events. The costliest
 hurricane this century, hurricane Katrina, was responsible for 1833 deaths and caused \$108
-billion USD in damage \parencite{TODOCITE}. % TODO: Need another sentence here.
+billion USD in damage \parencite{TODOCITE}. % TODOWRITE: Need another sentence here.
 Hurricanes are therefore of great importance socially,
 economically and, in hurricane Katrina's case, even politically.
 
@@ -175,7 +185,8 @@ the 20\ts{th} century, providing an objective measure of the number of hurricane
 A global reanalysis project is an attempt to reconstruct the complete historical state of the
 atmosphere at a given spatial and temporal resolution, assimilating an incomplete series of
 measurements of atmospheric variables (a more complete description is given in Section
-\ref{sec:20crp}). Several reanalysis projects exist, such as NCEP/NCAR Reanalysis 1
+\ref{sec:20crp}). % TODOIMPROVE: They are not incomplete, just sparse in time/space.
+Several reanalysis projects exist, such as NCEP/NCAR Reanalysis 1
 \parencite{TODOCITE}, ECMWF ERA-40 \parencite{uppalaEra2006} and the JRA-55 \parencite{TODOCITE}.
 These reanalysis only run for 66, 40 and 55 years respectively, and so would not be useful for
 looking into hurricanes at the start of the 20\ts{th} century. The 20CR on the other hand covers
@@ -199,7 +210,7 @@ the \SI{850}{hPa} pressure level recorded.
 % List some previous attempts to detect hurr/tropical cyclones in reanalyses.
 % Talk about the primary difference: the existence of best tracks datasets.
 
-% TODO: Needs a bit of re-writing due to not being on the output of a GCM for reanalyses.
+% TODOIMPROVE: Needs a bit of re-writing due to not being on the output of a GCM for reanalyses.
 Several reasons exist for wanting to detect hurricanes in the output of GCMs. Often the goal is to
 look into the effects of climate change with a warming climate \parencite{bengtsson1996, sugi2002,
 yoshimura2006}. When running this sort of analysis, there is no objective measure of whether or not
@@ -209,14 +220,14 @@ the output of a GCM that is part of a historical reanalysis dataset, where it is
 the detected hurricane to a given tracks in a given best track database, as was done by
 \textcite{walsh1995}.
 
-% TODO: Ditto, make it clear that it's acting on global atm. output, not nec. GCM output.
+% TODOIMPROVE: Ditto, make it clear that it's acting on global atm. output, not nec. GCM output.
 There are two closely related approaches to detecting hurricanes in the output of GCMs. The first is
 to examine the output of the GCM at every timestep, looking for a cell or cells which meet certain
 criteria, and then produce tracks based on combining cells that meet these in criteria in different
 timesteps. These criteria are normally involve vorticity at the \SI{850}{hPa} pressure level,
 maximum wind speed, and temperature anomalies at different pressure levels. Additionally, the tracks
 produced have to be longer than a certain time duration, typically 1.5 to 2 days. Examples of
-studies that take this approach are \textcite{TODOCITEmultiple}. 
+studies that take this approach are \textcite{TODOCITE multiple}. 
 
 The second approach of detecting hurricanes is to first track some feature from one timestep to the
 next (typically vorticity maxima), and then apply a set of criteria to each point in these tracks to
@@ -299,7 +310,7 @@ sea ice data from the Hadley Centre Sea Ice and SST dataset \parencite{rayner200
 a GCM - the NCEP Global Forecast System \parencite{TODOCITE}. This is combined with pressure
 observations from the International Surface Pressure Databank \parencite{TODOCITE}, which is
 assimilated with the forecasts provided by the GCM by means of an Ensemble Kalman Filter (EKF). It
-provides estimates at a 2\textdegree spatial resolution, and on a 6-hour timestep, from 1871 to 2012
+provides estimates at a 2\textdegree\ spatial resolution, and on a 6-hour timestep, from 1871 to 2012
 (more years will be added using the same process in due time). A level of consistency is ensured by
 using the same process from the beginning of the reanalysis to the end, and by using only SST, sea
 ice and pressure data. This avoids the problems seen in other reanalysis projects, such as ERA-40
@@ -314,7 +325,7 @@ The GCM and EKF are run with 56 ensemble members, meaning that for every timeste
 estimates for the state of the atmosphere. According to \textcite{compoTwentieth2011}, individual
 tracking of storms is best done through tracking them in individual ensemble members, instead of
 looking at the ensemble mean. This is because the ensemble mean, in the presence of only a few
-observations, exhibits less synoptic variability. % TODO: unclear, explain better.
+observations, exhibits less synoptic variability. % TODOIMPROVE: unclear, explain better.
 Therefore the individual ensemble members were used in this study. Consequently, the analysis
 carried out in this study had to be repeated 56 times, and this provides that classification
 algorithms used in Section \ref{sec:classification} far more samples than would otherwise have been
@@ -325,15 +336,16 @@ the case.
 
 % Runs a GCM - NCEP GFS - to produce background fields
 % Technical details on GCM
-The GCM used was the NCEP Global Forecast System \parencite{TODOCITE}, with parameterisation as
-specified by \textcite{saha2006}. The version used in the reanalysis was slightly modified to permit
-time varying \ce{CO2} and volcanic aerosols. These, along with incoming radiation, where specified
-as in \textcite{saha2010}. The model was run at a horizontal resolution of T62 and a vertical
-resolution of 28 vertical hybrid sigma-pressure levels \parencite{juang2005}. This horizontal
-resolution is between the T42 and T106 resolutions analysed in \textcite{bengtsson1995}, and
-therefore should be capable of producing hurricane-type vortices, as the T42 model in that study
-was found to be capable of producing vortices, although it was noted that these vortices were of
-lower intensity and that their overall structure was less realistic than in the T106 GCM. 
+The GCM used by the reanalysis was the NCEP Global Forecast System \parencite{TODOCITE}, with
+parameterisation as specified by \textcite{saha2006}. The version used in the reanalysis was
+slightly modified to permit time varying \ce{CO2} and volcanic aerosols. These, along with incoming
+radiation, were used as specified in \textcite{saha2010}. The model was run at a horizontal
+resolution of T62 and a vertical resolution of 28 vertical hybrid sigma-pressure levels
+\parencite{juang2005}. This horizontal resolution is between the T42 and T106 resolutions analysed
+in \textcite{bengtsson1995}, and therefore should be capable of producing hurricane-type vortices,
+as the T42 model in that study was found to be capable of producing vortices, although it was noted
+that these vortices were of lower intensity and that their overall structure was less realistic than
+in the T106 GCM. 
 
 % Technical details EKF
 The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994}. It is
@@ -377,7 +389,7 @@ study (see Section \ref{sec:ibtracs}). This is of interest because this study tr
 sources as being independent, although this is not the case. However, due to the data assimilation
 process, and all the other factors that go into making the reanalysis data such as the GCM and every
 other source of pressure data, it is thought that the effect of this data being assimilated should
-not overly affect the conclusions of this study. Indeed, in Section \ref{sec:TODO}, where a
+not overly affect the conclusions of this study. Indeed, in Section \ref{sec:TODOREF}, where a
 comparison is made between a derived track and a best track, the surprising aspect is the degree to
 which the pressures do not correlate, which suggests that the IBTrACS best track pressure data is
 not solely responsible for the pressure along the track's course.
@@ -396,7 +408,7 @@ for this hurricane was systematically to the north-east of the corresponding bes
 the IBTrACS dataset). However, this study points to the fact that even hurricanes as far back as the
 beginning of the 20\ts{th} century are well represented. Figure \ref{fig:TODOFIG} shows the pressure
 and vorticity fields for one ensemble member and one date of this hurricane. In this figure, the
-2\textdegree resolution of the data is clearly visible, as is the vorticity maximum and the pressure
+2\textdegree\ resolution of the data is clearly visible, as is the vorticity maximum and the pressure
 minimum.
 
 % Figure showing Galveston Hurricane.
@@ -485,7 +497,7 @@ tracks.
 
 \subsection{Downscaling of Data}
 
-Following \textcite{TODOCITEhodgesXXX}, the vorticity field was downscaled to a finer resolution. This was
+Following \textcite{TODOCITE hodgesXXX}, the vorticity field was downscaled to a finer resolution. This was
 done so as when tracks were derived from these data, the so called ``staircase effect'', whereby
 tracks are seen to follow the grid cells at the resolution of the 20CR data, was minimised (an
 example of this ``staircase effect'' can be seen in Figure \ref{fig:katrina_individual_match_em7}). This
@@ -518,12 +530,12 @@ say interesting things about these figures.
 
 \section{Tracking}
 
-From both initial experimentation, and reading the literature \parencite{TODOCITEmultiple}, it was found
+From both initial experimentation, and reading the literature \parencite{TODOCITE multiple}, it was found
 that tracking on minima of the pressure field did not produce suitable tracks for identifying
 storm systems. This was due to the pressure field being subject to synoptic scale disturbances
 that mean that minima may not be present due to the surrounding gradient of this field. Whilst it is
 possible to apply high pass filtering to remove these disturbances, it was decided to follow
-\textcite{TODOCITEmultiple} and produce derived tracks from the 20CR data based on vorticity maxima.
+\textcite{TODOCITE multiple} and produce derived tracks from the 20CR data based on vorticity maxima.
 
 % TODOIMPROVE: This section is confusing on re-reading it. I think I need to make it clearer that I'm going to
 % compare different configurations.
@@ -540,7 +552,7 @@ The tracking algorithm used was a simple nearest neighbour tracking algorithm, w
 that counted two or more vorticity maxima that were sufficiently close as being part of the same storm
 system, with the location and strength of the maximum given by the strongest of
 these maxima. This cutoff distance was set as eight times the distance between the cells at
-0\textdegree N, or approximately \SI{1800}{km}. This distance was found to reduce problems of
+0\textdegree\ N, or approximately \SI{1800}{km}. This distance was found to reduce problems of
 vorticity maxima merging and splitting. The algorithm worked as follows:
 
 %  TODOIMPROVE: flowchart?
@@ -792,7 +804,7 @@ discard fields based on whether or not they pass a particular threshold test.
 \subsubsection{Linear/Quadratic Discriminant Analysis Classifiers}
 
 % How these work.
-% TODO: I need to check quadratic discriminant analysis.
+% TODOCHECK: I need to check quadratic discriminant analysis.
 For binary classification, Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis
 (QDA) are two closely related classification algorithms that allow computationally cheap
 classification of data where a gold standard is available under trained supervision.
@@ -818,7 +830,7 @@ to 2 million samples, and are thus suitable for the problem in this project
 classifier, which only scales to around \SI{10e5}{} samples. They work by TODOWRITE.
 
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
-% TODO: Explain feature scaling.
+% TODOWRITE: Explain feature scaling.
 This particular classifier is sensitive to feature scaling, therefore the input features must be
 scaled before the classifier is trained with this dataset, and likewise any data to be classified
 must be scaled using this same scaling. Dataset scaling was provided by the scikit-learn library.
