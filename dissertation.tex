@@ -53,7 +53,7 @@
 % TODOs: 81
 
 % TODO: 5
-% TODOCITE: 16
+% TODOCITE: 2
 % TODOWRITE: 20
 % TODOREF: 3
 % TODOFIGREF: 10
@@ -239,10 +239,10 @@ next (typically vorticity maxima), and then apply a set of criteria to each poin
 see whether they represent hurricanes or not. Normally, a time duration of the tracks must be longer
 than a certain duration as well, again typically 1.5 days. These tracks can yield extra information
 about the hurricanes, such as where their were formed, which is important in deriving details about
-cyclogenesis \parencite{TODOCITE}. Useful information about the fate of the cyclone can also be
-found, such as whether it undergoes an extra tropical transition \parencite{TODOCITE}. This is the
-approach taken by \textcite{hodges1994general, hodges1999adaptive, camargo2002improving}, and is
-also the approach that will be used in this study.
+cyclogenesis \parencite{marchok2002ncep}. Useful information about the fate of the cyclone can also
+be found, such as whether it undergoes an extra tropical transition \parencite{hart2001climatology}.
+This is the approach taken by \textcite{hodges1994general, hodges1999adaptive,
+camargo2002improving}, and is also the approach that will be used in this study.
 
 Both these approaches rely on thresholds being set for the criteria in advance of running the
 detection procedure, although there may be some sensitivity analysis done on these thresholds as in
@@ -513,13 +513,15 @@ tracks.
 
 \subsection{Downscaling of Data}
 
-Following \textcite{TODOCITE hodgesXXX}, the vorticity field was downscaled to a finer resolution. This was
-done so as when tracks were derived from these data, the so called ``staircase effect'', whereby
+% TODOCITE See if I can find a direct citation for this. Interpolation is mentioned in hodges1994,
+% but not using a spline.
+The vorticity field was downscaled to a finer resolution. This was done so as when tracks were
+derived from these data, the so called ``staircase effect'' \parencite{hodges1994general}, whereby
 tracks are seen to follow the grid cells at the resolution of the 20CR data, was minimised (an
-example of this ``staircase effect'' can be seen in Figure \ref{fig:katrina_individual_match_em7}). This
-downscaling was accomplished using a cubic spline interpolation, and the data were downscaled to two and
-three times their original resolutions. The efficacy of this downscaling will be demonstrated in
-Section \ref{sec:results_tracking}.
+example of this ``staircase effect'' can be seen in Figure \ref{fig:katrina_individual_match_em7}).
+This downscaling was accomplished using a cubic spline interpolation, and the data were downscaled
+to two and three times their original resolutions. The efficacy of this downscaling will be
+demonstrated in Section \ref{sec:results_tracking}.
 
 \subsection{Data Processing Results}
 
@@ -546,12 +548,12 @@ say interesting things about these figures.
 
 \section{Tracking}
 
-From both initial experimentation, and reading the literature \parencite{TODOCITE multiple}, it was found
-that tracking on minima of the pressure field did not produce suitable tracks for identifying
-storm systems. This was due to the pressure field being subject to synoptic scale disturbances
-that mean that minima may not be present due to the surrounding gradient of this field. Whilst it is
-possible to apply high pass filtering to remove these disturbances, it was decided to follow
-\textcite{TODOCITE multiple} and produce derived tracks from the 20CR data based on vorticity maxima.
+From initial experimentation, it was found that tracking on minima of the pressure field did not
+produce suitable tracks for identifying storm systems. This was due to the pressure field being
+subject to synoptic scale disturbances that mean that minima may not be present due to the
+surrounding gradient of this field. Whilst it is possible to apply high pass filtering to remove
+these disturbances, it was decided to follow \textcite{reed1988evaluation, thorncroft2001african}
+and produce derived tracks from the 20CR data based on vorticity maxima.
 
 % TODOIMPROVE: This section is confusing on re-reading it. I think I need to make it clearer that I'm going to
 % compare different configurations.
@@ -850,8 +852,9 @@ library scikit-learn were used \parencite{scikitLearn2011}.
 % How this works.
 Stochastic Gradient Descent (SGD) classifiers are an efficient class of classifiers that can scale
 to 2 million samples, and are thus suitable for the problem in this project
-\parencite{singer07pegasos}. This makes them more suitable than e.g. a Support Vector Machine
-classifier, which only scales to around \SI{10e5}{} samples. They work by TODOWRITE.
+\parencite{singer07pegasos, bottou2008tradeoffs}. This makes them more suitable than e.g. a Support
+Vector Machine (SVM) classifier, to which they are closely related. SVM classifiers typically only
+scale to around \SI{10e5}{} samples. They work by TODOWRITE.
 
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
 % TODOWRITE: Explain feature scaling.
