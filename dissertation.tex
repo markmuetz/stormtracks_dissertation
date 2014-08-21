@@ -50,17 +50,18 @@
 % Common typos:
 % possibly
 
-% TODOs: 75
-% TODO: 3
-% TODOCITE: 15
-% TODOWRITE: 18
+% TODOs: 81
+
+% TODO: 5
+% TODOCITE: 16
+% TODOWRITE: 20
 % TODOREF: 3
 % TODOFIGREF: 10
 % TODOFIG: 10
 % TODOTABLEREF: 1
 % TODOTABLE: 1
 % TODOCHECK: 4
-% TODOIMPROVE: 10
+% TODOIMPROVE: 11
 
 \title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
@@ -197,6 +198,7 @@ across the entire 20\ts{th} century.  It contains an estimate of the state of th
 T62 (2\textdegree) spatial resolution and at 6-hourly timesteps, with variables such as the
 longitudinal and latitudinal wind speeds at the \SI{995}{hPa} pressure level and the temperature at
 the \SI{850}{hPa} pressure level recorded.
+% TODOWRITE: say that I'm going to be detecting hurricanes etc.
 
 \section{Existing Tracking and Detection Algorithms}
 % Context.
@@ -269,6 +271,9 @@ historical reanalysis dataset, otherwise this would not be possible.
 % Outline of objectives for this project.
 % Finish with a run-down of the structure of the rest of the dissertation, including why it deviates
 % from the traditional Intro/Methods/Results/Discussion/Conclusion structure.
+
+% TODOIMPROVE: think about moving last objective to the top, and explaining that development of the
+% procedure involves these steps.
 The objectives of this study are to develop a tracking algorithm that is capable of producing tracks
 derived from the 20CR dataset that can be successfully matched to the tracks in the IBTrACS best
 tracks database. Following from this, these derived tracks will be used to collect extra information for
@@ -352,6 +357,7 @@ in the T106 GCM.
 % Technical details EKF
 The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994}. It is
 'deterministic', and is based on the 'Ensemble Square Root Filter' of \textcite{whitaker2002}.
+% TODOWRITE: say more about EKF.
 
 % Assimilates the observations and the output from the GCM using an EKF to provide an estimate as to
 % the state of the atmosphere at each timestep
@@ -696,9 +702,9 @@ These points will be knows as cyclone data points (CDPs) and for a typical year 
 Classification is the process of taking a dataset and splitting it up into various categories based
 on the attributes of each item in the dataset. For the purposes of hurricane classification, this is
 a binary classification, i.e. a CDP is either a hurricane or it is not. More fine-grained approaches
-are possible, such as splitting each CDP into a category from the Saffir-Simpson hurricane scale,
-but in this analysis the only concern was trying to correctly categorise whether or not a given CDP
-was a hurricane.
+are possible, such as splitting each CDP into a category from the Saffir-Simpson hurricane scale
+\parencite{TODOCITE}, but in this analysis the only concern was trying to correctly categorise whether or
+not a given CDP was a hurricane.
 
 Given that each derived track has also been matched to a best track, it is also possible to use the
 information from the best tracks dataset about whether the point on the best track is a hurricane or
