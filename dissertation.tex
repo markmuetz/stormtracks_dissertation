@@ -189,16 +189,17 @@ A global reanalysis project is an attempt to reconstruct the complete historical
 atmosphere at a given spatial and temporal resolution, assimilating an incomplete series of
 measurements of atmospheric variables (a more complete description is given in Section
 \ref{sec:20crp}). % TODOIMPROVE: They are not incomplete, just sparse in time/space.
-Several reanalysis projects exist, such as NCEP/NCAR Reanalysis 1
-\parencite{TODOCITE}, ECMWF ERA-40 \parencite{uppalaEra2006} and the JRA-55 \parencite{TODOCITE}.
-These reanalysis only run for 66, 40 and 55 years respectively, and so would not be useful for
-looking into hurricanes at the start of the 20\ts{th} century. The 20CR on the other hand covers
-over 140 years, from 1871 to 2012, and is therefore suitable for studying the number of hurricanes
-across the entire 20\ts{th} century.  It contains an estimate of the state of the atmosphere on a
-T62 (2\textdegree) spatial resolution and at 6-hourly timesteps, with variables such as the
-longitudinal and latitudinal wind speeds at the \SI{995}{hPa} pressure level and the temperature at
-the \SI{850}{hPa} pressure level recorded.
-% TODOWRITE: say that I'm going to be detecting hurricanes etc.
+Several reanalysis projects exist, such as NCEP/NCAR Reanalysis \parencite{kalnay1996ncep,
+kistler2001ncep}, ECMWF ERA-40 \parencite{uppala2005era} and the JRA-55
+\parencite{ebita2011japanese}.  These reanalysis only go back to 1948, 1957 and 1958  respectively,
+and so would not be useful for looking into hurricanes at the start of the 20\ts{th} century. The
+20CR on the other hand covers over 140 years, from 1871 to 2012, and is therefore suitable for
+studying the number of hurricanes across the entire 20\ts{th} century.  It contains an estimate of
+the state of the atmosphere on a T62 (2\textdegree) spatial resolution and at 6-hourly timesteps,
+with variables such as the longitudinal and latitudinal wind speeds at the \SI{995}{hPa} pressure
+level and the temperature at the \SI{850}{hPa} pressure level recorded.
+% TODOWRITE: say that I'm going to be detecting hurricanes etc. i.e. spell out what makes it
+% suitable.
 
 \section{Existing Tracking and Detection Algorithms}
 % Context.
@@ -216,13 +217,13 @@ the \SI{850}{hPa} pressure level recorded.
 
 % TODOIMPROVE: Needs a bit of re-writing due to not being on the output of a GCM for reanalyses.
 Several reasons exist for wanting to detect hurricanes in the output of GCMs. Often the goal is to
-look into the effects of climate change with a warming climate \parencite{bengtsson1996, sugi2002,
-yoshimura2006}. When running this sort of analysis, there is no objective measure of whether or not
+look into the effects of climate change with a warming climate \parencite{bengtsson1996will,
+sugi2002influence, yoshimura2006influence}. When running this sort of analysis, there is no objective measure of whether or not
 an individual detection of a hurricane is correct or not, although often tests are done to make sure
 that the resulting climatologies are realistic. This is in contrast to running the detection using
 the output of a GCM that is part of a historical reanalysis dataset, where it is possible to match
 the detected hurricane to a given tracks in a given best track database, as was done by
-\textcite{walsh1995}.
+\textcite{walsh1997objective}.
 
 % TODOIMPROVE: Ditto, make it clear that it's acting on global atm. output, not nec. GCM output.
 There are two closely related approaches to detecting hurricanes in the output of GCMs. The first is
@@ -240,17 +241,17 @@ than a certain duration as well, again typically 1.5 days. These tracks can yiel
 about the hurricanes, such as where their were formed, which is important in deriving details about
 cyclogenesis \parencite{TODOCITE}. Useful information about the fate of the cyclone can also be
 found, such as whether it undergoes an extra tropical transition \parencite{TODOCITE}. This is the
-approach taken by \textcite{TODOCITE, hodges, camargo}, and is also the approach that will be used
-in this study.
+approach taken by \textcite{hodges1994general, hodges1999adaptive, camargo2002improving}, and is
+also the approach that will be used in this study.
 
 Both these approaches rely on thresholds being set for the criteria in advance of running the
 detection procedure, although there may be some sensitivity analysis done on these thresholds as in
-\textcite{walsh1995}. These thresholds can be somewhat arbitrary and can vary with resolution
-\parencite{walsh2007}. Two studies that have looked at T63 resolution (very close to the T62 used by
+\textcite{walsh1997objective}. These thresholds can be somewhat arbitrary and can vary with resolution
+\parencite{walsh2007objectively}. Two studies that have looked at T63 resolution (very close to the T62 used by
 the 20CR dataset), have used values of \SI{6e-5}{s^{-1}} as a threshold value for hurricanes in the
-\SI{850}{hPa} vorticity \parencite{bengtsson2006, bengtsson2007}.  Therefore any value used in this
+\SI{850}{hPa} vorticity \parencite{bengtsson2006storm, bengtsson2007may}.  Therefore any value used in this
 study should be of a similar magnitude to this number.  The thresholds can also vary from basin to
-basin \parencite{camargo}, and thus need to be chosen quite carefully. 
+basin \parencite{camargo2002improving}, and thus need to be chosen quite carefully. 
 
 This study takes a different approach to choosing these thresholds. Instead of deciding what they
 should be before running the analysis, the analysis is run, and the values of e.g. vorticity and
@@ -261,7 +262,7 @@ of the thresholds \textit{after} the bulk of the processing has been done, thus 
 the process of finding optimum values for these thresholds. It also permits the use of machine
 learning classification algorithms, which it is hoped will improve the accuracy of the hurricane
 detection, as measured by the number of true and false positives. This is a similar approach to
-\textcite{walsh1995}, who analysed the numbers of false and missing tropical cyclones over September
+\textcite{walsh1997objective}, who analysed the numbers of false and missing tropical cyclones over September
 1989 and October 1992, and results of this study will be compared against these. It bears repeating
 that this approach is only possible because this study is running the hurricane detection over a
 historical reanalysis dataset, otherwise this would not be possible.
@@ -313,19 +314,19 @@ the results of the previous sections.
 The 20\ts{th} Century Reanalysis Project (20CR) is a project whose aim is to produce a consistent
 best estimate of the state of the atmosphere by including information from a variety of different
 sources using data assimilation \parencite{compoTwentieth2011}. Sea Surface Temperature (SST) and
-sea ice data from the Hadley Centre Sea Ice and SST dataset \parencite{rayner2003} are used to drive
-a GCM - the NCEP Global Forecast System \parencite{TODOCITE}. This is combined with pressure
-observations from the International Surface Pressure Databank \parencite{TODOCITE}, which is
-assimilated with the forecasts provided by the GCM by means of an Ensemble Kalman Filter (EKF). It
-provides estimates at a 2\textdegree\ spatial resolution, and on a 6-hour timestep, from 1871 to 2012
-(more years will be added using the same process in due time). A level of consistency is ensured by
-using the same process from the beginning of the reanalysis to the end, and by using only SST, sea
-ice and pressure data. This avoids the problems seen in other reanalysis projects, such as ERA-40
-\parencite{TODOCITE}, which incorporate as much data as possible. This biases more recent years, as
-e.g. satellite data from the 1970s onwards provides far more observations than exist before this
-period. Due to the use of an EKF, it is also possible for the 20CR to provide estimates for the
-uncertainty of each of its estimates at each timestep, although this information is not used as part
-of this study.
+sea ice data from the Hadley Centre Sea Ice and SST dataset \parencite{rayner2003global} are used to drive
+a GCM - the NCEP Global Forecast System \parencite{kanamitsu1989description, kanamitsu1991recent}.
+This is combined with pressure observations from the International Surface Pressure Databank
+\parencite{yin2008international}, which is assimilated with the forecasts provided by the GCM by means of an
+Ensemble Kalman Filter (EKF). It provides estimates at a 2\textdegree\ spatial resolution, and on a
+6-hour timestep, from 1871 to 2012 (more years will be added using the same process in due time). A
+level of consistency is ensured by using the same process from the beginning of the reanalysis to
+the end, and by using only SST, sea ice and pressure data. This avoids the problems seen in other
+reanalysis projects, such as ERA-40 \parencite{uppala2005era}, which incorporate as much data as
+possible. This biases more recent years, as e.g. satellite data from the 1970s onwards provides far
+more observations than exist before this period. Due to the use of an EKF, it is also possible for
+the 20CR to provide estimates for the uncertainty of each of its estimates at each timestep,
+although this information is not used as part of this study.
 
 % necessity of analysing single EM (ref compo2011)
 The GCM and EKF are run with 56 ensemble members, meaning that for every timestep there are 56
@@ -343,20 +344,22 @@ the case.
 
 % Runs a GCM - NCEP GFS - to produce background fields
 % Technical details on GCM
-The GCM used by the reanalysis was the NCEP Global Forecast System \parencite{TODOCITE}, with
-parameterisation as specified by \textcite{saha2006}. The version used in the reanalysis was
+The GCM used by the reanalysis was the NCEP Global Forecast System
+\parencite{kanamitsu1989description, kanamitsu1991recent}, with
+parameterisation as specified by \textcite{saha2006ncep}. The version used in the reanalysis was
 slightly modified to permit time varying \ce{CO2} and volcanic aerosols. These, along with incoming
-radiation, were used as specified in \textcite{saha2010}. The model was run at a horizontal
-resolution of T62 and a vertical resolution of 28 vertical hybrid sigma-pressure levels
-\parencite{juang2005}. This horizontal resolution is between the T42 and T106 resolutions analysed
-in \textcite{bengtsson1995}, and therefore should be capable of producing hurricane-type vortices,
-as the T42 model in that study was found to be capable of producing vortices, although it was noted
-that these vortices were of lower intensity and that their overall structure was less realistic than
-in the T106 GCM. 
+radiation, were used as specified in \textcite{saha2010ncep}. The model was run at a horizontal
+resolution of T62 and a vertical resolution of 28 vertical hybrid sigma-pressure levels as described
+by \textcite{juang2005discrete}. This horizontal resolution is between the T42 and T106 resolutions
+analysed in \textcite{bengtsson1995hurricane}, and therefore should be capable of producing
+hurricane-type vortices, as the T42 model in that study was found to be capable of producing
+vortices, although it was noted that these vortices were of lower intensity and that their overall
+structure was less realistic than in the T106 GCM. 
 
 % Technical details EKF
-The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994}. It is
-'deterministic', and is based on the 'Ensemble Square Root Filter' of \textcite{whitaker2002}.
+The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994sequential,
+evensen2003ensemble}. It is 'deterministic', and is based on the 'Ensemble Square Root Filter' of
+\textcite{whitaker2002ensemble}.
 % TODOWRITE: say more about EKF.
 
 % Assimilates the observations and the output from the GCM using an EKF to provide an estimate as to
@@ -391,16 +394,17 @@ period.
 
 \subsection{International Surface Pressure Databank}
 The pressure data comes from the International Surface Pressure Databank version 2 (ISPDv2)
-\parencite{TODOCITE}. This takes its data from over 40 international agencies, and combines them
-into one usable databank. One particularly notable data source is the IBTrACS dataset used in this
-study (see Section \ref{sec:ibtracs}). This is of interest because this study treats these two data
-sources as being independent, although this is not the case. However, due to the data assimilation
-process, and all the other factors that go into making the reanalysis data such as the GCM and every
-other source of pressure data, it is thought that the effect of this data being assimilated should
-not overly affect the conclusions of this study. Indeed, in Section \ref{sec:TODOREF}, where a
-comparison is made between a derived track and a best track, the surprising aspect is the degree to
-which the pressures do not correlate, which suggests that the IBTrACS best track pressure data is
-not solely responsible for the pressure along the track's course.
+\parencite{yin2008international}. This takes its data from over 40 international agencies, and
+combines them into one usable databank. One particularly notable data source is the IBTrACS dataset
+used in this study (see Section \ref{sec:ibtracs}). This is of interest because this study treats
+these two data sources as being independent, although this is not the case. However, due to the data
+assimilation process, and all the other factors that go into making the reanalysis data such as the
+GCM and every other source of pressure data, it is thought that the effect of this data being
+assimilated should not overly affect the conclusions of this study. Indeed, in Section
+\ref{sec:TODOREF}, where a comparison is made between a derived track and a best track, the
+surprising aspect is the degree to which the pressures do not correlate, which suggests that the
+IBTrACS best track pressure data is not solely responsible for the pressure along the track's
+course.
 
 % Results summary and usage for hurricane detection:
 % * compo2011
@@ -409,22 +413,22 @@ not solely responsible for the pressure along the track's course.
 
 \subsection{Representations of Hurricanes in the 20CR dataset}
 
-In \textcite{neff2013}, the path of the Galveston Hurricane of the 8\ts{th} September, 1900 is
-analysed. The analysis finds that the hurricane is detectable through a minimum in the pressure
+In \textcite{neff2013analysis}, the path of the Galveston Hurricane of the 8\ts{th} September, 1900
+is analysed. The analysis finds that the hurricane is detectable through a minimum in the pressure
 field, even though the mean pressure field was used. They find that the track derived from the 20CR
 for this hurricane was systematically to the north-east of the corresponding best track (taken from
 the IBTrACS dataset). However, this study points to the fact that even hurricanes as far back as the
 beginning of the 20\ts{th} century are well represented. Figure \ref{TODOFIGREF} shows the pressure
 and vorticity fields for one ensemble member and one date of this hurricane. In this figure, the
-2\textdegree\ resolution of the data is clearly visible, as is the vorticity maximum and the pressure
-minimum.
+2\textdegree\ resolution of the data is clearly visible, as is the vorticity maximum and the
+pressure minimum.
 
 % TODOFIG showing Galveston Hurricane.
 
-In a more comprehensive study, \textcite{emanuel2010} used an earlier version of the 20CR dataset to
-look at tropical cyclone activity from 1908-1958. He used dynamical downscaling (i.e. using a
-high resolution model with the 20CR data providing boundary conditions for this model, not to be
-confused with the simple cubic spline interpolation downscaling used in this study) to better
+In a more comprehensive study, \textcite{emanuel2010tropical} used an earlier version of the 20CR
+dataset to look at tropical cyclone activity from 1908-1958. He used dynamical downscaling (i.e.
+using a high resolution model with the 20CR data providing boundary conditions for this model, not
+to be confused with the simple cubic spline interpolation downscaling used in this study) to better
 represent the structure of the tropical cyclones. He found a ``marginally significant increase'' in
 the number of northern hemisphere tropical cyclones, along with a high correlation between the power
 dissipation index from derived from the 20CR reanalysis and the best tracks from the same period.
@@ -581,10 +585,11 @@ vorticity maxima merging and splitting. The algorithm worked as follows:
     \item Move onto the third timestep and repeat the process
 \end{enumerate}
 
-Whilst this algorithm is considerably less sophisticated that that of \textcite{hodges1994}, it was
-found to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS dataset,
-and almost all of the best tracks that were hurricanes (Section  \ref{sec:results_tracking}). A
-discussion of other tracking algorithms can be found in Section \ref{sec:discussion_tracking_algs}.
+Whilst this algorithm is considerably less sophisticated that that of \textcite{hodges1994general},
+it was found to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS
+dataset, and almost all of the best tracks that were hurricanes (Section
+\ref{sec:results_tracking}). A discussion of other tracking algorithms can be found in Section
+\ref{sec:discussion_tracking_algs}.
 
 \subsection{Tracking Results}
 \label{sec:results_tracking}
@@ -703,7 +708,7 @@ Classification is the process of taking a dataset and splitting it up into vario
 on the attributes of each item in the dataset. For the purposes of hurricane classification, this is
 a binary classification, i.e. a CDP is either a hurricane or it is not. More fine-grained approaches
 are possible, such as splitting each CDP into a category from the Saffir-Simpson hurricane scale
-\parencite{TODOCITE}, but in this analysis the only concern was trying to correctly categorise whether or
+\parencite{simpson1974hurricane}, but in this analysis the only concern was trying to correctly categorise whether or
 not a given CDP was a hurricane.
 
 Given that each derived track has also been matched to a best track, it is also possible to use the
@@ -810,7 +815,7 @@ through a series of binary tests, determining which category a particular CDP sh
 in the results of these tests.
 
 The approach of using thresholds is very similar to the approach taken by
-\textcite{walshObjective1997}. The main difference between his approach and the one here is that in
+\textcite{walsh1997objective}. The main difference between his approach and the one here is that in
 this case the thresholds are applied after the processing has been done, thereby allowing far more
 scope for experimenting with changes to these threshold values (i.e. the whole processing step does
 not have to be run to experiment with different threshold values). This allows for a much faster
