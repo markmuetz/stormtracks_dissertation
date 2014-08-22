@@ -797,7 +797,7 @@ possible results of an individual classification. These are:
 When classifying a dataset, the collection of these results can be represented visually with a Venn
 diagram, as shown in Figure \ref{fig:tf_np_venn}. They can also be represented in tabular form in an
 Error Matrix (also called a Contingency Table or Confusion Matrix). An example of an Error Matrix
-can be seen in Table \ref{TODOTABLEREF}, which shows the successes and failures of a simple
+can be seen in Table \ref{tab:tf_np_table}, which shows the successes and failures of a simple
 classifier for a subset of the data.
 
 \begin{figure}[hb!]
@@ -813,6 +813,19 @@ classifier for a subset of the data.
 \end{figure}
 
 % TODOTABLE: error matrix
+\begin{table}
+    \centering
+    \begin{tabular}{ l | c c }
+                                & Condition Positive & Condition Negative \\
+        \hline                       
+        Classification Positive & \SI{40587}{} & \SI{14344}{} \\
+        Classification Negative & \SI{23125}{} & \SI{2042954}{} \\
+    \end{tabular}
+    \caption{Shows the number of True Positives, False Positives, False Negatives and True Negatives
+        for the calibration run with the Stochastic Gradient Descent classifier described later in this
+        section. }
+    \label{tab:tf_np_table}
+\end{table}
 
 \newpage
 \subsubsection{Sensitivity, Positive Predictive Value and False Positive Rate}
@@ -843,6 +856,18 @@ that the FPR will typically be very low, and less information can be gleaned fro
 metric. Also, as will be explained in the next section, the Sensitivity and the PPV can be used to
 obtain an estimate of the number of actual hurricanes. Examples of these plots can be seen in
 Figure \ref{fig:ppv_and_fpr_vs_sens}.
+
+For the values in Table \ref{tab:tf_np_table} the values would be:
+
+\begin{table}[hb!]
+    \centering
+    \begin{tabular}{ r c }
+        Sensitivity: & \SI{0.637}{} \\
+        PPV: & \SI{0.739}{} \\
+        FPR: & \SI{6.97e-3}{} \\
+    \end{tabular}
+    \label{tab:success_metric_table}
+\end{table}
 
 \subsubsection{Estimate of the Number of Actual Hurricanes}
 
