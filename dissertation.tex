@@ -50,12 +50,12 @@
 % Common typos:
 % possibly
 
-% TODOs: 81
+% TODOs: 56
 
 % TODO: 5
 % TODOCITE: 2
-% TODOWRITE: 20
-% TODOREF: 3
+% TODOWRITE: 9
+% TODOREF: 2
 % TODOFIGREF: 10
 % TODOFIG: 10
 % TODOTABLEREF: 1
@@ -161,16 +161,17 @@ webster2005changes, holland2007heightened}.
 Most studies into hurricane frequency and intensity tend to rely on best tracks databases as their
 primary data source, such as the IBTrACS database used in this study
 \parencite{knappInternational2010}, or the tropical cyclone database from the National Hurricane
-Center \parencite{jarvinen1984tropical}. These databases suffer from some problems when going into
-the middle and early 20\ts{th} century, such as the lack of satellite data before the 1970s, and the
-lack of reliable aeroplane reconnaissance data before the mid 1940s \parencite{chang2007number}.
-Accordingly, in this study, the approach taken is a different one. Instead of using the numbers
-compiled by various agencies as the primary source of information into hurricanes, the primary data
-will be taken from reanalysis data, specifically the 20\ts{th} Century Reanalysis (20CR) Project
-\parencite{compoTwentieth2011}.  Hurricanes will be detected in these data, and the detection
-procedure will be trained and validated on recent data (from 1990 to 2009), where reliable best
-tracks exist. Once the detection procedure has been trained, it can be used to run over the whole of
-the 20\ts{th} century, providing an objective measure of the number of hurricanes in each year.
+Center (HURDAT) \parencite{jarvinen1984tropical}. These databases suffer from some problems when
+going into the middle and early 20\ts{th} century, such as the lack of satellite data before the
+1970s, and the lack of reliable aeroplane reconnaissance data before the mid 1940s
+\parencite{chang2007number}.  Accordingly, in this study, the approach taken is a different one.
+Instead of using the numbers compiled by various agencies as the primary source of information into
+hurricanes, the primary data will be taken from reanalysis data, specifically the 20\ts{th} Century
+Reanalysis (20CR) Project \parencite{compoTwentieth2011}.  Hurricanes will be detected in these
+data, and the detection procedure will be trained and validated on recent data (from 1990 to 2009),
+where reliable best tracks exist. Once the detection procedure has been trained, it can be used to
+run over the whole of the 20\ts{th} century, providing an objective measure of the number of
+hurricanes in each year.
 
 \section{Research Problem}
 % Detection of hurricanes in 20CR dataset.
@@ -447,7 +448,13 @@ The International Best Track Archive for Climate Stewardship (IBTrACS)
 tropical storms and tropical cyclones. It collects best tracks from numerous Regional Specialized
 Meteorological Centers (RSMCs) and Tropical Cyclone Warning Centres (TCWCs), and combines these
 together, removing duplicates and trying detect common discrepancies, such as dates being different
-by one day and the positions between tracks not being the same. 
+by one day and the positions between tracks not being the same.  
+
+The dataset contains data for each track at 6 hourly time intervals (taken at 0000, 0600, 1200, 1800
+UTC daily). It includes data on position, wind speed and pressure. It is split into separate basins,
+and in this study only the North Atlantic (NA) basin will be utilised. The primary source of data
+for this basin is the Atlantic Hurricane Database (HURDAT), \parencite{jarvinen1984tropical}, indeed
+there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset. 
 
 % TODOWRITE:
 % Talk about usage for hurricane trending over 20th C, and problems with this.
@@ -536,18 +543,29 @@ say interesting things about these figures.
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\textwidth]{figures/katrina_data_proc}
-    \caption{TODOWRITE: Caption goes here.}
+    \caption{Three different views of Hurricane Katrina over the Gulf of Mexico as it appears in the
+        20CR on the 27\ts{th} August, 2005 at 1800 UTC (taken from ensemble member 1). Figure (a)
+        shows the raw 20CR wind fields with contours fitted based on the maximum wind speed. Figure
+        (b) shows the corresponding vorticity field, with the 2\textdegree\ resolution of the data
+        clearly visible. Figure(c) shows the data after they have been downscaled to three times the
+        original resolution, showing the more precise location of the vorticity maximum.}
     \label{fig:katrina_data_proc}
 \end{figure}
 
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\textwidth]{figures/katrina_max_mins}
-    \caption{TODOWRITE: Caption goes here.}
+    \caption{Vorticity and pressure maximum and minimum detection as shown by Hurricane Katrina,
+        taken on the 27\ts{th} August, 2005 at 1800 UTC (taken from ensemble member 1). Maxima are
+        shown by red dots, and minima by black crosses. The large number of vorticity maxima should
+        be noted, which is why a vorticity cutoff as described in Section \ref{sec:tracking} is
+        employed. A clear vorticity maximum and pressure minimum can be seen indicating the position of
+        Hurricane Katrina in this figure.}
     \label{fig:katrina_max_mins}
 \end{figure}
 
 \section{Tracking}
+\label{sec:tracking}
 
 From initial experimentation, it was found that tracking on minima of the pressure field did not
 produce suitable tracks for identifying storm systems. This was due to the pressure field being
@@ -564,7 +582,8 @@ levels, and for the one, two and three times the actual 20CR resolution, yieldin
 possible configurations for the tracking. These various configurations were compared, and the
 results can be seen in Section \ref{sec:results_tracking}. Maxima that were below a cutoff value
 of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
-that are unlikely to be part of even tropical storms. This choice is revisited in Section
+that are unlikely to be part of even tropical storms. This is similar to the ``relaxed threshold
+criteria'' used in \textcite{camargo2002improving}. This choice is revisited in Section
 \ref{TODOREF} where some further justification is given for this value.
 
 The tracking algorithm used was a simple nearest neighbour tracking algorithm, with a modification
@@ -627,22 +646,34 @@ noticeable points from this figure are TODOWRITE.
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=\linewidth]{figures/katrina_six_tracking_configs}
-    \caption{TODOWRITE Caption goes here.}
+    \caption{The six different tracking configurations tested for their fit with the best track of
+        Hurricane Katrina.  Each of the individual figures shows all of the tracks across the
+        different ensemble members that were matched with Hurricane Katrina. Katrina started as a
+        tropical depression to the East of Florida, and then strengthened over the Gulf of Mexico,
+        where it became a hurricane. This section of the best track is particularly well matched in all
+        of the figures, indicating that it is easier to track hurricanes and stronger storms in general due
+        to their more pronounced natures. The tighter grouping of the higher resolution derived tracks
+        around the best track can also be seen, indicating that they may be providing a better track. }
     \label{fig:katrina_six_tracking_configs}
 \end{figure}
 
 To judge the tracking ability of the different tracking configurations, this matching across all
-best tracks and derived tracks was done for each year in the ten year period 2000-2009.
-% TODOWRITE: switch to cumoveroverlap as it is much easier to describe.
-For each year, the combined average distance between each derived track and best track was
-calculated. This number was divided by the total number of matches, so as a particular configuration
-that achieved relatively few matches would be penalised. This produces a metric by which the various
-configurations can be judged, and each of the configurations was then compared the others to see how
-they performed on this metric. The results of this comparison can be seen in Figure
-\ref{TODOFIGREF}. It is clear that higher resolution, downscaled data produces better tracks that
-the unscaled data. This suggests that for tracking, scaling of three times the original resolution
-should be used. What is less clear is which is better: the NSPL or the \SI{850}{hPa}
-pressure levels. TODOWRITE: why I picked \SI{850}{hPa}.
+best tracks and derived tracks was done for each year in the ten year period 2000-2009.  For each
+year, the cumulative distance between each derived track and best track across all ensemble members
+was calculated. This number was divided by the total number of overlaps between derived tracks and
+best tracks, so as a particular configuration that achieved relatively few matches would be
+penalised.  This produces a metric by which the various configurations can be judged, and each of
+the configurations was then compared the others to see how they performed on this metric. The
+results of this comparison can be seen in Figure \ref{TODOFIGREF}. It is clear that higher
+resolution, downscaled data produces better tracks that the unscaled data. This suggests that for
+tracking, scaling of three times the original resolution should be used. 
+
+What is less clear is which is better: the NSPL or the \SI{850}{hPa} pressure levels. It is hard to
+pick between them based on performance grounds on this metric alone. However, theoretical reasons
+for preferring the \SI{850}{hPa} pressure level were given in Section \ref{TODOREF}. Therefore the
+\SI{850}{hPa} level was chosen over the NSPL. This has the added benefit of making comparison
+between this study and other studies easer, as almost all other studies use the \SI{850}{hPa}
+pressure level, thereby allowing e.g. comparison of the vorticity values found.
 
 % TODOFIG: Comparison of wins/losses of different tracking configurations.
 
@@ -702,11 +733,6 @@ the IBTrACS dataset. Reasons as to why this might be so are examined further in 
 
 \section{Classification}
 
-% TODOWRITE: Need to mention supervised/unsupervised machine learning. In fact, need to mention machine
-%learning full stop!
-% TODOWRITE: mention fields I have collected are termed features in machine learning terminology.
-% TODOWRITE: mention that CDPs are equivalent to samples in machine learning terminology.
-
 % Description of the goal of classification and how it applies in this setting. Set out terminology
 % that I am going to use.
 % standard by which the various classifiers can be trained/judged.
@@ -721,7 +747,8 @@ on the attributes of each item in the dataset. For the purposes of hurricane cla
 a binary classification, i.e. a CDP is either a hurricane or it is not. More fine-grained approaches
 are possible, such as splitting each CDP into a category from the Saffir-Simpson hurricane scale
 \parencite{simpson1974hurricane}, but in this analysis the only concern was trying to correctly categorise whether or
-not a given CDP was a hurricane.
+not a given CDP was a hurricane. In classification terminology, each CDP represents one sample, and
+the different fields for each CDP are known as features for that sample.
 
 Given that each derived track has also been matched to a best track, it is also possible to use the
 information from the best tracks dataset about whether the point on the best track is a hurricane or
@@ -730,8 +757,13 @@ represents a hurricane. This is represented visually in Figure \ref{TODOFIGREF},
 CDP for the year TODO, as well as whether the individual point has been matched to a hurricane in
 the best tracks dataset or not. In classification terminology, this matching represents the gold
 standard by which the classification algorithms can be trained, and by which their performance can
-be validated.  This allows classification algorithms to take the information derived from the 20CR
-and perform classification based on this information.
+be validated. This allows classification algorithms to take the information derived from the 20CR
+and perform classification based on this information. Matching of features from a set of samples,
+against a gold standard, is known as supervised machine learning. This is contrast to other types of
+machine learning where there is no objective gold standard by which to train the algorithms, known
+as unsupervised machine learning. An example of unsupervised machine learning can be seen in
+\textcite{studholme2014objective}, where a K-means clustering algorithm is used to determine the
+extratropical transition of cyclones.
 
 % TODOFIG showing CDP with training set info included.
 
