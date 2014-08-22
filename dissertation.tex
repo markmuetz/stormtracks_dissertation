@@ -795,15 +795,26 @@ possible results of an individual classification. These are:
 \end{enumerate}
 
 When classifying a dataset, the collection of these results can be represented visually with a Venn
-diagram, as shown in Figure \ref{TODOFIGREF}. They can also be represented in tabular form in an
+diagram, as shown in Figure \ref{fig:tf_np_venn}. They can also be represented in tabular form in an
 Error Matrix (also called a Contingency Table or Confusion Matrix). An example of an Error Matrix
 can be seen in Table \ref{TODOTABLEREF}, which shows the successes and failures of a simple
 classifier for a subset of the data.
 
-% TODOFIG: Venn diagram
+\begin{figure}[hb!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/tf_np_venn_cropped}
+    \vspace{-10pt}
+    \caption{Venn diagram showing relationship of True Positives, False Positives, True Negatives and
+        False Negatives. Everything inside the thick dashed line is objectively true, as determined
+        by the gold standard. Everything inside the thin dotted line is predicted to be true, by the
+        classification algorithm. The intersection of these two sets represents all True Positives.}
+    \label{fig:tf_np_venn}
+    \vspace{-10pt}
+\end{figure}
 
 % TODOTABLE: error matrix
 
+\newpage
 \subsubsection{Sensitivity, Positive Predictive Value and False Positive Rate}
 
 From the success and error results, various metrics are defined that give a measure of how well a
