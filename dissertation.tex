@@ -11,7 +11,7 @@
 
 % Reduces margins substantially.
 \usepackage{geometry}
-\newgeometry{margin=3.0cm}
+\newgeometry{margin=2.5cm}
 
 % Allows headers and footers.
 \usepackage{fancyhdr}
@@ -42,7 +42,7 @@
 % Abstract
 % Intro
 % Data Sources
-% Development of the Hurricane Detection Algorithm
+% Development of the Hurricane Detection Procedure
 % Conclusion
 % Appendices
 % References
@@ -53,14 +53,14 @@
 % TODOs: 56
 
 % TODO: 5
-% TODOCITE: 2
+% TODOCITE: 1
 % TODOWRITE: 9
 % TODOREF: 3
 % TODOFIGREF: 10
 % TODOFIG: 10
 % TODOTABLEREF: 1
 % TODOTABLE: 1
-% TODOCHECK: 4
+% TODOCHECK: 1
 % TODOIMPROVE: 11
 
 \title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
@@ -75,9 +75,9 @@
 \onehalfspacing
 \section*{Abstract}
 
-% Should be >= 400 words.
+% Should be <= 400 words.
 % Not included in word count.
-% 255 words so far.
+% ~262 words so far.
 A procedure for the detection of hurricanes in the 20\ts{th} Century Reanalysis Project dataset is
 developed. Tracks are derived from the dataset by tracking vorticity maxima over time. These derived
 tracks are matched against best tracks taken from the International Best Track Archive for Climate
@@ -99,10 +99,10 @@ metrics.
 
 The developed procedure is run over the course of the 20\ts{th} Century, and a comparison between
 the estimated number of hurricanes and the number as recorded in the IBTrACS dataset is performed.
-It is found that\dots
+It is found that TODOWRITE
 
 \begin{center}
-\textbf{Word count:} 6116 % 21/08/14 9:00
+\textbf{Word count:} 6800 % 22/08/14 14:00
 \end{center}
 
 \section*{Acknowledgements}
@@ -234,7 +234,7 @@ criteria, and then produce tracks based on combining cells that meet these in cr
 timesteps. These criteria are normally involve vorticity at the \SI{850}{hPa} pressure level,
 maximum wind speed, and temperature anomalies at different pressure levels. Additionally, the tracks
 produced have to be longer than a certain time duration, typically 1.5 to 2 days. Examples of
-studies that take this approach are \textcite{TODOCITE multiple}. 
+studies that take this approach are \textcite{bengtsson1995hurricane, walsh1997objective}. 
 
 The second approach of detecting hurricanes is to first track some feature from one timestep to the
 next (typically vorticity maxima), and then apply a set of criteria to each point in these tracks to
@@ -645,7 +645,7 @@ noticeable points from this figure are TODOWRITE.
 
 \begin{figure}[hbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/katrina_six_tracking_configs}
+    \includegraphics[width=0.9\linewidth]{figures/katrina_six_tracking_configs}
     \caption{The six different tracking configurations tested for their fit with the best track of
         Hurricane Katrina.  Each of the individual figures shows all of the tracks across the
         different ensemble members that were matched with Hurricane Katrina. Katrina started as a
@@ -732,6 +732,7 @@ the IBTrACS dataset. Reasons as to why this might be so are examined further in 
 % TODOFIG: plot showing poor correlation between Katrina derived and best.
 
 \section{Classification}
+\label{sec:classification}
 
 % Description of the goal of classification and how it applies in this setting. Set out terminology
 % that I am going to use.
@@ -830,11 +831,11 @@ Figures \ref{TODOFIGREF} and \ref{TODOFIGREF}.
 When any of the classifiers is run on a dataset, it will produce a prediction of which of the
 members of that dataset are hurricanes, $H_{predicted}$. The PPV value derived for that particular classifier will
 allow an estimate of the number of TPs for that prediction. Likewise, from the estimated number of
-TPs, the sensitivity will allow a means of estimating the number of actual hurricanes, $H_{est. actual}$,
+TPs, the sensitivity will allow a means of estimating the number of actual hurricanes, $H_{estimated}$,
 in the dataset. The equation for this is:
 
 \begin{equation}
-    H_{est. actual} = \frac{PPV \times H_{predicted}}{sensitivity}
+    H_{estimated} = \frac{PPV \times H_{predicted}}{sensitivity}
     \label{eqn:n_actual_hurricane}
 \end{equation}
 
@@ -890,19 +891,35 @@ These algorithms were not implemented from scratch; instead the implementations 
 library scikit-learn were used \parencite{scikitLearn2011}.
 
 \subsubsection{Stochastic Gradient Descent Classifiers}
-% TODO: Need to explain what samples are higher up.
-% How this works.
+% How this works. Its relation to SVM.
 Stochastic Gradient Descent (SGD) classifiers are an efficient class of classifiers that can scale
 to 2 million samples, and are thus suitable for the problem in this project
 \parencite{singer07pegasos, bottou2008tradeoffs}. This makes them more suitable than e.g. a Support
-Vector Machine (SVM) classifier, to which they are closely related. SVM classifiers typically only
-scale to around \SI{10e5}{} samples. They work by TODOWRITE.
+Vector Machine (SVM) classifier \parencite{cortes1995support}, to which they are closely related.
+SVM classifiers typically only scale to around \SI{10e5}{} samples and therefore would not scale to
+the number of samples used in this study. To understand how an SGD classifier works, it is useful to
+consider how an SVM classifier works first.
+
+SVM classifiers work by calculating the hyperplane or set of hyperplanes which separate the two
+categories into two distinct groups with the clearest possible gap between them. In the case where
+there is no clean divide between the two categories, SVM classifiers will pick the hyperplanes which
+most cleanly divide them \parencite{cortes1995support}. By use of the kernel trick
+\parencite{aizerman1964theoretical}, SVM classifiers are not restricted to linear division between
+the categories, but can represent more complex surfaces than just hyperplanes. The locations of the
+hyperplanes which best separates the samples are calculated analytically.
+
+SGD classifiers use the same underlying idea of hyperplanes to split the samples into two distinct
+categories, however instead of calculating the location of the hyperplanes analytically, their
+position is found iteratively using an SGD algorithm for optimising the position of this hyperplane.
+This allows SGD classifiers to scale to far more samples than their SVM counterparts, whilst still
+solving the same underlying problem (albeit possibly less optimally).
 
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
-% TODOWRITE: Explain feature scaling.
-This particular classifier is sensitive to feature scaling, therefore the input features must be
-scaled before the classifier is trained with this dataset, and likewise any data to be classified
-must be scaled using this same scaling. Dataset scaling was provided by the scikit-learn library.
+This particular classifier is sensitive to feature scaling, which is where a larger absolute range
+for e.g. pressure than vorticity leads to the classification being unduly biased towards this
+feature.  Therefore the input features must be scaled before the classifier is trained with this
+dataset, and likewise any data to be classified must be scaled using this same scaling as was used
+for the training dataset. Dataset scaling was provided by the scikit-learn library.
 
 \subsubsection{Combining Classifiers}
 With some of the classifiers, it was clear from examination of the output that they performed well
@@ -924,17 +941,17 @@ amount. This has the effect of increasing the PPV and FPR, but has no effect on 
 \subsubsection{Training Dataset}
 For the training dataset, all tracks from all ensemble members from the even years between 1990 and
 2008 were taken. Given that each track is comprised of multiple (at least six) CDPs, this leads to a
-large number of samples. On average, there were TODOCHECK samples per year, leading to a total
-sample size of TODOCHECK million samples. This training dataset was used as a way of picking optimum
+large number of samples. On average, there were \SI{211906}{} samples per year, leading to a total
+sample size of 2.12 million samples. This training dataset was used as a way of picking optimum
 values for the threshold classifier manually (as defined by a maximum combined value of sensitivity
 and PPV), and then using a brute force around the chosen values to verify that these values were
 indeed the local maximum. The training dataset was also used to train each of the LDA, QDA and SGD
-classifier.
+classifiers.
 
 \subsubsection{Validation Dataset} The validation dataset was similarly made up of all the tracks
 from all ensemble members from the odd years between 1991 and 2009. This ensured that the training
-and validation datasets were independent. It had a similar number of samples as the training
-dataset: TODOCHECK million samples.
+and validation datasets were independent, yet still spanned the almost the same time period. It had
+a similar number of samples as the training dataset: 2.14 million samples.
 
 \chapter{20\ts{th} Century Analysis Results}
 \label{chap:results_analysis}
