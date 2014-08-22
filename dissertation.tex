@@ -82,8 +82,8 @@ A procedure for the detection of hurricanes in the 20\ts{th} Century Reanalysis 
 developed. Tracks are derived from the dataset by tracking vorticity maxima over time. These derived
 tracks are matched against best tracks taken from the International Best Track Archive for Climate
 Stewardship (IBTrACS) best tracks dataset. Six different tracking configurations are evaluated:
-using the vorticity at the \SI{995}{hPa} and \SI{850}{hPa} pressure levels and using the original
-resolution data, data downscaled by cubic interpolation to two and three times the original
+using the vorticity at the 0.995 times the surface and \SI{850}{hPa} pressure levels and using the
+original resolution data, data downscaled by cubic interpolation to two and three times the original
 resolution. It is found that using downscaling to three times the resolution provides a better match
 between the derived tracks and the best tracks. Tracks at the different pressure levels produce
 similar results, and the \SI{850}{hPa} pressure level is chosen on theoretical grounds.
@@ -196,8 +196,9 @@ and so would not be useful for looking into hurricanes at the start of the 20\ts
 20CR on the other hand covers over 140 years, from 1871 to 2012, and is therefore suitable for
 studying the number of hurricanes across the entire 20\ts{th} century.  It contains an estimate of
 the state of the atmosphere on a T62 (2\textdegree) spatial resolution and at 6-hourly timesteps,
-with variables such as the longitudinal and latitudinal wind speeds at the \SI{995}{hPa} pressure
-level and the temperature at the \SI{850}{hPa} pressure level recorded.
+with variables such as the longitudinal and latitudinal wind speeds at the 0.995 times the surface
+pressure level, or the Near Surface Pressure Level (NSPL), and the temperature at the \SI{850}{hPa}
+pressure level recorded.
 % TODOWRITE: say that I'm going to be detecting hurricanes etc. i.e. spell out what makes it
 % suitable.
 
@@ -401,10 +402,10 @@ these two data sources as being independent, although this is not the case. Howe
 assimilation process, and all the other factors that go into making the reanalysis data such as the
 GCM and every other source of pressure data, it is thought that the effect of this data being
 assimilated should not overly affect the conclusions of this study. Indeed, in Section
-\ref{sec:TODOREF}, where a comparison is made between a derived track and a best track, the
-surprising aspect is the degree to which the pressures do not correlate, which suggests that the
-IBTrACS best track pressure data is not solely responsible for the pressure along the track's
-course.
+\ref{sec:extra_field_collection}, where a comparison is made between a derived track and a best
+track, the surprising aspect is the degree to which the pressures do not correlate, which suggests
+that the IBTrACS best track pressure data is not solely responsible for the pressure along the
+track's course.
 
 % Results summary and usage for hurricane detection:
 % * compo2011
@@ -475,10 +476,10 @@ by one day and the positions between tracks not being the same.
 
 In the 20CR data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used
 to calculate the vorticity and wind speeds. These are available at three different pressure levels:
-\SI{995}{hPa}, \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were only used to determine
-whether or not they were suitable for tracking of hurricanes, and it was found that they did not
-produce suitable tracks, and were not further used (see Section \ref{sec:results_tracking}). The
-formula for vorticity, $\omega$, is given by:
+Near Surface Pressure Level (NSPL), \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were
+only used to determine whether or not they were suitable for tracking of hurricanes, and it was
+found that they did not produce suitable tracks, and were not further used (see Section
+\ref{sec:results_tracking}). The formula for vorticity, $\omega$, is given by:
 
 \begin{equation}
     \omega = \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}
@@ -498,7 +499,7 @@ speed at grid cell $i, j$. Then $\omega$ can approximated on the surface of the 
     \label{eqn:vorticity_2nd_order}
 \end{equation}
 
-The vorticities at the \SI{995}{hPa} and \SI{850}{hPa} levels were calculated.
+The vorticities at the NSPL and \SI{850}{hPa} levels were calculated.
 
 \subsection{Maxima and Minima detection}
 \label{sec:methods_maxima_minima}
@@ -558,7 +559,7 @@ and produce derived tracks from the 20CR data based on vorticity maxima.
 % TODOIMPROVE: This section is confusing on re-reading it. I think I need to make it clearer that I'm going to
 % compare different configurations.
 For each timestep, the vorticity maxima were calculated, as per Section
-\ref{sec:methods_maxima_minima}. This was done for both the \SI{995}{hPa} and \SI{850}{hPa} pressure
+\ref{sec:methods_maxima_minima}. This was done for both the NSPL and \SI{850}{hPa} pressure
 levels, and for the one, two and three times the actual 20CR resolution, yielding a total of six
 possible configurations for the tracking. These various configurations were compared, and the
 results can be seen in Section \ref{sec:results_tracking}. Maxima that were below a cutoff value
@@ -640,13 +641,14 @@ configurations can be judged, and each of the configurations was then compared t
 they performed on this metric. The results of this comparison can be seen in Figure
 \ref{TODOFIGREF}. It is clear that higher resolution, downscaled data produces better tracks that
 the unscaled data. This suggests that for tracking, scaling of three times the original resolution
-should be used. What is less clear is which is better: the \SI{995}{hPa} or the \SI{850}{hPa}
+should be used. What is less clear is which is better: the NSPL or the \SI{850}{hPa}
 pressure levels. TODOWRITE: why I picked \SI{850}{hPa}.
 
 % TODOFIG: Comparison of wins/losses of different tracking configurations.
 
 \newpage
 \section{Extra Field Collection}
+\label{sec:extra_field_collection}
 
 Up until this point in the processing, only the $u$ and $v$ wind fields have been utilised. From
 these, the vorticity has been calculated and tracks have been derived from the maxima of these
@@ -656,21 +658,29 @@ non-hurricanes. To this end, the latitude, longitude, date and ensemble member w
 further variables from the 20CR dataset. These variables were:
 
 \begin{enumerate}
+    \item \textbf{Vorticity:} the value of the vorticity at the local maximum.
     \item \textbf{Minimum pressure:} the pressure minimum within \SI{1000}{km} of the vorticity
-        maximum was found and the distance from the vorticity maximum to this minimum was also stored.
+        maximum.
+    \item \textbf{Distance to minimum pressure:} the distance from the vorticity maximum to the
+        pressure minimum.
     \item \textbf{Ambient pressure difference:} the difference in pressure between the minimum
         pressure and the local mean pressure, as calculated by taking the surrounding 121 grid cells
         and averaging their pressures.
-    \item \textbf{Temperature at \SI{995}{hPa}:} the temperature at the \SI{995}{hPa} pressure
-        level.
-    \item \textbf{Temperature at \SI{850}{hPa}:} the temperature at the \SI{850}{hPa} pressure
-        level.
-    \item \textbf{Temperature difference:} the temperature difference between the \SI{995}{hPa} and
+    \item \textbf{Temperature at NSPL:} the temperature at the height of the NSPL.
+    \item \textbf{Temperature at \SI{850}{hPa}:} the temperature at the height of the \SI{850}{hPa}
+        pressure level.
+    \item \textbf{Temperature difference:} the temperature difference between the NSPL and
         \SI{850}{hPa} pressure levels.
-    \item \textbf{Maximum windspeed:} the maximum wind speed in the nearest 121 grid cells.
-    \item \textbf{CAPE:} TODOWRITE
-    \item \textbf{PWAT:} TODOWRITE
-    \item \textbf{RH995:} TODOWRITE plus mention that is was found not to be that useful, and so dropped.
+    \item \textbf{Maximum wind speed:} the maximum wind speed in the nearest 121 grid cells as taken
+        from the \SI{850}{hPa} pressure level.
+    \item \textbf{Distance to maximum wind speed:} the distance (in km) from the vorticity
+        maximum to the wind speed maximum.
+    \item \textbf{Direction to maximum wind speed:} the angle (in radians) from the vorticity
+        maximum to the wind speed maximum.
+    \item \textbf{Convective available potential energy:} a measure of atmospheric instability.
+    \item \textbf{Atmospheric water vaopur content:} amount of water vapour held by the atmosphere.
+    \item \textbf{Relative humidity at the NSPL:} Initial experimentation showed that this field was
+        not useful for hurricane detection so it was not collected for all years.
 \end{enumerate}
 
 Figure \ref{TODOFIGREF} shows the pressure and vorticity fields surrounding the vorticity maxima for
