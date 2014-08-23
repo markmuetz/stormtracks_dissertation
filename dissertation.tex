@@ -425,13 +425,12 @@ is analysed. The analysis finds that the hurricane is detectable through a minim
 field, even though the mean pressure field was used. They find that the track derived from the 20CR
 for this hurricane was systematically to the north-east of the corresponding best track (taken from
 the IBTrACS dataset). However, this study points to the fact that even hurricanes as far back as the
-beginning of the 20\ts{th} century are well represented. Figure \ref{TODOFIGREF} shows the pressure
-and vorticity fields for one ensemble member and one date of this hurricane. In this figure, the
-2\textdegree\ resolution of the data is clearly visible, as is the vorticity maximum and the
-pressure minimum.
+beginning of the 20\ts{th} century are well represented. Figure \ref{fig:galveston} shows the
+pressure and vorticity fields for one ensemble member and one date of this hurricane. In this
+figure, the 2\textdegree\ resolution of the data is clearly visible, as is the vorticity maximum and
+the pressure minimum.
 
-% TODOFIG showing Galveston Hurricane.
-\begin{figure}[hb!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth]{figures/galveston_1900-9-7_18-00_em0}
     \caption{Vorticity and pressure fields over the Gulf of Mexico from September the 7\ts{th}, 1900
@@ -440,7 +439,7 @@ pressure minimum.
     \label{fig:galveston}
 \end{figure}
 
-
+% TODO not sure this should be here.
 In a more comprehensive study, \textcite{emanuel2010tropical} used an earlier version of the 20CR
 dataset to look at tropical cyclone activity from 1908-1958. He used dynamical downscaling (i.e.
 using a high resolution model with the 20CR data providing boundary conditions for this model, not
@@ -448,12 +447,6 @@ to be confused with the simple cubic spline interpolation downscaling used in th
 represent the structure of the tropical cyclones. He found a ``marginally significant increase'' in
 the number of northern hemisphere tropical cyclones, along with a high correlation between the power
 dissipation index from derived from the 20CR reanalysis and the best tracks from the same period.
-
-% TODO: is this necessary? Maybe appendix?
-% Format and availability:
-% * NetCDF4
-% * (individual results available as GRIB)
-% * nersc portal
 
 \section{IBTrACS Best Tracks Dataset}
 \label{sec:ibtracs}
@@ -470,11 +463,26 @@ and in this study only the North Atlantic (NA) basin will be utilised. The prima
 for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical}, indeed
 there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset. 
 
+\begin{figure}[hm!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/hurr_per_year}
+    \caption{Hurricane-timesteps from 1890 to 2009.}
+    \label{fig:hurr_per_year}
+\end{figure}
+
+\begin{figure}[hm!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/yearly_hurr_dist}
+    \caption{Hurricane distribution over the course of the year. The 1\ts{th} of June and the
+    1\ts{th} of December are shown, these indicate the start and end of the analysis period in this
+study. It can be seen that the vast majority of hurricanes fall within this period.}
+    \label{fig:yearly_hurr_dist}
+\end{figure}
+
 % TODOWRITE:
 % Talk about usage for hurricane trending over 20th C, and problems with this.
 % Go into more detail generally.
 
-% TODOIMPROVE: chapter title?
 \chapter{Development of the Hurricane Detection Procedure}
 \label{chap:development}
 
@@ -740,18 +748,17 @@ further variables from the 20CR dataset. These variables were:
 % Figure \ref{TODOFIGREF} shows the pressure and vorticity surrounding the vorticity maxima for the
 % Hurricane Katrina track (taken from ensemble member 8).  Figure \ref{TODOFIGREF} shows the different
 % fields plotted for each timestep that Katrina was tracked for. 
+
 Figure \ref{fig:katrina_best_derived_comparison} shows the derived pressure and maximum wind speed
 for Katrina, plotted with the equivalent variables for the matching best track. From this figure, it
 is clear that there is far more variability in both pressure and maximum wind speed for the best
 track than there is for the derived track. This is to be expected, as the 20CR data is at a
 resolution that will reduce the relative values of e.g. the maximum wind speed, as discussed in
-\textcite{TODOCITE}. However, to more fully test this, the values of all pressures and maximum wind
+\textcite{walsh2007objectively}. However, to more fully test this, the values of all pressures and maximum wind
 speeds for all ensemble members was plotted against the corresponding best track pressures and
 maximum wind speeds as is shown in Figure \ref{fig:press_max_ws_corr_2005}.
 
-
 % TODOFIG: one timestep per day showing wind/vorticity for Katrina.
-
 % TODOFIG: plot of all collected fields for Katrina.
 
 \begin{figure}[hb!]
@@ -776,9 +783,6 @@ maximum wind speeds as is shown in Figure \ref{fig:press_max_ws_corr_2005}.
         larger maximum wind speed. }
     \label{fig:press_max_ws_corr_2005}
 \end{figure}
-
-% TODOFIG: plot showing slight correlation derived and best over 2005.
-
 
 \newpage
 \section{Classification}
