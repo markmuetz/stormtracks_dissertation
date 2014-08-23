@@ -641,7 +641,7 @@ one ensemble member and best track is shown in Figure \ref{fig:katrina_individua
 This shows how the cumulative and mean distances between a derived track (from ensemble member 8)
 and a best track are calculated. All matching tracks across all the ensemble members for each of the
 different configurations for Hurricane Katrina are shown in Figure
-\ref{fig:katrina_six_tracking_configs_mod}. This shows a typical hurricane that makes landfall. Some
+\ref{fig:katrina_six_tracking_configs}. This shows a typical hurricane that makes landfall. Some
 noticeable points from this figure are TODOWRITE.
 
 \begin{figure}[hb!]
@@ -659,7 +659,7 @@ noticeable points from this figure are TODOWRITE.
 
 \begin{figure}[hbp]
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/katrina_six_tracking_configs}
+    \includegraphics[width=4.5in]{figures/katrina_six_tracking_configs}
     \caption{The six different tracking configurations tested for their fit with the best track of
         Hurricane Katrina.  Each of the individual figures shows all of the tracks across the
         different ensemble members that were matched with Hurricane Katrina. Katrina started as a
@@ -700,7 +700,6 @@ pressure level, thereby allowing e.g. comparison of the vorticity values found.
     \label{fig:tracking_wins_losses}
 \end{figure}
 
-
 \newpage
 \section{Extra Field Collection}
 \label{sec:extra_field_collection}
@@ -738,23 +737,50 @@ further variables from the 20CR dataset. These variables were:
         not useful for hurricane detection so it was not collected for all years.
 \end{enumerate}
 
-Figure \ref{TODOFIGREF} shows the pressure and vorticity fields surrounding the vorticity maxima for
-the Hurricane Katrina track (taken from ensemble member TODO). Figure \ref{TODOFIGREF} shows the
-different fields plotted for each timestep that Katrina was tracked for. Figure \ref{TODOFIGREF}
-shows the derived pressure and maximum wind speed for Katrina, plotted with the equivalent variables
-for the matching best track. From this figure, it is clear that there is very little correlation in
-these two variable between the derived track and
-% Check this\dots
-the best track. This is surprising, not least because the 20CR assimilates the pressure data from
-the IBTrACS dataset. Reasons as to why this might be so are examined further in Section
-\ref{TODOREF}.
+% Figure \ref{TODOFIGREF} shows the pressure and vorticity surrounding the vorticity maxima for the
+% Hurricane Katrina track (taken from ensemble member 8).  Figure \ref{TODOFIGREF} shows the different
+% fields plotted for each timestep that Katrina was tracked for. 
+Figure \ref{fig:katrina_best_derived_comparison} shows the derived pressure and maximum wind speed
+for Katrina, plotted with the equivalent variables for the matching best track. From this figure, it
+is clear that there is far more variability in both pressure and maximum wind speed for the best
+track than there is for the derived track. This is to be expected, as the 20CR data is at a
+resolution that will reduce the relative values of e.g. the maximum wind speed, as discussed in
+\textcite{TODOCITE}. However, to more fully test this, the values of all pressures and maximum wind
+speeds for all ensemble members was plotted against the corresponding best track pressures and
+maximum wind speeds as is shown in Figure \ref{fig:press_max_ws_corr_2005}.
+
 
 % TODOFIG: one timestep per day showing wind/vorticity for Katrina.
 
 % TODOFIG: plot of all collected fields for Katrina.
 
-% TODOFIG: plot showing poor correlation between Katrina derived and best.
+\begin{figure}[hb!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/katrina_best_derived_comparison}
+    \vspace{-10pt}
+    \caption{Time series graphs taken from Hurricane Katrina (2005), showing pressure and maximum
+            wind speed taken from the best track for Katrina and the corresponding pressure from derived
+            track (taken form ensemble member 8). }
+    \label{fig:katrina_best_derived_comparison}
+    \vspace{-10pt}
+\end{figure}
 
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/press_max_ws_corr_2005}
+    \vspace{-10pt}
+    \caption{Correlation of best track and derived track pressures and maximum wind speeds. The
+        r$^2$ values indicate that there is some correlation between these variables. The best track
+        pressure is shown to vary far more than the derived track pressure, exhibiting a much larger lowest
+        possible value. The best track maximum wind speed is also shown to vary more, exhibiting a much
+        larger maximum wind speed. }
+    \label{fig:press_max_ws_corr_2005}
+\end{figure}
+
+% TODOFIG: plot showing slight correlation derived and best over 2005.
+
+
+\newpage
 \section{Classification}
 \label{sec:classification}
 
