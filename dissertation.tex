@@ -678,9 +678,9 @@ was calculated. This number was divided by the total number of overlaps between 
 best tracks, so as a particular configuration that achieved relatively few matches would be
 penalised.  This produces a metric by which the various configurations can be judged, and each of
 the configurations was then compared the others to see how they performed on this metric. The
-results of this comparison can be seen in Figure \ref{TODOFIGREF}. It is clear that higher
-resolution, downscaled data produces better tracks that the unscaled data. This suggests that for
-tracking, scaling of three times the original resolution should be used. 
+results of this comparison can be seen in Figure \ref{fig:tracking_wins_losses}. It is clear that
+higher resolution, downscaled data produces better tracks that the unscaled data. This suggests that
+for tracking, scaling of three times the original resolution should be used. 
 
 What is less clear is which is better: the NSPL or the \SI{850}{hPa} pressure levels. It is hard to
 pick between them based on performance grounds on this metric alone. However, theoretical reasons
@@ -689,7 +689,17 @@ for preferring the \SI{850}{hPa} pressure level were given in Section \ref{TODOR
 between this study and other studies easer, as almost all other studies use the \SI{850}{hPa}
 pressure level, thereby allowing e.g. comparison of the vorticity values found.
 
-% TODOFIG: Comparison of wins/losses of different tracking configurations.
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/tracking_wins_losses}
+    \caption{Comparison for the number of wins/losses for each tracking configuration within the
+        NSPL (top), the \SI{850}{hPa} pressure level (middle) and then the scale 3 groups. In both
+        of the pressure level comparisons it is clear that the scale 3 configuration comes out on top,
+        with eight wins in both cases. The comparison between scale 3 for the two pressure levels is less
+        clear, with each configuration winning five times apiece.}
+    \label{fig:tracking_wins_losses}
+\end{figure}
+
 
 \newpage
 \section{Extra Field Collection}
