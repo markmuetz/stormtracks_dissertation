@@ -50,16 +50,16 @@
 % Common typos:
 % possibly
 
-% TODOs: 42
+% TODOs: 31
 
-% TODO: 4
+% TODO: 2
 % TODOCITE: 1
 % TODOWRITE: 8
-% TODOREF: 3
-% TODOFIGREF: 7
-% TODOFIG: 7
+% TODOREF: 2
+% TODOFIGREF: 3
+% TODOFIG: 4
 % TODOCHECK: 1
-% TODOIMPROVE: 11
+% TODOIMPROVE: 10
 
 \title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
@@ -808,19 +808,28 @@ the different fields for each CDP are known as features for that sample.
 Given that each derived track has also been matched to a best track, it is also possible to use the
 information from the best tracks dataset about whether the point on the best track is a hurricane or
 not as an objective standard for whether or not the corresponding point on the derived track
-represents a hurricane. This is represented visually in Figure \ref{TODOFIGREF}, which shows every
-CDP for the year TODO, as well as whether the individual point has been matched to a hurricane in
-the best tracks dataset or not. In classification terminology, this matching represents the gold
-standard by which the classification algorithms can be trained, and by which their performance can
-be validated. This allows classification algorithms to take the information derived from the 20CR
-and perform classification based on this information. Matching of features from a set of samples,
-against a gold standard, is known as supervised machine learning. This is contrast to other types of
-machine learning where there is no objective gold standard by which to train the algorithms, known
-as unsupervised machine learning. An example of unsupervised machine learning can be seen in
-\textcite{studholme2014objective}, where a K-means clustering algorithm is used to determine the
-extratropical transition of cyclones.
+represents a hurricane. This is represented visually in Figure \ref{fig:cdp_2005_with_hurrs}, which
+shows every CDP for the 2005, as well as whether the individual point has been matched to a
+hurricane in the best tracks dataset or not. In classification terminology, this matching represents
+the gold standard by which the classification algorithms can be trained, and by which their
+performance can be validated. This allows classification algorithms to take the information derived
+from the 20CR and perform classification based on this information. Matching of features from a set
+of samples, against a gold standard, is known as supervised machine learning. This is contrast to
+other types of machine learning where there is no objective gold standard by which to train the
+algorithms, known as unsupervised machine learning. An example of unsupervised machine learning can
+be seen in \textcite{studholme2014objective}, where a K-means clustering algorithm is used to
+determine the extratropical transition of cyclones.
 
-% TODOFIG showing CDP with training set info included.
+\begin{figure}[hb!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/cdp_2005_with_hurrs}
+    \vspace{-10pt}
+    \caption{Every CDP from all ensemble members for the year 2005, as well as indication of whether
+        the CDP was matched to a hurricane (red circle) or not (blue cross). The middle and right
+        figures show the overlap between the two sets.}
+    \label{fig:cdp_2005_with_hurrs}
+\end{figure}
+% TODOFIG showing CDP with training set info included. Show for t850 too.
 
 \subsubsection{Classification Successes and Errors}
 
@@ -859,7 +868,7 @@ classifier for a subset of the data.
     \vspace{-10pt}
 \end{figure}
 
-\begin{table}
+\begin{table}[hb!]
     \centering
     \begin{tabular}{ l | c c }
                                 & Condition Positive & Condition Negative \\
@@ -1034,6 +1043,7 @@ amount. This has the effect of increasing the PPV and FPR, but has no effect on 
 
 % Explain how 20 years worth of data were split into a training/validation dataset.
 \subsubsection{Training Dataset}
+\label{sec:training_dataset}
 For the training dataset, all tracks from all ensemble members from the even years between 1990 and
 2008 were taken. Given that each track is comprised of multiple (at least six) CDPs, this leads to a
 large number of samples. On average, there were \SI{211906}{} samples per year, leading to a total
