@@ -50,14 +50,14 @@
 % Common typos:
 % possibly
 
-% TODOs: 31
+% TODOs: 28
 
 % TODO: 2
 % TODOCITE: 1
 % TODOWRITE: 8
 % TODOREF: 2
-% TODOFIGREF: 3
-% TODOFIG: 4
+% TODOFIGREF: 2
+% TODOFIG: 2
 % TODOCHECK: 1
 % TODOIMPROVE: 10
 
@@ -102,9 +102,9 @@ on classification success and error metrics. It is found that a Stochastic Gradi
 classifier combined with a simple threshold classifier produces the highest combined score on these
 metrics.
 
-The developed procedure is run over the course of the 20\ts{th} Century, and a comparison between
-the estimated number of hurricanes and the number as recorded in the IBTrACS dataset is performed.
-It is found that TODOWRITE
+The hurricane detection procedure is run over the course of the 20\ts{th} Century, and a comparison
+between the estimated number of hurricanes and the number as recorded in the IBTrACS dataset is
+performed. It is found that TODOWRITE
 
 \begin{center}
 \textbf{Word count:} 7858 % 6909 + 949 (captions) 24/08/14 16:00
@@ -295,17 +295,16 @@ over the course of the 20\ts{th} century, and aggregate statistics about the num
 over this duration will be presented, along with a comparison between the estimated number of
 hurricanes from the 20CR dataset and the IBTrACS database.
 
-The following chapter will present more detail on the two data sources used in this study: the
-20CR dataset and the IBTrACS database. Chapter \ref{chap:development} will then detail the steps
-taken to develop the detection procedure, presenting a logical progression of the development along
-with results pertinent to the following sections of the development. Chapter
-\ref{chap:results_analysis} will then look into the results of running the procedure over the course
-of the 20\ts{th} century. Chapter \ref{chap:discussion} will then discuss these results in the wider
-context of hurricane detection and trends over the 20\ts{th} century, and Chapter
-\ref{chap:conclusion} will provide a summary and conclusion of the findings. This deviates slightly
-from the traditional thesis structure due to the time spent working on the detection procedure, and
-the desire to present this development in a logical manner where the subsequent sections depend on
-the results of the previous sections.
+The following chapter will present more detail on the two data sources used in this study: the 20CR
+dataset and the IBTrACS database. Chapter \ref{chap:hurricane_detection_proc} will then detail the
+steps in the detection procedure, presenting a logical progression of the development along with
+results pertinent to the following sections of the development. Chapter \ref{chap:results_analysis}
+will then look into the results of running the procedure over the course of the 20\ts{th} century.
+Chapter \ref{chap:discussion} will then discuss these results in the wider context of hurricane
+detection and trends over the 20\ts{th} century, and Chapter \ref{chap:conclusion} will provide a
+summary and conclusion of the findings. This deviates slightly from the traditional thesis structure
+due to the time spent working on the detection procedure, and the desire to present this development
+in a logical manner where the subsequent sections depend on the results of the previous sections.
 
 \chapter{Data Sources}
 
@@ -484,8 +483,8 @@ study. It can be seen that the vast majority of hurricanes fall within this peri
 % Talk about usage for hurricane trending over 20th C, and problems with this.
 % Go into more detail generally.
 
-\chapter{Development of the Hurricane Detection Procedure}
-\label{chap:development}
+\chapter{Hurricane Detection Procedure}
+\label{chap:hurricane_detection_proc}
 
 % Overall description to go here, with flow chart.
 % Mention:
@@ -493,16 +492,45 @@ study. It can be seen that the vast majority of hurricanes fall within this peri
 % * choice of tracking then classification vs classifying individual CDPs
 % * amount of processing required
 
-\begin{figure}[hb!]
+The hurricane detection procedure forms the basis of the rest of this study. It is a multi-step
+procedure which logically follows the flowchart shown in Figure \ref{fig:hurricane_detection_proc}.
+The procedure consists of separate logical steps, starting from the data in the 20CR and IBTrACS
+datasets, and proceeding through a series of steps until detected hurricanes are found. 
+
+\begin{figure}[ht!]
     \centering
-    \includegraphics[width=\textwidth]{figures/hurricane_detection_procedure}
-    \caption{Flowchart showing the steps in the hurricane detection procedure.}
+    \includegraphics[width=0.7\textwidth]{figures/hurricane_detection_procedure}
+    \caption{Flowchart showing the steps in the hurricane detection procedure. Processes are shown
+    by diamonds, and data or results are shown by rectangles. }
     \label{fig:hurricane_detection_proc}
 \end{figure}
+
+\newpage
+The computer code developed to perform these processes was all written in Python, apart from two
+helper methods for calculating vorticity as in Section \ref{sec:vort}, which were written in C for
+computational efficiency. The code for this project is all available at the following location:
+https://github.com/markmuetz/stormtracks/. The code follows the structure set out in the flowchart
+closely, there are e.g. Python modules called c20data, tracking and matching, although the flowchart
+represents a simplification of the code. The Python project also contains infrastructure code for
+allowing concurrent processing on the UCL computers, where the bulk of the processing was done,
+following a simple master/slave pattern, with one computer designated as the master, farming out
+jobs to multiple slave computers that would carry out the processing, whether it be e.g. matching or
+extra field collection. 
+
+There were constraints on the available disk space on the UCL computers, so the
+processing was batched into decades, with the 20CR data for one decade downloaded, the processing
+run, and the results gathered, before deleting that decades data and moving onto the next one.
+Bearing in mind one decade's worth of 20CR data takes up about \SI{112}{GB} of disk space,
+downloading all of this data and processing it took about 12 hours, even with the processing spread
+across multiple computers. Therefore the complete run over the period from 1890 to 2009 took around
+six days, notwithstanding the various failures and problems hit along the way. Given that the
+processing was run on 12 computers, and accounted for roughly half of the time spent for one decade,
+this represents around 36 days of processing time.
 
 \section{Data Processing}
 
 \subsection{Wind Fields and Vorticity}
+\label{sec:vort}
 
 In the 20CR data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used
 to calculate the vorticity and wind speeds. These are available at three different pressure levels:
@@ -833,7 +861,6 @@ determine the extratropical transition of cyclones.
         overlap between the two sets.}
     \label{fig:cdp_2005_with_hurrs}
 \end{figure}
-% TODOFIG showing CDP with training set info included. Show for t850 too.
 
 \subsubsection{Classification Successes and Errors}
 
