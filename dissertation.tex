@@ -107,7 +107,7 @@ the estimated number of hurricanes and the number as recorded in the IBTrACS dat
 It is found that TODOWRITE
 
 \begin{center}
-\textbf{Word count:} 7327 % 6714 + 613 (captions) 23/08/14 13:00
+\textbf{Word count:} 7858 % 6909 + 949 (captions) 24/08/14 16:00
 \end{center}
 
 \section*{Acknowledgements}
@@ -1074,10 +1074,25 @@ and PPV), and then using a brute force around the chosen values to verify that t
 indeed the local maximum. The training dataset was also used to train each of the LDA, QDA and SGD
 classifiers.
 
-\subsubsection{Validation Dataset} The validation dataset was similarly made up of all the tracks
-from all ensemble members from the odd years between 1991 and 2009. This ensured that the training
-and validation datasets were independent, yet still spanned the almost the same time period. It had
-a similar number of samples as the training dataset: 2.14 million samples.
+\subsubsection{Validation Dataset} 
+The validation dataset was similarly made up of all the tracks from all ensemble members from the
+odd years between 1991 and 2009. This ensured that the training and validation datasets were
+independent, yet still spanned the almost the same time period. It had a similar number of samples
+as the training dataset: 2.14 million samples.
+
+\subsubsection{Performance Metrics}
+
+From the performance metrics shown in Table \ref{tab:classifier_performance_metrics} and Figure
+\ref{fig:ppv_and_fpr_vs_sens}, there is clearly some difference in performance between the different
+classifiers. The LDC classifier performs least well on both metrics on sensitivity, and poorly on
+PPV, therefore it is not deemed suitable for classification in this context. The QDC categoriser
+performs particularly well on sensitivity, but is worst for PPV and FPR. This does not preclude its
+use for classification; if it were important to not miss as many hurricanes as possible, and a high
+number of FPs was acceptable, than it may be a suitable classifier. Indeed, coupled with a threshold
+classifier (``QDC/Thresh.''), it performs well on both sensitivity and PPV metrics. The two
+remaining classifiers, the threshold and the SGDC, perform similarly well on sensitivity, but
+the SGDC classifier outperforms the threshold classifier on the PPV, therefore it is chosen as the
+classifier to use.
 
 \begin{figure}[hb!]
     \centering
