@@ -1062,15 +1062,6 @@ amount. This has the effect of increasing the PPV and FPR, but has no effect on 
 % Figures showing performance of various classifiers in terms of FP/FN/TP/TN for 3 variables plotted
 % against vorticity for training set. Discussion of performance differences.
 
-\begin{figure}[hb!]
-    \centering
-    \includegraphics[width=\textwidth]{figures/ppv_and_fpr_vs_sens}
-    \caption{Classifier performance shown for calibration (top) and validation (bottom) datasets,
-        showing PPV vs sensitivity (left) and FPR vs sensitivity - Receiver Operating Characteristic
-        plot (ROC plot, right). Note that x-axis on the ROC plots only goes from 0 to 0.1. }
-    \label{fig:ppv_and_fpr_vs_sens}
-\end{figure}
-
 % Explain how 20 years worth of data were split into a training/validation dataset.
 \subsubsection{Training Dataset}
 \label{sec:training_dataset}
@@ -1087,6 +1078,44 @@ classifiers.
 from all ensemble members from the odd years between 1991 and 2009. This ensured that the training
 and validation datasets were independent, yet still spanned the almost the same time period. It had
 a similar number of samples as the training dataset: 2.14 million samples.
+
+\begin{figure}[hb!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ppv_and_fpr_vs_sens}
+    \caption{Classifier performance shown for calibration (top) and validation (bottom) datasets,
+        showing PPV vs sensitivity (left) and FPR vs sensitivity - Receiver Operating Characteristic
+        plot (ROC plot, right). Note that x-axis on the ROC plots only goes from 0 to 0.1. }
+    \label{fig:ppv_and_fpr_vs_sens}
+\end{figure}
+
+\begin{table}[hb!]
+    \centering
+    \begin{tabular}{ l | l l r | l l r | }
+        \cline{2-7}
+        & \multicolumn{3}{c |}{Training} & \multicolumn{3}{c |}{Validation} \\
+        & \multicolumn{1}{c}{Sens.} & \multicolumn{1}{c}{PPV} & \multicolumn{1}{c|}{FPR} &
+            \multicolumn{1}{c}{Sens.} & \multicolumn{1}{c}{PPV} & \multicolumn{1}{c|}{FPR} \\
+        \hline
+% cal: 0.6385453289804118, 0.702436244971252, 0.008377007122935034, 
+% val: 0.6702334298858409,0.6811546520286066, 0.008826099523583321
+        \multicolumn{1}{|c|}{Threshold} & 0.639 & 0.702 & \SI{8.38e-3}{} & 0.670 & 0.681 & \SI{8.82e-3}{} \\
+% cal: 0.6177172275238574, 0.6129645204498022, 0.012078950156953441
+% val: 0.6312659737604361, 0.6053164722412835, 0.011579432259338635
+        \multicolumn{1}{|c|}{LDC} & 0.618 & 0.612 & \SI{12.08e-3}{} & 0.631 & 0.605 & \SI{11.58e-3}{} \\
+% cal: 0.7484618282270216, 0.5963358969549177, 0.015689997268261573
+% val: 0.7647299369568922, 0.5755725973992665, 0.015864258395292107
+        \multicolumn{1}{|c|}{QDC} & 0.748 & 0.596 & \SI{15.69e-3}{} & 0.765 & 0.576 & \SI{15.86e-3}{} \\
+% cal: 0.6370385484681065, 0.7388724035608308, 0.006972251953776264
+% val: 0.6369398534673709, 0.7170643750479552, 0.007070274695750501
+        \multicolumn{1}{|c|}{SGDC} & 0.637 & 0.739 & \SI{6.97e-3}{} & 0.640 & 0.717 & \SI{7.07e-3}{} \\
+% cal: 0.6629363385233551, 0.6684761965054444, 0.010181801566909607 
+% val: 0.6819219628556824, 0.6619035805838088, 0.009799161057981525
+        \multicolumn{1}{|c|}{QDC/Thresh.} & 0.663 & 0.668 & \SI{10.18e-3}{} & 0.682 & 0.662 & \SI{9.79e-3}{} \\
+        \hline
+    \end{tabular}
+    \caption{Performance metrics for each of the classifiers.}
+    \label{tab:classifier_performance_metrics}
+\end{table}
 
 \chapter{20\ts{th} Century Analysis Results}
 \label{chap:results_analysis}
