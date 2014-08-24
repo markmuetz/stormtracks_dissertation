@@ -593,19 +593,20 @@ say interesting things about these figures.
 
 \begin{figure}[hb!]
     \centering
-    \includegraphics[width=\textwidth]{figures/katrina_data_proc}
+    \includegraphics[width=0.9\textwidth]{figures/katrina_data_proc}
     \caption{Three different views of Hurricane Katrina over the Gulf of Mexico as it appears in the
-        20CR on the 27\ts{th} August, 2005 at 1800 UTC (taken from ensemble member 1). Figure (a)
-        shows the raw 20CR wind fields with contours fitted based on the maximum wind speed. Figure
-        (b) shows the corresponding vorticity field, with the 2\textdegree\ resolution of the data
-        clearly visible. Figure(c) shows the data after they have been downscaled to three times the
-        original resolution, showing the more precise location of the vorticity maximum.}
+        20CR on the 27\ts{th} August, 2005 at 1800 UTC (taken from ensemble member 1). The left
+        figure shows the raw 20CR wind fields with contours fitted based on the wind speed. The
+        middle figure shows the corresponding vorticity field, with the 2\textdegree\ resolution of
+        the data clearly visible. The right figure shows the data after they have been downscaled to
+        three times the original resolution, showing the more precise location of the vorticity
+        maximum.}
     \label{fig:katrina_data_proc}
 \end{figure}
 
 \begin{figure}[hb!]
     \centering
-    \includegraphics[width=\textwidth]{figures/katrina_max_mins}
+    \includegraphics[width=0.9\textwidth]{figures/katrina_max_mins}
     \caption{Vorticity and pressure maximum and minimum detection as shown by Hurricane Katrina,
         taken on the 27\ts{th} August, 2005 at 1800 UTC (taken from ensemble member 1). Maxima are
         shown by red dots, and minima by black crosses. The large number of vorticity maxima should
@@ -635,7 +636,7 @@ results can be seen in Section \ref{sec:results_tracking}. Maxima that were belo
 of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
 that are unlikely to be part of even tropical storms. This is similar to the ``relaxed threshold
 criteria'' used in \textcite{camargo2002improving}. This choice is revisited in Section
-\ref{TODOREF} where some further justification is given for this value.
+TODOREF where some further justification is given for this value.
 
 The tracking algorithm used was a simple nearest neighbour tracking algorithm, with a modification
 that counted two or more vorticity maxima that were sufficiently close as being part of the same storm
@@ -721,7 +722,7 @@ for tracking, scaling of three times the original resolution should be used.
 
 What is less clear is which is better: the NSPL or the \SI{850}{hPa} pressure levels. It is hard to
 pick between them based on performance grounds on this metric alone. However, theoretical reasons
-for preferring the \SI{850}{hPa} pressure level were given in Section \ref{TODOREF}. Therefore the
+for preferring the \SI{850}{hPa} pressure level were given in Section TODOREF. Therefore the
 \SI{850}{hPa} level was chosen over the NSPL. This has the added benefit of making comparison
 between this study and other studies easer, as almost all other studies use the \SI{850}{hPa}
 pressure level, thereby allowing e.g. comparison of the vorticity values found.
