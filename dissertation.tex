@@ -1195,7 +1195,14 @@ number of best tracks hurricanes is substantially larger in the aircraft (and ea
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth]{figures/20th_century_hurricane_timesteps}
-    \caption{}
+    \caption{(top) The hurricane timesteps per year as taken from the IBTrACS best tracks database
+        (red), and the mean across ensemble members of the estimated values taken from the 20CR
+        dataset (blue dashed). The blue shading shows the difference between the maximum and maximum
+        taken from the ensemble members, showing the range of values for each year. The division
+        between four eras: pre-Panama Canal, Panama Canal, aircraft reconnaissance and satellite are
+        shown with dashed black vertical lines. (bottom) The estimated value subtracted from the best
+        tracks value for each year. A negative value means that the estimation is larger than the best
+        tracks value.}
     \label{fig:20th_century_hurricane_timesteps}
 \end{figure}
 
@@ -1203,19 +1210,24 @@ number of best tracks hurricanes is substantially larger in the aircraft (and ea
 Figure \ref{fig:20th_century_hurricane_corr} shows the correlation of the two time series, first
 over the whole of the time period, and second by dividing the time period into two roughly equal
 periods, based on the start of aircraft reconnaissance (1944). Given the high $r^2$ value of \SI{0.63}{}
-shown in the first correlation plot, these series are very well correlated. The slope is less than
+shown in the first correlation plot, these series are very well correlated. The gradient is less than
 unity though which implies that the estimated hurricanes is underestimating how many hurricanes there
 were over the whole period (although this effect is slightly mitigated by the positive y-intercept).
 From analysing the two time periods separately, as in the second correlation plot, a clear
 distinction between the two periods can be seen, with the pre-1944 estimated numbers clearly
 estimating more hurricanes than were seen in the best tracks database, and the reverse being true in
-the post-1944 period. For reference the pre-1944 period has a slope of TODOCHECK and a y-intercept
-of TODOCHECK. The post-1944 period has a slop of TODOCHECK ad a y-intercept of TODOCHECK.
+the post-1944 period. The pre-1944 period has a gradient of TODOCHECK and a y-intercept of TODOCHECK.
+The post-1944 period has a slop of TODOCHECK ad a y-intercept of TODOCHECK.
 
 \begin{figure}[hb!]
     \centering
     \includegraphics[width=\textwidth]{figures/20th_century_corr}
-    \caption{}
+    \caption{Correlation plots showing the whole of the 20\ts{th} Century (left) and dividing the
+    20\ts{th} Century into pre-1944 and post-1944 (right). From the left plot, the high value for
+    r$^2$ indicates good correlation between the two datasets. From the right plot,  the different
+    gradients of the lines of best fit indicate that in the pre-1944 period the estimated tracks
+    were on average higher than the best tracks, and in the post-1944 period the estimates tracks were
+    lower.}
     \label{fig:20th_century_hurricane_corr}
 \end{figure}
 
@@ -1223,13 +1235,13 @@ of TODOCHECK. The post-1944 period has a slop of TODOCHECK ad a y-intercept of T
 Figure \ref{fig:20th_century_hurricane_corr_split} shows a finer breakdown of the two series, based
 on the four eras listed in Section TODOREF. This again shows that the number of estimated hurricanes
 in the pre-Panama Canal era is far higher than in the best tracks database, both due to the large 
-positive y-intercept and the slope which is greater than unity. Reasons for this are discussed in
-Section TODOREF. In the next era, the Panama era, the slope is slightly below unity, and the
+positive y-intercept and the gradient which is greater than unity. Reasons for this are discussed in
+Section TODOREF. In the next era, the Panama era, the gradient is slightly below unity, and the
 y-intercept is small and positive, which means that the two time series are well matched. The most
-surprising era is the aircraft reconnaissance era, for which the slope is substantially less than
+surprising era is the aircraft reconnaissance era, for which the gradient is substantially less than
 unity, and the y-intercept is very close to zero. This means that during the aircraft reconnaissance
 era, the estimated hurricanes were almost always lower than the best tracks hurricanes. Reasons as
-to why this might be are discussed in Section TODOREF.  Finally, in the satellite era, the slope is
+to why this might be are discussed in Section TODOREF.  Finally, in the satellite era, the gradient is
 very close to unity, and the y-intercept is significantly negative, indicating that during this era
 the estimated number of hurricanes is systematically lower than the best tracks number of
 hurricanes.
@@ -1237,7 +1249,9 @@ hurricanes.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth]{figures/20th_century_corr_split}
-    \caption{}
+    \caption{Individual correlation plots for each of the four eras. r$^2$ values were between 0.64
+        and 0.80, representing good correlation between the two time series for each era. The high
+        gradient for the pre-Panama era and the low gradient for the aircraft era are particularly noteworthy. }
     \label{fig:20th_century_hurricane_corr_split}
 \end{figure}
 
@@ -1253,14 +1267,17 @@ different eras are shown in Table \ref{tab:era_p_value}.
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{ l | l l l l }
-        & \multicolumn{2}{c}{IBTrACS }& \multicolumn{2}{c}{20CR} \\
-        Era & slope & $p$ value & slope & $p$ value \\
+    \begin{tabular}{ l | r r | r r | }
+        \cline{2-5}
+        & \multicolumn{2}{c |}{IBTrACS }& \multicolumn{2}{c |}{20CR} \\
         \hline
-        pre-Panama Canal & -4.93 & 0.018 & -5.41 & 0.013 \\
-        Panama Canal & 0.41 & 0.768 & -0.81 & 0.513 \\
-        Aircraft & 1.82 & 0.391 & 0.41 & 0.768 \\
-        Satellite & 1.07 & 0.190 & 2.48 & 0.001 \\
+        \multicolumn{1}{| l |}{Era} & gradient & $p$ value & gradient & $p$ value \\
+        \hline
+        \multicolumn{1}{| l |}{pre-Panama Canal} & -4.93 & 0.018 & -5.41 & 0.013 \\
+        \multicolumn{1}{| l |}{Panama Canal} & 0.41 & 0.768 & -0.81 & 0.513 \\
+        \multicolumn{1}{| l |}{Aircraft} & 1.82 & 0.391 & 0.41 & 0.768 \\
+        \multicolumn{1}{| l |}{Satellite} & 1.07 & 0.190 & 2.48 & 0.001 \\
+        \hline
     \end{tabular}
     \caption{}
     \label{tab:era_p_value}
@@ -1272,7 +1289,7 @@ This test is used to see whether the null hypothesis that the time series in que
 changing (i.e. its gradient is zero) can be rejected.  This is the same as was used in
 \textcite{vecchi2008estimates}. Based on this test for significance, three of the time series over
 the eras in Table \ref{tab:era_p_value} show statistically significant trends. The pre-Panama
-Canal (1890 - 1914) era for hurricane frequencies for best track and estimated track numbers both
+Canal era (1890 - 1914) for hurricane frequencies for best track and estimated track numbers both
 show significant downwards trends. However, the most significant change is shown by the estimated
 hurricane numbers in the satellite era (1966 - 2009) from only the 20CR dataset, which has a $p$
 value of \SI{0.001}{}. The same era in the best tracks number is not seen to show any significant
