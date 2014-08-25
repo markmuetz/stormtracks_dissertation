@@ -1245,30 +1245,40 @@ hurricanes.
 \subsection{Trends in Hurricane Frequencies}
 \label{sec:trends_freq}
 
-% TODO: trend analysis.
 For the four eras in question, it is interesting to note whether there are any trends in the numbers
 of hurricanes, both in the best tracks dataset, and in the estimated hurricane numbers. This is done
-by fitting a straight line to the time series, and performing a two-sided test on the p-value of the
-fitted line, as in \textcite{vecchi2008estimates, emanuel2010tropical}. The p-values for the
+by fitting a straight line to the time series, and performing a two-sided test on the $p$ value of the
+fitted line, as in \textcite{vecchi2008estimates, emanuel2010tropical}. The $p$ values for the
 different eras are shown in Table \ref{tab:era_p_value}.
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{ l | l l }
-        Era & slope & p-value \\
+    \begin{tabular}{ l | l l l l }
+        & \multicolumn{2}{c}{IBTrACS }& \multicolumn{2}{c}{20CR} \\
+        Era & slope & $p$ value & slope & $p$ value \\
         \hline
-        pre-Panama Canal & 1.2 & 1.2 \\
-        Panama Canal & 1.2 & 1.2 \\
-        Aircraft & 1.2 & 1.2 \\
-        Satellite & 1.2 & 1.2 \\
+        pre-Panama Canal & -4.93 & 0.018 & -5.41 & 0.013 \\
+        Panama Canal & 0.41 & 0.768 & -0.81 & 0.513 \\
+        Aircraft & 1.82 & 0.391 & 0.41 & 0.768 \\
+        Satellite & 1.07 & 0.190 & 2.48 & 0.001 \\
     \end{tabular}
     \caption{}
     \label{tab:era_p_value}
 \end{table}
 
+\newpage
+The test for statistical significance employed in this study is to test to see if $p \leq 0.05$.
+This test is used to see whether the null hypothesis that the time series in question is not
+changing (i.e. its gradient is zero) can be rejected.  This is the same as was used in
+\textcite{vecchi2008estimates}. Based on this test for significance, three of the time series over
+the eras in Table \ref{tab:era_p_value} show statistically significant trends. The pre-Panama
+Canal (1890 - 1914) era for hurricane frequencies for best track and estimated track numbers both
+show significant downwards trends. However, the most significant change is shown by the estimated
+hurricane numbers in the satellite era (1966 - 2009) from only the 20CR dataset, which has a $p$
+value of \SI{0.001}{}. The same era in the best tracks number is not seen to show any significant
+rise, although the gradient of the line is positive.
 
 % \section{Hurricane Dissipated Power Index Over the 20\ts{th} Century}
-
 
 \chapter{Discussion}
 \label{chap:discussion}
