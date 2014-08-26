@@ -112,7 +112,7 @@ upwards trend in the number of hurricanes from 1966 to 2009 is also detected fro
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
-\textbf{Word count:} 10427 % 9180 + 1247 (captions) 26/08/14 14:19
+\textbf{Word count:} 10540 % 9293 + 1247 (captions) 26/08/14 14:19
 \end{center}
 
 \newpage
@@ -123,8 +123,9 @@ Technical expertise from Qinling Wu proved useful in setting the direction for t
 Talking to Joshua Studholme helped to provide context for the field and ideas for analysis, as well
 as giving me some pointers on extratropical transitions. % TODOIMPROVE: CLUMSY
 Dr. Kevin Hodges (Reading University) provided many useful suggestions for the tracking algorithm.
-The 20\ts{th} Century Reanalysis Project and the IBTrACS projects are both excellent resources, 
-with the first providing over 1.3 terabytes of data.
+NERSC and the National Climatic Data Center at the NOAA both provided excellent resources in the
+20\ts{th} Century Reanalysis Project and the IBTrACS projects, with the first providing over 1.3
+terabytes of data.
 Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and
 for sounding out various ideas.
 
@@ -1418,16 +1419,25 @@ These two comparisons demonstrate the power of being able to perform classificat
 collected all the data, as well as the suitability of supervised machine learning techniques for
 this task. However, sensitivities of around \SI{0.66}{} and PPVs of around \SI{0.73}{} could still
 be improved upon significantly, as this represents only 66\% of actual hurricanes that are correctly
-identified, and 73\% of predicted hurricanes that turn out to be actual hurricanes. During the
-course of this study, collecting more fields was a primary way of helping to improve these numbers,
-with the temperature fields having good discriminatory power between hurricanes and non-hurricanes.
-However, there were many fields that I would have liked to include but could not, due to constraints
-as to what is easily available to download from the 20CR portal for each ensemble member. These
-include the TODOWRITE.
+identified, and 73\% of predicted hurricanes that turn out to be actual hurricanes. 
+
+During the course of this study, collecting more fields was a primary way of helping to improve
+these metrics, with the temperature fields having good discriminatory power between hurricanes and
+non-hurricanes.  However, there were many fields that I would have liked to include but could not,
+due to constraints as to what is easily available to download from the 20CR portal for each ensemble
+member. These include the temperatures at \SI{700}{}, \SI{500}{} and \SI{300}{hPa}, which are used
+to calculate the warm core criterion and temperature anomalies \parencite{bengtsson1995hurricane,
+bengtsson1996will, walsh1997objective, yoshimura2006influence}. I would also have liked to include
+the cyclone phase space parameters as described in \textcite{evans2003objective, hart2003cyclone},
+but these require the geopotential heights of \SI{900}{}, \SI{600}{} and \SI{300}{hPa}, and these
+are not available for each ensemble member either, although the geopotential heights of \SI{1000}{},
+\SI{500}{} and \SI{200}{hPa} are.  Whilst these fields are available, the only way to obtain them is
+to download the entire state of the atmosphere as represented by the GCM, which would prohibitively
+time consuming for this project, although these extra fields would have probably helped the
+classification procedure.
 
 \subsection{Tracking Algorithms}
 \label{sec:discussion_tracking_algs}.
-
 % Modifications that were considered: changing other configuration parameters, Kalman Filter based
 % tracker. Explain how testing framework would have allowed changes to be compared automatically,
 % and to judge the success of these changes. Say that using an algorithm such as Hodges' could also
