@@ -283,25 +283,48 @@ that this approach is only possible because this study is running the hurricane 
 historical reanalysis dataset, otherwise this would not be possible, as there is no objective
 standard by which to judge success.
 
+\section{Goals and Objectives}
 % Objectives/Project Structure.
 % -----------------------------
 % Outline of objectives for this project.
 % Finish with a run-down of the structure of the rest of the dissertation, including why it deviates
 % from the traditional Intro/Methods/Results/Discussion/Conclusion structure.
 
-% TODOIMPROVE: think about moving last objective to the top, and explaining that development of the
-% procedure involves these steps.
-The objectives of this study are to develop a tracking algorithm that is capable of producing tracks
-derived from the 20CR dataset that can be successfully matched to the tracks in the IBTrACS best
-tracks database. Following from this, these derived tracks will be used to collect extra information for
-each of the points in the track, such as temperature at \SI{850}{hPa}. This information will then
-used, along with the information about whether a particular point corresponds with a hurricane or
-not, to train different classification algorithms to correctly predict whether each point is a
-hurricane or not. The classification algorithm which performs best on success and error metrics will
-be chosen, and this process will form the hurricane detection procedure. This will then be run
-over the course of the 20\ts{th} century, and aggregate statistics about the number of hurricanes
-over this duration will be presented, along with a comparison between the estimated number of
-hurricanes from the 20CR dataset and the IBTrACS database.
+The two principal goals of this study are to produce a hurricane detection procedure that is capable
+of detecting hurricanes in the 20CR dataset, and to use this procedure to investigate hurricane
+frequencies over the course of the 20\ts{th} century. These goals will be met by completing the
+following objectives:
+
+\begin{itemize}
+    \item develop a tracking algorithm that is capable of producing tracks derived from the 20CR
+    \item match the derived tracks to the tracks in the IBTrACS best tracks database
+    \item compare different tracking algorithm configuration, and choose the optimum tracking
+        algorithm based on the overall distance between the tracks it produces and the best tracks.
+    \item collect extra information for each of the points in the optimum tracks, such as
+        temperature at \SI{850}{hPa}
+    \item train different classification algorithms to correctly predict whether each point is a
+        hurricane or not, by using the extra information, along with the information about whether a
+        particular point corresponds with a hurricane or not
+    \item choose the classification algorithm which performs best on success and error metrics, and
+        this process will form the hurricane detection procedure
+    \item run this procedure over the course of the 20\ts{th} century
+    \item calculate aggregate statistics about the number of hurricanes over this duration
+    \item perform a comparison between the estimated number of hurricanes from the 20CR dataset and
+        the IBTrACS database
+\end{itemize}
+
+% Old form:
+% The objectives of this study are to develop a tracking algorithm that is capable of producing tracks
+% derived from the 20CR dataset that can be successfully matched to the tracks in the IBTrACS best
+% tracks database. Following from this, these derived tracks will be used to collect extra information for
+% each of the points in the track, such as temperature at \SI{850}{hPa}. This information will then
+% used, along with the information about whether a particular point corresponds with a hurricane or
+% not, to train different classification algorithms to correctly predict whether each point is a
+% hurricane or not. The classification algorithm which performs best on success and error metrics will
+% be chosen, and this process will form the hurricane detection procedure. This will then be run
+% over the course of the 20\ts{th} century, and aggregate statistics about the number of hurricanes
+% over this duration will be presented, along with a comparison between the estimated number of
+% hurricanes from the 20CR dataset and the IBTrACS database.
 
 The following chapter will present more detail on the two data sources used in this study: the 20CR
 dataset and the IBTrACS database. Chapter \ref{chap:hurricane_detection_proc} will then detail the
