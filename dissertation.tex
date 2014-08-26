@@ -50,14 +50,14 @@
 
 % TODOs: 29
 
-% TODO: 2
+% TODO: 4
 % TODOCITE: 1
-% TODOWRITE: 9
-% TODOREF: 2
+% TODOWRITE: 5
+% TODOREF: 5
 % TODOFIGREF: 2
 % TODOFIG: 2
 % TODOCHECK: 1
-% TODOIMPROVE: 10
+% TODOIMPROVE: 9
 
 \title{Objective Tracking and Classification of Hurricanes in the 20\ts{th} Century Reanalysis Dataset}
 \author{Mark Muetzelfeldt - UCL Department of Geography}
@@ -112,7 +112,7 @@ upwards trend in the number of hurricanes from 1966 to 2009 is also detected fro
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
-\textbf{Word count:} 9439 % 8221 + 1218 (captions) 26/08/14 11:08
+\textbf{Word count:} 9922 % 8704 + 1218 (captions) 26/08/14 14:19
 \end{center}
 
 \newpage
@@ -793,10 +793,13 @@ for tracking, scaling of three times the original resolution should be used.
 
 What is less clear is which is better: the NSPL or the \SI{850}{hPa} pressure levels. It is hard to
 pick between them based on performance grounds on this metric alone. However, theoretical reasons
-for preferring the \SI{850}{hPa} pressure level were given in Section TODOREF. Therefore the
-\SI{850}{hPa} level was chosen over the NSPL. This has the added benefit of making comparison
-between this study and other studies easer, as almost all other studies use the \SI{850}{hPa}
-pressure level, thereby allowing e.g. comparison of the vorticity values found.
+for preferring the \SI{850}{hPa} pressure level exist. These are that the vorticity at \SI{850}{hPa}
+is less influenced by strong background flows, and therefore more suitable than the NSLP for
+tracking of hurricanes \parencite{trigo2006climatology}. Due to the fact they are higher up, they are
+also less affected by surface effects than the NSPL. Therefore the \SI{850}{hPa} level was chosen
+over the NSPL. This has the added benefit of making comparison between this study and other studies
+easer, as almost all other studies use the \SI{850}{hPa} pressure level, thereby allowing e.g.
+comparison of the vorticity values found.
 
 \begin{figure}[hbp]
     \centering
@@ -1158,7 +1161,6 @@ amount. This has the effect of increasing the PPV and FPR, but has no effect on 
 
 \subsection{Classifier Performance}
 
-% TODOWRITE:
 % Figures showing performance of various classifiers in terms of FP/FN/TP/TN for 3 variables plotted
 % against vorticity for training set. Discussion of performance differences.
 
@@ -1236,7 +1238,6 @@ classifier to use.
 \label{chap:results_analysis}
 % Data analysis and results.
 
-% TODOWRITE: 4 eras of interest, where should it go? I think in the IBTrACS section for now.
 \section{Hurricane Frequencies Over the 20\ts{th} Century}
 
 Figure \ref{fig:20th_century_hurricane_timesteps} shows a comparison of the number of hurricane
@@ -1343,7 +1344,7 @@ different eras are shown in Table \ref{tab:era_p_value}.
     \centering
     \begin{tabular}{ l | r r | r r | }
         \cline{2-5}
-        & \multicolumn{2}{c |}{IBTrACS }& \multicolumn{2}{c |}{20CR} \\
+        & \multicolumn{2}{c |}{Best Tracks }& \multicolumn{2}{c |}{Estimated} \\
         \hline
         \multicolumn{1}{| l |}{Era} & gradient & $p$ value & gradient & $p$ value \\
         \hline
@@ -1353,7 +1354,8 @@ different eras are shown in Table \ref{tab:era_p_value}.
         \multicolumn{1}{| l |}{Satellite} & 1.07 & 0.190 & 2.48 & 0.001 \\
         \hline
     \end{tabular}
-    \caption{}
+    \caption{Values of gradient and $p$ value of the linear regression for the best tracks and
+    estimated hurricane timestep and hurricane timestep time series, for each of the four eras.}
     \label{tab:era_p_value}
 \end{table}
 
@@ -1381,11 +1383,38 @@ the gradient of the line is positive.
 \chapter{Discussion}
 \label{chap:discussion}
 
-\section{Tracking Algorithms}
+\section{Hurricane Detection}
+
+\subsection{Classification Success}
+% Compare numbers of FP/FN/TP/TN results with walsh1997objective
+% Talk about other fields that could have been collected (and the technical difficulties involved in
+% doing this).  Hart parameters, temperature anomalies (go through literature and check what else is
+% used and add these in). 
+
+\subsection{Tracking Algorithms}
 \label{sec:discussion_tracking_algs}.
+
+% Modifications that were considered: changing other configuration parameters, Kalman Filter based
+% tracker. Explain how testing framework would have allowed changes to be compared automatically,
+% and to judge the success of these changes. Say that using an algorithm such as Hodges' could also
+% be performed, and that this may improve the tracking noticeably.
+
+\section{Comparison Between Best Track and Estimated Hurricane Frequencies}
+% Compare hurricane freqs freqemanuel2010tropical. Mention best tracks correction in
+% vecchi2008estimates, and explain that the numbers that I found were in line 
+
+\section{Trends in Hurricane Frequencies}
+% Point out numerous problems with trend analysis in hurricane frequency counts. Explain that trend
+% found is probably spurious. Links to climate change and how it is quite interesting.
 
 \chapter{Conclusions}
 \label{chap:conclusion}
+% Concluding remarks, state what I have achieved, and point out the main take home results of the
+% study. Talk about supervised machine learning with respect to hurricane detection, and some of the
+% benefits it brings. Show that the framework of success and error metrics provides an objective way
+% of measuring performance of various classifiers/detection procedures. Explain that different
+% classifiers have different strengths and weaknesses, and that these can be picked in accordance
+% with what is required.
 
 % Not included in word count.
 \addcontentsline{toc}{chapter}{Auto-critique}
