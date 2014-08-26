@@ -77,12 +77,12 @@
 
 % Should be <= 400 words.
 % Not included in word count.
-% ~262 words so far.
+% ~369 words so far.
 A procedure for the detection of hurricanes in the 20\ts{th} Century Reanalysis Project dataset is
 developed. Tracks are derived from the dataset by tracking vorticity maxima over time. These derived
 tracks are matched against best tracks taken from the International Best Track Archive for Climate
 Stewardship (IBTrACS) best tracks dataset. Six different tracking configurations are evaluated:
-using the vorticity at the 0.995 times the surface and \SI{850}{hPa} pressure levels and using the
+using the vorticity at 0.995 times the surface and \SI{850}{hPa} pressure levels and using the
 original resolution data, data downscaled by cubic interpolation to two and three times the original
 resolution. It is found that using downscaling to three times the resolution provides a better match
 between the derived tracks and the best tracks. Tracks at the different pressure levels produce
@@ -99,12 +99,20 @@ metrics.
 
 The hurricane detection procedure is run over the course of the 20\ts{th} century, and a comparison
 between the estimated number of hurricanes and the number as recorded in the IBTrACS dataset is
-performed. It is found that TODOWRITE
+performed. It is found that there is good correlation between the two time series, and that there
+are significant discrepancies between the two series between 1890 to 1914 and 1945 to 1965. Between
+1890 and 1914, the estimated hurricane count is higher than the best tracks count. Between 1945 and
+1965, fewer estimated hurricanes are found than best tracks hurricanes. 
+
+A downwards trend in both the estimated and best tracks hurricanes is detected from 1890 to 1914. An
+upwards trend in the number of hurricanes from 1966 to 2009 is also detected from the estimated
+number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
 \textbf{Word count:} 9439 % 8221 + 1218 (captions) 26/08/14 11:08
 \end{center}
 
+\newpage
 \section*{Acknowledgements}
 
 I would like to thank Dr. Chris Brierley for his guidance and assistance in this dissertation.
@@ -112,6 +120,8 @@ Technical expertise from Qinling Wu proved useful in setting the direction for t
 Talking to Joshua Studholme helped to provide context for the field and ideas for analysis, as well
 as giving me some pointers on extratropical transitions. % TODOIMPROVE: CLUMSY
 Dr. Kevin Hodges (Reading University) provided many useful suggestions for the tracking algorithm.
+The 20\ts{th} Century Reanalysis Project and the IBTrACS projects are both excellent resources, 
+with the first providing over 1.3 terabytes of data.
 Finally, numerous discussions with Robert Muetzelfeldt were invaluable for keeping me on track and
 for sounding out various ideas.
 
@@ -143,7 +153,7 @@ contribution is large enough that it may affect the thermohaline circulation
 \parencite{hu2009effect}, a major component of the coupled atmosphere-ocean system of the Earth. So,
 coupled with their socio-economic impact, understanding hurricanes is of intrinsic scientific
 interest too, helping to understand the Earth's climate and to produce more accurate General
-Circulation Models.
+Circulation Models (GCMs).
 
 % Effects of global warming on frequency/intensity.
 From a theoretical perspective, increasing global mean temperatures are predicted to lead to an
@@ -374,15 +384,16 @@ The process by which estimates are produced involves three main steps:
     \item Use GCM to predict the state of the atmosphere at the next timestep (repeated)
 \end{enumerate}
 
-56 individual GCMs are initialised with climatalogical states taken from 14 months before the start
-of the production period, i.e. the period over which estimates are produced. The GCMs are then run
-for 14 months, to ``reduce the effect of the initial condition in the lower layers of the land
-model.'' This makes use of the SST and sea ice data. At this point, the 56 different states of the
-atmosphere from the GCMs are used as background states for the EKF, which assimilates the pressure
-observations for the current timestep, to produce 56 estimates for the state of the atmosphere based
-on the GCM output and the observations. These estimates are then used as the starting point for the
-GCMs, which predict what the state of the atmosphere will be in 6 hours time, and this is used as
-the background state for the EKF, which assimilates the pressure observations at the new timestep.
+56 individual instances of the GCM are initialised with climatalogical states taken from 14 months
+before the start of the production period, i.e. the period over which estimates are produced. The
+instances are then run for 14 months, to ``reduce the effect of the initial condition in the lower
+layers of the land model.'' This makes use of the SST and sea ice data. At this point, the 56
+different states of the atmosphere from the instances are used as background states for the EKF,
+which assimilates the pressure observations for the current timestep, to produce 56 estimates for
+the state of the atmosphere based on the GCM output and the observations. These estimates are then
+used as the starting point for the instances, which predict what the state of the atmosphere will be
+in 6 hours time, and this is used as the background state for the EKF, which assimilates the
+pressure observations at the new timestep.
 
 % Feeds this estimate back into the GCM to run another forecast
 % Consistency of each EM not an issue (ref compo2011)
@@ -413,7 +424,7 @@ track's course.
 % * neff2013
 % * emanuel2010
 
-\subsection{Representations of Hurricanes in the 20CR dataset}
+\subsection{Detection of Hurricanes in the 20CR dataset}
 
 In \textcite{neff2013analysis}, the path of the Galveston Hurricane of the 8\ts{th} September, 1900
 is analysed. The analysis finds that the hurricane is detectable through a minimum in the pressure
@@ -458,21 +469,44 @@ and in this study only the North Atlantic (NA) basin will be utilised. The prima
 for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical}, indeed
 there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset.
 
+Figure \ref{fig:hurr_per_year} shows the hurricane timesteps per year, where a hurricane timestep is
+defined as being one individual recorded hurricane per 6-hour timestep in the best tracks database.
+This means that one hurricane track over the course of the day counts as four hurricane timesteps,
+and if there are multiple hurricane tracks active in one timestep then each one will count towards
+the total hurricane timesteps. 
+
+Following \textcite{vecchi2008estimates}, four historical eras are shown in this figure, henceforth
+called the pre-Panama Canal (1890 - 1914), Panama Canal (1915 - 1943), aircraft reconnaissance (1944
+- 1965) and satellite (1966 - 2009) eras.  These are of significance to the number of observed
+hurricanes in the best tracks dataset. Before the opening of the Panama Canal, shipping was
+mostly concentrated in the northern and eastern tropical Atlantic, and along the east coast of North
+America. This meant that there were fewer ships in the Gulf of Mexico, an active hurricane area, and
+consequently there is thought to be a gap in the recorded hurricanes in this period from this area.
+The aircraft reconnaissance era lead to more detailed observations of hurricanes, although coverage
+did not extend across the entire North Atlantic. Finally, after the advent of satellite technology,
+the entire basin could be covered, and this began in 1966 \parencite{landsea2007counting}.
+
 % TODO Explain what a hurricane timestep is.
 % TODO Add eras to hurricane timesteps. 
 
-\begin{figure}[hm!]
+\begin{figure}[hb!]
     \centering
     \includegraphics[width=\textwidth]{figures/hurr_per_year}
     \caption{Hurricane timesteps from 1890 to 2009.}
     \label{fig:hurr_per_year}
 \end{figure}
 
-\begin{figure}[hm!]
+\newpage
+Figure \ref{fig:yearly_hurr_dist} shows how the hurricanes are distributed over the course of a
+year. Black dashed lines show the 1\ts{st} of June and the 1\ts{st} of December, and it is clear
+that the vast majority of hurricanes (over 99\%) fall within this period. For this reason, only
+dates that fell within this range were considered when detecting hurricanes in this study.
+
+\begin{figure}[hb!]
     \centering
     \includegraphics[width=\textwidth]{figures/yearly_hurr_dist}
-    \caption{Hurricane distribution over the course of the year. The 1\ts{th} of June and the
-    1\ts{th} of December are shown, these indicate the start and end of the analysis period in this
+    \caption{Hurricane distribution over the course of the year. The 1\ts{st} of June and the
+    1\ts{st} of December are shown, these indicate the start and end of the analysis period in this
 study. It can be seen that the vast majority of hurricanes fall within this period.}
     \label{fig:yearly_hurr_dist}
 \end{figure}
