@@ -277,10 +277,10 @@ of the thresholds \textit{after} the bulk of the processing has been done, thus 
 the process of finding optimum values for these thresholds. It also permits the use of machine
 learning classification algorithms, which it is hoped will improve the accuracy of the hurricane
 detection, as measured by the number of true and false positives. This is a similar approach to
-\textcite{walsh1997objective}, who analysed the numbers of false and missing tropical cyclones over September
-1989 and October 1992, and results of this study will be compared against these. It bears repeating
-that this approach is only possible because this study is running the hurricane detection over a
-historical reanalysis dataset, otherwise this would not be possible, as there is no objective
+\textcite{walsh1997objective}, who analysed the numbers of false and missing tropical cyclones over
+September 1989 and October 1992, and results of this study will be compared against these. It bears
+repeating that this approach is only possible because this study is running the hurricane detection
+over a historical reanalysis dataset, otherwise this would not be possible, as there is no objective
 standard by which to judge success.
 
 \section{Goals and Objectives}
@@ -905,24 +905,28 @@ Classification is the process of taking a dataset and splitting it up into vario
 on the attributes of each item in the dataset. For the purposes of hurricane classification, this is
 a binary classification, i.e. a CDP is either a hurricane or it is not. More fine-grained approaches
 are possible, such as splitting each CDP into a category from the Saffir-Simpson hurricane scale
-\parencite{simpson1974hurricane}, but in this analysis the only concern was trying to correctly categorise whether or
-not a given CDP was a hurricane. In classification terminology, each CDP represents one sample, and
-the different fields for each CDP are known as features for that sample.
+\parencite{simpson1974hurricane}, but in this analysis the only concern was trying to correctly
+categorise whether or not a given CDP was a hurricane. In classification terminology, each CDP
+represents one sample, and the different fields for each CDP are known as features for that sample.
 
 Given that each derived track has also been matched to a best track, it is also possible to use the
 information from the best tracks dataset about whether the point on the best track is a hurricane or
 not as an objective standard for whether or not the corresponding point on the derived track
 represents a hurricane. This is represented visually in Figure \ref{fig:cdp_2005_with_hurrs}, which
 shows every CDP for the 2005, as well as whether the individual point has been matched to a
-hurricane in the best tracks dataset or not. In classification terminology, this matching represents
-the gold standard by which the classification algorithms can be trained, and by which their
-performance can be validated. This allows classification algorithms to take the information derived
-from the 20CR and perform classification based on this information. Matching of features from a set
-of samples, against a gold standard, is known as supervised machine learning. This is contrast to
-other types of machine learning where there is no objective gold standard by which to train the
-algorithms, known as unsupervised machine learning. An example of unsupervised machine learning can
-be seen in \textcite{studholme2014objective}, where a K-means clustering algorithm is used to
-determine the extratropical transition of cyclones.
+hurricane in the best tracks dataset or not. Missed hurricanes are hurricanes which are present in
+the best tracks database, but which were not in the CDP for the derived track. There were relatively
+few of these, around TODOCHECK\%. 
+
+In classification terminology, this matching represents the gold standard by which the
+classification algorithms can be trained, and by which their performance can be validated. This
+allows classification algorithms to take the information derived from the 20CR and perform
+classification based on this information. Matching of features from a set of samples, against a gold
+standard, is known as supervised machine learning. This is contrast to other types of machine
+learning where there is no objective gold standard by which to train the algorithms, known as
+unsupervised machine learning. An example of unsupervised machine learning can be seen in
+\textcite{studholme2014objective}, where a K-means clustering algorithm is used to determine the
+extratropical transition of cyclones.
 
 \begin{figure}[hb!]
     \centering
@@ -938,10 +942,10 @@ determine the extratropical transition of cyclones.
 \end{figure}
 
 \subsubsection{Classification Successes and Errors}
+\label{sec:cla_successes_and_errors}
 
 % Explanation of FPs and FNs, TPs and TNs. Talk about Gold standard and how I am using IBTrACS as a
 % gold standard. Relationship to Type I/II errors (maybe). Venn diagram showing FP/FN/TP/TN.
-
 When classifying data with a binary classifier for which a gold standard exists, there are four
 possible results of an individual classification. These are:
 
@@ -953,7 +957,8 @@ possible results of an individual classification. These are:
     \item \textbf{False Positive (FP):} The classification predicts that the CDP is a hurricane and
         this is refuted by the best tracks information.
     \item \textbf{False Negative (FN):} The classification predicts that the CDP is not a hurricane
-        and this is refuted by the best tracks information.
+        and this is refuted by the best tracks information. Missed hurricanes are also added to this
+        number.
 \end{enumerate}
 
 When classifying a dataset, the collection of these results can be represented visually with a Venn
@@ -1390,6 +1395,35 @@ the gradient of the line is positive.
 % Talk about other fields that could have been collected (and the technical difficulties involved in
 % doing this).  Hart parameters, temperature anomalies (go through literature and check what else is
 % used and add these in). 
+In one of the studies that influenced this one, \textcite{walsh1997objective} attempted to detect
+cyclones in the output in T106 resolution reanalysis output. In this study, a metric called
+Probability Of Detection (POD) is defined, and its definition is identical to the sensitivity used
+in this study (given that missing hurricanes are added to the FN numbers, as mentioned in Section
+\ref{sec:cla_successes_and_errors}. They find values of POD equal \SI{0.57}{}, which is
+lower (and therefore worse) than the minimum values of sensitivity listed in Table
+\ref{tab:classifier_performance_metrics} of \SI{0.618}{}. It is substantially lower than both the
+training and validation values for the SGD classifier that was chosen in this study, which were
+\SI{0.64}{} and \SI{0.68}{}. This is in spite of the fact that the resolution of the data used in
+that study was almost twice as fine as the resolution found in this.
+
+It is possibly to calculate values of PPV from the data in figures in \textcite{walsh1997objective},
+although this is not done explicitly in that study. The highest value obtained is \SI{0.57}{}, which
+is again lower than the values of \SI{0.74}{} (training) and \SI{0.72}{} (validation) seen in this
+study for the SGD classifier. It should be pointed out that only two months, September 1989 and
+October 1992, were analysed for one ensemble member there, compared with two decades with 56
+ensemble members here. Therefore the sample size and consequently the reliability of these numbers
+should be subject to less variability in this study.
+
+These two comparisons demonstrate the power of being able to perform classification after having
+collected all the data, as well as the suitability of supervised machine learning techniques for
+this task. However, sensitivities of around \SI{0.66}{} and PPVs of around \SI{0.73}{} could still
+be improved upon significantly, as this represents only 66\% of actual hurricanes that are correctly
+identified, and 73\% of predicted hurricanes that turn out to be actual hurricanes. During the
+course of this study, collecting more fields was a primary way of helping to improve these numbers,
+with the temperature fields having good discriminatory power between hurricanes and non-hurricanes.
+However, there were many fields that I would have liked to include but could not, due to constraints
+as to what is easily available to download from the 20CR portal for each ensemble member. These
+include the TODOWRITE.
 
 \subsection{Tracking Algorithms}
 \label{sec:discussion_tracking_algs}.
