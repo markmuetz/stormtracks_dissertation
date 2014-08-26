@@ -23,6 +23,9 @@
 \chead{}
 \rhead{}
 
+% Turn on subsubsection numbering.
+\setcounter{secnumdepth}{3}
+
 \newcommand{\ts}{\textsuperscript}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
@@ -356,6 +359,7 @@ the case.
 
 % Runs a GCM - NCEP GFS - to produce background fields
 % Technical details on GCM
+\subsubsection{GCM}
 The GCM used by the reanalysis was the NCEP Global Forecast System
 \parencite{kanamitsu1989description, kanamitsu1991recent}, with
 parameterisation as specified by \textcite{saha2006ncep}. The version used in the reanalysis was
@@ -368,14 +372,26 @@ hurricane-type vortices, as the T42 model in that study was found to be capable 
 vortices, although it was noted that these vortices were of lower intensity and that their overall
 structure was less realistic than in the T106 GCM.
 
+\subsubsection{EKF}
 % Technical details EKF
 The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994sequential,
 evensen2003ensemble}. It is 'deterministic', and is based on the 'Ensemble Square Root Filter' of
-\textcite{whitaker2002ensemble}.
-% TODOWRITE: say more about EKF.
+\textcite{whitaker2002ensemble}. It works by taking the atmospheric state of the atmosphere from the
+56 instances of the GCM, the prediction by the model in Kalman filter terminology, and updating this
+prediction based on the pressure observations at that timestep. Each individual ensemble member is
+updated in such a way so as to keep the state of its atmosphere continuous, whilst still
+incorporating the pressure observations (with one slight caveat; see the last paragraph in the next
+section for details). To mitigate the effects of ``filter divergence'', whereby the state of the EKF
+becomes too dependent on the output of the model, and does not give enough weight to the
+observations, two methods are used. The first is to use covariance inflation, as described in
+\textcite{whitaker2004reanalysis}. The second is to use covariance localisation, as described in
+\textcite{houtekamer2001sequential}. These are mentioned for completeness; a more detailed
+description is given in \textcite{compoTwentieth2011}.
 
 % Assimilates the observations and the output from the GCM using an EKF to provide an estimate as to
 % the state of the atmosphere at each timestep
+
+\subsubsection{Production Process}
 The process by which estimates are produced involves three main steps:
 
 \begin{enumerate}
