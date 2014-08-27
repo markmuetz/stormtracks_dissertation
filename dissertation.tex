@@ -178,14 +178,15 @@ primary data source, such as the IBTrACS database used in this study
 Center \parencite[HURDAT;][]{jarvinen1984tropical}. These databases suffer from some problems when
 going into the middle and early 20\ts{th} century, such as the lack of satellite data before the
 1970s, and the lack of reliable aircraft reconnaissance data before the mid 1940s
-\parencite{chang2007number}. Accordingly, in this study, the approach taken is a different one.
-Instead of using the numbers compiled by various agencies as the primary source of information into
-hurricanes, the primary data will be taken from reanalysis data, specifically the 20\ts{th} Century
-Reanalysis (20CR) Project \parencite{compoTwentieth2011}. Hurricanes will be detected in these
-data, and the detection procedure will be trained and validated on recent data (from 1990 to 2009),
-where reliable best tracks exist. Once the detection procedure has been trained, it can be used to
-run over the whole of the 20\ts{th} century, providing an objective measure of the number of
-hurricanes in each year.
+\parencite{chang2007number}. 
+
+Accordingly, in this study, the approach taken is a different one.  Instead of using the numbers
+compiled by various agencies as the primary source of information into hurricanes, the primary data
+will be taken from reanalysis data, specifically the 20\ts{th} Century Reanalysis (20CR) Project
+\parencite{compoTwentieth2011}. Hurricanes will be detected in these data, and the detection
+procedure will be trained and validated on recent data (from 1990 to 2009), where reliable best
+tracks exist. Once the detection procedure has been trained, it can be used to run over the whole of
+the 20\ts{th} century, providing an objective measure of the number of hurricanes in each year.
 
 \section{Research Problem}
 % Detection of hurricanes in 20CR dataset.
@@ -446,18 +447,18 @@ more important if one were looking at tropical cyclones over the Pacific, when t
 period.
 
 \subsection{International Surface Pressure Databank}
-The pressure data comes from the International Surface Pressure Databank version 2 (ISPDv2)
-\parencite{yin2008international}. This takes its data from over 40 international agencies, and
-combines them into one usable databank. One particularly notable data source is the IBTrACS dataset
-used in this study (see Section \ref{sec:ibtracs}). This is of interest because this study treats
-these two data sources as being independent, although this is not the case. However, due to the data
-assimilation process, and all the other factors that go into making the reanalysis data such as the
-GCM and every other source of pressure data, it is thought that the effect of this data being
-assimilated should not overly affect the conclusions of this study. Indeed, in Section
+The pressure data that is used by 20CR comes from the International Surface Pressure Databank
+version 2 (ISPDv2) \parencite{yin2008international}. This takes its data from over 40 international
+agencies, and combines them into one usable databank. One particularly notable data source is the
+IBTrACS dataset used in this study (see Section \ref{sec:ibtracs}). This is of interest because this
+study treats these two data sources as being independent, although this is not the case. However,
+due to the data assimilation process, and all the other factors that go into making the reanalysis
+data such as the GCM and every other source of pressure data, it is thought that the effect of this
+data being assimilated should not overly affect the conclusions of this study. Indeed, in Section
 \ref{sec:extra_field_collection}, where a comparison is made between a derived track and a best
-track, the surprising aspect is the weak correlation of the resulting pressures, which suggests
-that the IBTrACS best track pressure data is not solely responsible for the pressure along the
-track's course.
+track, the surprising aspect is the weak correlation of the resulting pressures, which suggests that
+the IBTrACS best track pressure data is not solely responsible for the pressure along the track's
+course.
 
 % Results summary and usage for hurricane detection:
 % * compo2011
@@ -515,6 +516,7 @@ This means that one hurricane track over the course of the day counts as four hu
 and if there are multiple hurricane tracks active in one timestep then each one will count towards
 the total hurricane timesteps. 
 
+% TODOWRITE: say a bit more about how these tracks are collected, lead in.
 Following \textcite{vecchi2008estimates}, four historical eras are shown in this figure, henceforth
 called the pre-Panama Canal (1890 - 1914), Panama Canal (1915 - 1943), aircraft reconnaissance (1944
 - 1965) and satellite (1966 - 2009) eras.  These are of significance to the number of observed
@@ -1429,6 +1431,8 @@ this task. However, sensitivities of around \SI{0.66}{} and PPVs of around \SI{0
 be improved upon significantly, as this represents only 66\% of actual hurricanes that are correctly
 identified, and 73\% of predicted hurricanes that turn out to be actual hurricanes. 
 
+\subsection{Improving Classification}
+\label{sec:improving_classification}
 During the course of this study, collecting more fields was a primary way of helping to improve
 these metrics, with the temperature fields having good discriminatory power between hurricanes and
 non-hurricanes.  However, there were many fields that I would have liked to have collected, but
@@ -1450,6 +1454,38 @@ project, although these extra fields would have probably helped the classificati
 % tracker. Explain how testing framework would have allowed changes to be compared automatically,
 % and to judge the success of these changes. Say that using an algorithm such as Hodges' could also
 % be performed, and that this may improve the tracking noticeably.
+The tracking algorithm used a simple nearest neighbour search from one timestep to another to
+identify tracks. It had a few modifications, as described in Section \ref{sec:tracking}, but it
+lacked the sophistication of a tracking algorithm such as the one described in
+\textcite{hodges1994general, hodges1999adaptive}. In Section \ref{sec:tracking_results}, it was
+shown that the nearest neighbour tracking algorithm was capable of tracking storm systems
+successfully, due to the high degree of matching between the derived tracks and the best tracks, and an
+optimal configuration for the tracking was chosen based on how well the derived tracks matched the
+best tracks. The suitability of the nearest neighbour tracking algorithm is supported by the low
+number of missed hurricanes in each year, around TODOCHECK \%, showing that the majority of
+hurricanes recorded in the best tracks were present in the derived tracks. 
+
+However, there were some configuration parameters that were not adjusted when working out which
+configuration produced optimum tracks, such as the cutoff vorticity and distance described in Section
+\ref{sec:tracking}. These may have influenced how well the derived tracks matched the best tracks,
+and it would have been good to investigate the effects of using different values for these
+parameters. This could be done using the general framework used in this study, which makes it easy
+to objectively compare the degree of matching between the derived tracks and best tracks, as
+described in Section \ref{sec:tracking_results}. It would also allow for testing other tracking
+algorithms, provided they could be made to produce data in the correct format. 
+
+% Kalman Filter Tracking
+
+A more advanced tracking algorithm would almost certainly have produced better tracks. Referring to
+the flowchart in Figure \ref{fig:hurricane_detexction_proc}, it is clear that the extra field
+detection, and the classification does not depend on how the tracks are produced. Therefore it
+should be straightforward to use a more sophisticated tracking algorithm, such as the one used in
+\textcite{thorncroft2001african}. Better tracks would have lead to better estimation of where the
+vorticity maxima lay, and may also have meant that fewer hurricanes were missed each year. This
+could have helped to improve the reported values for sensitivity and PPV, although I believe the
+changes suggested in Section \ref{sec:improving_classification} for collecting more fields
+would yield greater improvements.
+
 
 \section{Comparison Between Best Track and Estimated Hurricane Frequencies}
 % Compare hurricane freqs freqemanuel2010tropical. Mention best tracks correction in
