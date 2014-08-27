@@ -942,7 +942,7 @@ extratropical transition of cyclones.
     \label{fig:cdp_2005_with_hurrs}
 \end{figure}
 
-\subsubsection{Classification Successes and Errors}
+\subsection{Classification Successes and Errors}
 \label{sec:cla_successes_and_errors}
 
 % Explanation of FPs and FNs, TPs and TNs. Talk about Gold standard and how I am using IBTrACS as a
@@ -995,7 +995,7 @@ classifier for a subset of the data.
 \end{table}
 
 \newpage
-\subsubsection{Sensitivity, Positive Predictive Value and False Positive Rate}
+\subsection{Sensitivity, Positive Predictive Value and False Positive Rate}
 
 From the success and error results, various metrics are defined that give a measure of how well a
 particular classifier performs at various tasks. Of these metrics, three will be utilised in this
@@ -1036,7 +1036,7 @@ For the values in Table \ref{tab:tf_np_table} the values would be:
     \label{tab:success_metric_table}
 \end{table}
 
-\subsubsection{Estimate of the Number of Actual Hurricanes}
+\subsection{Estimate of the Number of Actual Hurricanes}
 \label{sec:estimated_hurricanes}
 
 When any of the classifiers is run on a dataset, it will produce a prediction of which of the
@@ -1259,6 +1259,11 @@ divided by the sensitivity, or a factor of $\frac{0.728}{0.637} = 1.143$ . The m
 numbers of estimated hurricane timesteps in any ensemble member were used to plot the light blue
 area, and the mean of the ensemble members was plotted using the blue dashed line.
 
+For the results of this chapter it is useful to use the four eras described in Section
+\ref{sec:ibtracs}. These were the pre-Panama Canal (1890 - 1914), Panama Canal (1915 - 1944),
+aircraft reconnaissance (1946 - 1965) and satellite (1966 - 2009) eras. Results will be presented in
+with reference to these eras.
+
 From the top graph in Figure \ref{fig:20th_century_hurricane_timesteps}, there is clearly a marked
 correlation between the two time series. There is also a suggestion of a discrepancy between the two
 time series in the pre-Panama Canal era and the aircraft reconnaissance era, with the estimated
@@ -1267,20 +1272,19 @@ aircraft reconnaissance era. This is borne out by the bottom graph in Figure
 \ref{fig:20th_century_hurricane_timesteps}, which shows the best tracks hurricane timesteps minus the
 estimated hurricane timesteps. Here there is a clear sign that the best tracks hurricane timesteps
 is substantially lower than the estimated hurricane timesteps in the pre-Panama Canal era. It is
-also evident that the best tracks hurricane timesteps is substantially larger in the aircraft (and
-early satellite) era.
+also evident that the best tracks hurricane timesteps is substantially larger in the aircraft
+reconnaissance and early satellite eras.
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth]{figures/20th_century_hurricane_timesteps}
     \caption{(top) The hurricane timesteps per year as taken from the IBTrACS best tracks database
         (red), and the mean across ensemble members of the estimated values taken from the 20CR
-        dataset (blue dashed). The blue shading shows the difference between the maximum and maximum
-        taken from the ensemble members, showing the range of values for each year. The division
-        between four eras: pre-Panama Canal, Panama Canal, aircraft reconnaissance and satellite are
-        shown with dashed black vertical lines. (bottom) The estimated value subtracted from the best
-        tracks value for each year. A negative value means that the estimation is larger than the best
-        tracks value.}
+        dataset (blue dashed). The blue shaded range shows the difference between the maximum and maximum
+        taken from the ensemble members. The division between four eras: pre-Panama Canal, Panama
+        Canal, aircraft reconnaissance and satellite are shown with dashed black vertical lines.
+        (bottom) The estimated value subtracted from the best tracks value for each year. A negative
+        value means that the estimation is larger than the best tracks value.}
     \label{fig:20th_century_hurricane_timesteps}
 \end{figure}
 
@@ -1289,12 +1293,14 @@ Figure \ref{fig:20th_century_hurricane_corr} shows the correlation of the two ti
 over the whole of the time period, and second by splitting the time period into two roughly equal
 periods, based on the start of aircraft reconnaissance (1944). Given the high $r^2$ value of
 \SI{0.63}{} shown in the first correlation plot, these series are very well correlated. The gradient
-is less than unity though which implies that the estimated hurricane timesteps is underestimating
+is less than unity though, which implies that the estimated hurricane timesteps is underestimating
 how many hurricanes there were over the whole period (although this effect is slightly mitigated by
 the positive y-intercept).  From analysing the two time periods separately, as in the second
 correlation plot, a clear distinction between the two periods can be seen, with the pre-1944
 estimated numbers clearly estimating more hurricanes than were seen in the best tracks database, and
-the reverse being true in the post-1944 period.
+the reverse being true in the post-1944 period. The pre-1944 period has a gradient of \SI{1.04}{}
+and a y-intercept of \SI{15.31}{}. The post-1944 period has a slop of \SI{0.83}{} and a y-intercept
+of \SI{-8.52}{}.
 
 \begin{figure}[hb!]
     \centering
@@ -1304,27 +1310,29 @@ the reverse being true in the post-1944 period.
     $r^2$ indicates good correlation between the two time series. From the right plot, the different
     gradients of the lines of best fit indicate that in the pre-1944 period the estimated tracks
     were on average higher than the best tracks, and in the post-1944 period the estimates tracks were
-    lower. The pre-1944 period has a gradient of \SI{1.04}{} and a y-intercept of \SI{15.31}{}. The
-    post-1944 period has a slop of \SI{0.83}{} and a y-intercept of \SI{-8.52}{}. }
+    lower. }
     \label{fig:20th_century_hurricane_corr}
 \end{figure}
 
 \newpage
-Figure \ref{fig:20th_century_hurricane_corr_split} shows a finer breakdown of the two series, based
-on the four eras listed in Section TODOREF. This again shows that the number of estimated hurricane
-timesteps in the pre-Panama Canal era is far higher than in the best tracks database, both due to
-the large positive y-intercept and the gradient which is greater than unity. Reasons for this are
-discussed in Section TODOREF. In the Panama Canal era, the gradient is slightly below unity, and the
-y-intercept is small and positive, which means that the two time series are well matched. The most
-surprising era is the aircraft reconnaissance era, for which the gradient is substantially less than
-unity, and the y-intercept is very close to zero. This means that during the aircraft reconnaissance
-era, the estimated hurricane timesteps were almost always lower than the best tracks hurricane
-timesteps, with the effect becoming more pronounced as the hurricane timesteps per year increases.
-Reasons as to why this might be are discussed in Section TODOREF. Finally, in the satellite era, the
-gradient is very close to unity, and the y-intercept is significantly negative, indicating that
-during this era the estimated hurricane timesteps is systematically lower than the best tracks
-hurricane timesteps. This is to be expected given that the classification was trained on data from
-the last two decades from this era.
+Figure \ref{fig:20th_century_hurricane_corr_split} shows a finer breakdown of the two series based
+on the four eras. The values of $r^2$ range between 0.68 to 0.80, meaning there is good correlation
+between the two time series within each era. This figure again shows that the number of estimated
+hurricane timesteps in the pre-Panama Canal era is far higher than in the best tracks database, both
+due to the large positive y-intercept and the gradient which is greater than unity. Reasons for this
+are discussed in Section TODOREF. In the Panama Canal era, the gradient is slightly below unity, and
+the y-intercept is small and positive, which means that the two time series are well matched. The
+most surprising era is the aircraft reconnaissance era, for which the gradient is substantially less
+than unity, and the y-intercept is very close to zero. This means that during the aircraft
+reconnaissance era, the estimated hurricane timesteps were almost always lower than the best tracks
+hurricane timesteps, with the effect becoming more pronounced as the hurricane timesteps per year
+increases.  Reasons as to why this might be are discussed in Section TODOREF. Finally, in the
+satellite era, the gradient is close to unity, and the y-intercept is negative, indicating that
+during this era the estimated hurricane timesteps is systematically slightly lower than the best
+tracks hurricane timesteps. The gradient being close to unity is to be expected given that the
+classification was trained on data from the last two decades from this era. The fact that it is less
+than unity, and the negative y-intercept, could be due to the underestimation of hurricanes in the
+early satellite era, as mentioned in regard to Figure \ref{fig:20th_century_hurricane_timesteps}.
 
 \begin{figure}[ht!]
     \centering
@@ -1371,18 +1379,18 @@ This test is used to see whether the null hypothesis that the time series in que
 changing (i.e. its gradient is zero) can be rejected. This is the same as was used in
 \textcite{vecchi2008estimates}. Based on this test for significance, three of the time series over
 the eras in Table \ref{tab:era_p_value} show statistically significant trends. The pre-Panama
-Canal era (1890 - 1914) for hurricane frequencies for best track and estimated track numbers both
+Canal era for hurricane frequencies for best track and estimated track numbers both
 show significant downwards trends. However, the most significant change is shown by the estimated
-hurricane numbers in the satellite era (1966 - 2009) from only the 20CR dataset, which has a $p$
+hurricane numbers in the satellite era from only the 20CR dataset, which has a $p$
 value of \SI{0.001}{}, and a positive gradient. Taken at face value this implies that there is
 a statistically significant positive trend over the final part of the 20\ts{th} century and start of
-the 21\ts{th} century in the number of hurricane timesteps, or a rise in the frequency of hurricanes
+the 21\ts{st} century in the number of estimated hurricane timesteps, or a rise in the frequency of hurricanes
 since 1966. However, caution must be applied as there is also evidence that the number of estimated
 hurricanes timesteps was below what would be expected (see Figure
-\ref{fig:20th_century_hurricane_timesteps}), and therefore a ``rise'' could be due to
-underestimating how many hurricanes there were in the late 1960s and 1970s, rather than a genuine
-signal. The same era in the best tracks number is not seen to show any significant rise, although
-the gradient of the line is positive. 
+\ref{fig:20th_century_hurricane_timesteps}), and therefore this rise could be due to underestimating
+how many hurricanes there were in the early satellite era, rather than a genuine signal. The same
+era in the best tracks number is not seen to show any significant rise, although the gradient of the
+line is positive. 
 
 % \section{Hurricane Dissipated Power Index Over the 20\ts{th} century}
 
@@ -1397,10 +1405,10 @@ the gradient of the line is positive.
 % doing this).  Hart parameters, temperature anomalies (go through literature and check what else is
 % used and add these in). 
 In one of the studies that influenced this one, \textcite{walsh1997objective} attempted to detect
-cyclones in the output in T106 resolution reanalysis output. In this study, a metric called
+cyclones in the output in T106 resolution reanalysis output. In that study, a metric called
 Probability Of Detection (POD) is defined, and its definition is identical to the sensitivity used
 in this study (given that missing hurricanes are added to the FN numbers, as mentioned in Section
-\ref{sec:cla_successes_and_errors}. They find values of POD equal \SI{0.57}{}, which is
+\ref{sec:cla_successes_and_errors}). They find values of POD equal \SI{0.57}{}, which is
 lower (and therefore not as good) than the minimum values of sensitivity listed in Table
 \ref{tab:classifier_performance_metrics} of \SI{0.618}{}. It is substantially lower than both the
 training and validation values for the SGD classifier that was chosen in this study, which were
@@ -1412,8 +1420,8 @@ although this is not done explicitly in that study. The highest value obtained i
 is again lower than the values of \SI{0.74}{} (training) and \SI{0.72}{} (validation) seen in this
 study for the SGD classifier. It should be pointed out that only two months, September 1989 and
 October 1992, were analysed for one ensemble member there, compared with two decades with 56
-ensemble members here. Therefore the sample size and consequently the reliability of these numbers
-should be subject to less variability in this study.
+ensemble members here. Therefore, due to the larger sample size, the reliability of the values in
+this study should be subject to less variability.
 
 These two comparisons demonstrate the power of being able to perform classification after having
 collected all the data, as well as the suitability of supervised machine learning techniques for
@@ -1423,18 +1431,18 @@ identified, and 73\% of predicted hurricanes that turn out to be actual hurrican
 
 During the course of this study, collecting more fields was a primary way of helping to improve
 these metrics, with the temperature fields having good discriminatory power between hurricanes and
-non-hurricanes.  However, there were many fields that I would have liked to include but could not,
-due to constraints as to what is easily available to download from the 20CR portal for each ensemble
-member. These include the temperatures at \SI{700}{}, \SI{500}{} and \SI{300}{hPa}, which are used
-to calculate the warm core criterion and temperature anomalies \parencite{bengtsson1995hurricane,
-bengtsson1996will, walsh1997objective, yoshimura2006influence}. I would also have liked to include
-the cyclone phase space parameters as described in \textcite{evans2003objective, hart2003cyclone},
-but these require the geopotential heights of \SI{900}{}, \SI{600}{} and \SI{300}{hPa}, and these
-are not available for each ensemble member either, although the geopotential heights of \SI{1000}{},
-\SI{500}{} and \SI{200}{hPa} are.  Whilst these fields are available, the only way to obtain them is
-to download the entire state of the atmosphere as represented by the GCM, which would prohibitively
-time consuming for this project, although these extra fields would have probably helped the
-classification procedure.
+non-hurricanes.  However, there were many fields that I would have liked to have collected, but
+could not, due to constraints as to what is easily available to download from the 20CR portal for
+each ensemble member. These include the temperatures at \SI{700}{}, \SI{500}{} and \SI{300}{hPa},
+which are used to calculate the warm core criterion and temperature anomalies
+\parencite{bengtsson1995hurricane, bengtsson1996will, walsh1997objective, yoshimura2006influence}. I
+would also have liked to have collected the cyclone phase space parameters as described in
+\textcite{evans2003objective, hart2003cyclone}, but these require the geopotential heights of
+\SI{900}{}, \SI{600}{} and \SI{300}{hPa}, and these are not readily available for each ensemble
+member either, although the geopotential heights of \SI{1000}{}, \SI{500}{} and \SI{200}{hPa} are.
+Whilst it is possible to obtain these fields, the only way to do this is to download the entire
+state of the atmosphere as represented by the GCM, which would prohibitively time consuming for this
+project, although these extra fields would have probably helped the classification procedure.
 
 \subsection{Tracking Algorithms}
 \label{sec:discussion_tracking_algs}.
