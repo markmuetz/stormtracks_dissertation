@@ -411,7 +411,7 @@ structure was less realistic than in the T106 GCM.
 \subsubsection{EKF}
 % Technical details EKF
 The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994sequential,
-evensen2003ensemble}. It is 'deterministic', and is based on the 'Ensemble Square Root Filter' of
+evensen2003ensemble}. It is `deterministic', and is based on the `Ensemble Square Root Filter' of
 \textcite{whitaker2002ensemble}. It works by taking the atmospheric state of the atmosphere from the
 56 instances of the GCM, the prediction by the model in Kalman filter terminology, and updating this
 prediction based on the pressure observations at that timestep. Each individual ensemble member is
@@ -598,7 +598,7 @@ extra field collection.
 
 There were constraints on the available disk space on the UCL computers, so the
 processing was batched into decades, with the 20CR data for one decade downloaded, the processing
-run, and the results gathered, before deleting that decades data and moving onto the next one.
+run, and the results gathered, before deleting that decade's data and moving onto the next one.
 Bearing in mind one decade's worth of 20CR data takes up about \SI{112}{GB} of disk space,
 downloading all of these data and processing it took about 12 hours, even with the processing spread
 across multiple computers. Therefore the complete run over the period from 1890 to 2009 took around
