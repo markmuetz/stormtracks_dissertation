@@ -24,7 +24,7 @@
 \rhead{}
 
 % Turn on subsubsection numbering.
-\setcounter{secnumdepth}{3}
+% \setcounter{secnumdepth}{3}
 
 \newcommand{\ts}{\textsuperscript}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -159,7 +159,7 @@ maximum surface wind speed cubed \parencite{emanuel2005increasing}, this would l
 increase in hurricanes' destructive potential. In line with the theory, this destructive potential
 is found to have risen ``markedly'' since the 1970s \parencite{emanuel2005increasing}. As well as
 increases in the intensity of hurricanes, increases in their frequency have been detected
-\parencite{goldenberg2001recent, webster2005changes, holland2007heightened}.
+\parencite{goldenberg2001recent, holland2007heightened}.
 
 % Trends in hurricanes over time leading on to...
 Most studies into hurricane frequency and intensity tend to rely on best tracks databases as their
@@ -516,10 +516,12 @@ together, removing duplicates and trying to detect common discrepancies, such as
 by one day and the positions between tracks not being the same.
 
 The dataset contains data for each track at 6 hourly time intervals (taken at 0000, 0600, 1200, 1800
-UTC daily). It includes data on position, wind speed and pressure. It is split into separate basins,
-and in this study only the North Atlantic (NA) basin will be used. The primary source of data
-for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical}, indeed
-there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset.
+UTC daily). It includes data on position, wind speed and pressure. It also includes information on
+whether each individual point is a hurricane or not, and this information was used as part of the
+classification process described in Section \ref{sec:classification}. It is split into separate
+basins, and in this study only the North Atlantic (NA) basin will be used. The primary source of
+data for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical},
+indeed there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset.
 
 Figure \ref{fig:hurr_per_year} shows the hurricane timesteps per year, where a hurricane timestep is
 defined as being one individual recorded hurricane per 6-hour timestep in the best tracks database.
@@ -614,7 +616,7 @@ to calculate the vorticity and wind speeds. These are available at three differe
 Near Surface Pressure Level (NSPL), \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were
 only used to determine whether or not they were suitable for tracking of hurricanes, and it was
 found that they did not produce suitable tracks, and were not further used (see Section
-\ref{sec:tracking_results}). The formula for vorticity, $\omega$, is given by:
+\ref{sec:matching}). The formula for vorticity, $\omega$, is given by:
 
 \begin{equation}
     \omega = \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}
@@ -655,7 +657,7 @@ at the resolution of the 20CR data (an example of this ``staircase effect'' can 
 interpolation which takes into account the spherical nature of the globe, and the data were
 downscaled to two and three times their original resolutions in both longitude and latitude, leading
 to four and nine times the number of grid cells. The efficacy of this downscaling in improving the
-position of the vorticity maxima will be demonstrated in Section \ref{sec:tracking_results}.
+position of the vorticity maxima will be demonstrated in Section \ref{sec:matching}.
 
 % The vorticity field was downscaled to a finer resolution. This was done so as when tracks were
 % derived from these data, the so called ``staircase effect'' \parencite{hodges1994general}, whereby
@@ -663,7 +665,7 @@ position of the vorticity maxima will be demonstrated in Section \ref{sec:tracki
 % example of this ``staircase effect'' can be seen in Figure \ref{fig:katrina_individual_match_em7}).
 % This downscaling was accomplished using a cubic spline interpolation, and the data were downscaled
 % to two and three times their original resolutions. The efficacy of this downscaling in improving the
-% position of the vorticity maxima will be demonstrated in Section \ref{sec:tracking_results}.
+% position of the vorticity maxima will be demonstrated in Section \ref{sec:matching}.
 
 \subsection{Data Processing Results}
 
@@ -713,7 +715,7 @@ For each timestep, the vorticity maxima were calculated, as per Section
 \ref{sec:methods_maxima_minima}. This was done for both the NSPL and \SI{850}{hPa} pressure
 levels, and for the one, two and three times the actual 20CR resolution, yielding a total of six
 possible configurations for the tracking. These various configurations were compared, and the
-results can be seen in Section \ref{sec:tracking_results}. Maxima that were below a cutoff value
+results can be seen in Section \ref{sec:matching}. Maxima that were below a cutoff value
 of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
 that are unlikely to be part of even tropical storms. This is similar to the ``relaxed threshold
 criteria'' used in \textcite{camargo2002improving}.
@@ -741,11 +743,11 @@ vorticity maxima merging and splitting. The algorithm worked as follows:
 Whilst this algorithm is considerably less sophisticated that that of \textcite{hodges1994general},
 it was found to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS
 dataset, and almost all of the best tracks that were hurricanes (Section
-\ref{sec:tracking_results}). A discussion of other tracking algorithms can be found in Section
+\ref{sec:matching}). A discussion of other tracking algorithms can be found in Section
 \ref{sec:discussion_tracking_algs}.
 
-\subsection{Matching}
-\label{sec:tracking_results}
+\section{Matching}
+\label{sec:matching}
 
 Once tracks have been derived from the 20CR, it is possible to match them to the corresponding best
 tracks. The corresponding best track must be close the derived track in space, and its temporal
@@ -984,7 +986,7 @@ classifier for a subset of the data.
     \vspace{-10pt}
 \end{figure}
 
-\begin{table}[hb!]
+\begin{table}[ht!]
     \centering
     \begin{tabular}{ l | c c }
                                 & Condition Positive & Condition Negative \\
@@ -1326,7 +1328,7 @@ of \SI{-8.52}{}.
 \end{figure}
 
 \newpage
-\subsection{Hurricane Frequencies in each Era}
+\section{Hurricane Frequencies in each Era}
 \label{sec:hurr_freq_in_each_era}
 Figure \ref{fig:20th_century_hurricane_corr_split} shows a finer breakdown of the two series based
 on the four eras. The values of $r^2$ range between 0.68 to 0.80, meaning there is good correlation
@@ -1359,7 +1361,7 @@ the underestimation of hurricanes in the early satellite era, as mentioned in re
 \end{figure}
 
 \newpage
-\subsection{Trends in Hurricane Frequencies}
+\section{Trends in Hurricane Frequencies}
 \label{sec:trends_freq}
 
 For the four eras in question, it is interesting to note whether there are any trends in the numbers
@@ -1470,7 +1472,7 @@ project, although these extra fields would have probably helped the classificati
 The tracking algorithm used a simple nearest neighbour search from one timestep to another to
 identify tracks. It had a few modifications, as described in Section \ref{sec:tracking}, but it
 lacked the sophistication of a tracking algorithm such as the one described in
-\textcite{hodges1994general, hodges1999adaptive}. In Section \ref{sec:tracking_results}, it was
+\textcite{hodges1994general, hodges1999adaptive}. In Section \ref{sec:matching}, it was
 shown that the nearest neighbour tracking algorithm was capable of tracking storm systems
 successfully, due to the high degree of matching between the derived tracks and the best tracks, and an
 optimal configuration for the tracking was chosen based on how well the derived tracks matched the
@@ -1484,10 +1486,8 @@ configuration produced optimum tracks, such as the cutoff vorticity and distance
 and it would have been good to investigate the effects of using different values for these
 parameters. This could be done using the general framework used in this study, which makes it easy
 to objectively compare the degree of matching between the derived tracks and best tracks, as
-described in Section \ref{sec:tracking_results}. It would also allow for testing other tracking
+described in Section \ref{sec:matching}. It would also allow for testing other tracking
 algorithms, provided they could be made to produce data in the correct format. 
-
-% Kalman Filter Tracking
 
 A more advanced tracking algorithm would almost certainly have produced better tracks. Referring to
 the flowchart in Figure \ref{fig:hurricane_detection_proc}, it is clear that the extra field
@@ -1502,6 +1502,7 @@ would yield greater improvements.
 
 \section{Comparison Between Best Track and Estimated Hurricane Frequencies}
 \label{sec:freq_comparison}
+
 % Compare hurricane freqs freqemanuel2010tropical. Mention best tracks correction in
 % vecchi2008estimates, and explain that the numbers that I found were in line 
 Overall, there was a good correlation between the best tracks and estimated hurricane timesteps, as
@@ -1556,7 +1557,42 @@ algorithms, as discussed in Section \ref{sec:discussion_tracking_algs}.
 \section{Trends in Hurricane Frequencies}
 % Point out numerous problems with trend analysis in hurricane frequency counts. Explain that trend
 % found is probably spurious. Links to climate change and how it is quite interesting.
+Two statistically significant trends were identified in Section \ref{sec:trends_freq}. The first was
+found in both the best tracks and estimated hurricane timesteps, and the second in just the
+estimated hurricane timesteps. Both will be considered in this section.
 
+\subsection{Downward Trend in the Pre-Panama Canal Era}
+The downward trends of -4.93 (best track) and -5.41 (estimated) hurricane timesteps per year was
+found to be statistically significant in both cases. This represents a downward trend from 1890 to
+1914. Few studies have looked at this exact time span, so direct comparisons with the literature are
+difficult. However, \textcite{vecchi2008estimates} look at the period from 1878 to 2006, and mention
+two important details about the pre-Panama Canal era. The first is that there were ``high values''
+in the late 1800s, which they caution could be due to greater uncertainties in the best tracks
+record. The second is that there was a minimum from 1910 - 1930. Both these taken together would
+mean that looking at the 1890 to 1914 period is likely to sea a downward trend, as there is a period
+of high values at the start, and a period of low values at the end. That these downwards trends were
+seen in both the best track and estimated hurricane timesteps indicates that the signal is real,
+although this could be a consequence of the two datasets not being fully independent, as detailed in
+Section \ref{sec:ispd}.
+
+\subsection{Upward Trend in the Satellite Era}
+
+The fact that no statistically significant rise was found in the best tracks frequencies is of
+interest, as other studies have found a rise over similar periods \parencite{goldenberg2001recent,
+holland2007heightened}. However, although they both use best tracks information to work draw their
+conclusions, their methodology is substantially different to this study:
+\textcite{goldenberg2001recent} look at ``major hurricanes'', or hurricanes that are category 3 and
+above on the Saffir-Simpson scale; \textcite{holland2007heightened} use a moving average technique
+for identifying trends, not the linear regression used in this study.
+\textcite{vecchi2008estimates} also find a significant increase over the course of the 20\ts{th}
+century, but due to differences in the time periods it is again difficult to perform a direct
+comparison.
+
+The statistically significant rise in the estimated hurricane frequencies is a significant finding.
+Rises in the number of hurricanes has major socio-economic impacts, and is of contemporary interest
+due to the role that climate change and global warming (particularly SST warming) has in hurricane
+frequencies. However, as was mentioned before, the lower than expected counts in the early years of
+the satellite era could be the reason behind this trend.
 
 \chapter{Conclusions}
 \label{chap:conclusion}
