@@ -1127,8 +1127,8 @@ on the relative values of the two variances. QDA is similar except that the divi
 governed by a quadratic equation, and thus affords greater discriminating power between the two
 groups.
 
-These algorithms were not implemented from scratch; instead the implementations in the Python
-library scikit-learn were used \parencite{scikitLearn2011}.
+The implementations of these algorithms in the Python library scikit-learn were used
+\parencite{scikitLearn2011}.
 
 \subsubsection{Stochastic Gradient Descent Classifiers}
 % How this works. Its relation to SVM.
@@ -1201,8 +1201,8 @@ performs particularly well on sensitivity, but is worst for PPV and FPR. This do
 use for classification; if it were important to not miss as many hurricanes as possible, and a high
 number of FPs was acceptable, than it may be a suitable classifier. Indeed, coupled with a threshold
 classifier (``QDC/Thresh.''), it performs well on both sensitivity and PPV metrics. The two
-remaining classifiers, the threshold and the SGDC, perform similarly well on sensitivity, but
-the SGDC classifier outperforms the threshold classifier on the PPV, therefore it is chosen as the
+remaining classifiers, the threshold and the SGD, perform similarly well on sensitivity, but
+the SGD classifier outperforms the threshold classifier on the PPV, therefore it is chosen as the
 classifier to use.
 
 \begin{figure}[hb!]
@@ -1549,10 +1549,12 @@ algorithms, as discussed in Section \ref{sec:discussion_tracking_algs}.
 % Point out numerous problems with trend analysis in hurricane frequency counts. Explain that trend
 % found is probably spurious. Links to climate change and how it is quite interesting.
 
+
 \chapter{Conclusions}
 \label{chap:conclusion}
 % Concluding remarks, state what I have achieved, and point out the main take home results of the
-% study. Talk about supervised machine learning with respect to hurricane detection, and some of the
+% study. Talk about how the tracking framework allows for objective comparison of different
+% trackers. Talk about supervised machine learning with respect to hurricane detection, and some of the
 % benefits it brings. Show that the framework of success and error metrics provides an objective way
 % of measuring performance of various classifiers/detection procedures. Explain that different
 % classifiers have different strengths and weaknesses, and that these can be picked in accordance
