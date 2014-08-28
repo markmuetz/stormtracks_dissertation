@@ -34,6 +34,9 @@
 \renewcommand*{\nameyeardelim}{\addcomma\space}
 \addbibresource{references/references.bib} % note the .bib is required
 
+% Turns off page numbering! Do not leave this line in!!!
+% \pagenumbering{gobble}
+
 % 12,000 words max.
 
 % overall structure:
@@ -102,7 +105,7 @@ upwards trend in the number of hurricanes from 1966 to 2009 is also detected fro
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
-\textbf{Word count:} 12352 % 28/08/14 14:10
+\textbf{Word count:} 12023 % 28/08/14 16:08
 \end{center}
 
 \newpage
@@ -539,7 +542,7 @@ The dataset contains data for each track at 6 hourly time intervals (taken at 00
 UTC daily). It includes data on position, wind speed and pressure. It also includes information on
 whether each individual point is a hurricane or not, and this information was used as part of the
 classification process described in Section \ref{sec:classification}. It is split into separate
-basins, and in this study only the North Atlantic (NA) basin will be used. The primary source of
+basins, and in this study only the North Atlantic basin will be used. The primary source of
 data for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical}.
 
 % CULLED
@@ -882,7 +885,7 @@ obtain further variables from the 20CR dataset. These variables were:
     \item \textbf{Direction to maximum wind speed:} the angle (in radians) from the vorticity
         maximum to the wind speed maximum.
     \item \textbf{Convective available potential energy:} a measure of atmospheric instability.
-    \item \textbf{Atmospheric water vaopur content:} amount of water vapour held by the atmosphere.
+    \item \textbf{Atmospheric water vapour content:} amount of water vapour held by the atmosphere.
         % CULLED:
     % \item \textbf{Relative humidity at the NSPL:} Initial experimentation showed that this field was
         % not useful for hurricane detection so it was not collected for all years.
@@ -907,7 +910,7 @@ and the maximum wind speed.
     \vspace{-10pt}
     \caption{Time series graphs taken from Hurricane Katrina (2005), showing pressure and maximum
             wind speed taken from the best track for Katrina and the corresponding pressure from derived
-            track (taken form ensemble member 8). }
+            track (ensemble member 8). }
     \label{fig:katrina_best_derived_comparison}
     \vspace{-10pt}
 \end{figure}
@@ -1493,10 +1496,13 @@ which are used to calculate temperature anomalies \parencite{bengtsson1995hurric
 yoshimura2006influence}. I would also have liked to have calculated the cyclone phase space
 parameters as described in \textcite{evans2003objective, hart2003cyclone}, but these require the
 geopotential heights of \SI{900}{}, \SI{600}{} and \SI{300}{hPa}, and these are not readily
-available for each ensemble member either.  Whilst it is possible to obtain these fields, the only
-way to do this is to download the entire state of the atmosphere as represented by the GCM, which
-would be prohibitively time consuming for this project, although these extra fields would have
-probably helped the classification procedure.
+available for each ensemble member either.  
+
+% CULLED!
+% Whilst it is possible to obtain these fields, the only
+% way to do this is to download the entire state of the atmosphere as represented by the GCM, which
+% would be prohibitively time consuming for this project, although these extra fields would have
+% probably helped the classification procedure.
 
 % CULLED:, although the geopotential heights of \SI{1000}{}, \SI{500}{} and \SI{200}{hPa} are.
 
