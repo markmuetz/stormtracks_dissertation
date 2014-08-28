@@ -102,7 +102,7 @@ upwards trend in the number of hurricanes from 1966 to 2009 is also detected fro
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
-\textbf{Word count:} 12448 % 28/08/14 14:10
+\textbf{Word count:} 12352 % 28/08/14 14:10
 \end{center}
 
 \newpage
@@ -299,26 +299,26 @@ the vorticity threshold. The results of this study will be compared against the 
 
 The two principal goals of this study are to produce a hurricane detection procedure that is capable
 of detecting hurricanes in the 20CR dataset, and to use this procedure to investigate hurricane
-frequencies over the course of the 20\ts{th} century. These goals will be met by completing the
+frequencies over the course of the 20\ts{th} century. The first goal will be met by completing the
 following objectives:
 
 \begin{itemize}
-    \item Develop a tracking algorithm that is capable of producing tracks derived from the 20CR
-    \item Match the derived tracks to the tracks in the IBTrACS best tracks database
+    \item Develop a tracking algorithm that is capable of producing tracks derived from the 20CR.
+    \item Match the derived tracks to the tracks in the IBTrACS best tracks database.
     \item Compare different tracking algorithm configuration, and choose the optimum tracking
         algorithm based on the overall distance between the tracks it produces and the best tracks.
     \item Collect extra information for each of the points in the optimum tracks, such as
-        temperature at \SI{850}{hPa}
+        temperature at \SI{850}{hPa}.
     \item Train different classification algorithms to correctly predict whether each point is a
         hurricane or not, by using the extra information, along with the information about whether a
-        particular point is matched to a hurricane
-    \item Choose the classification algorithm which performs best on success and error metrics, and
-        this process will form the hurricane detection procedure
-    \item Run this procedure over the course of the 20\ts{th} century
-    \item Calculate aggregate statistics about the number of hurricanes over this duration
-    \item perform a comparison between the estimated number of hurricanes from the 20CR dataset and
-        the IBTrACS database
+        particular point is matched to a hurricane.
+    \item Choose the classification algorithm which performs best on success and error metrics.
 \end{itemize}
+
+The second goal will be met by running this procedure over the course of the 20\ts{th} century, then
+calculating aggregate statistics about the number of hurricanes over this duration. A comparison
+will then be performed between the estimated number of hurricanes from the 20CR dataset and the
+IBTrACS database, as well as looking for trends in both time series.
 
 % Old form:
 % The objectives of this study are to develop a tracking algorithm that is capable of producing tracks
@@ -424,16 +424,15 @@ by \textcite{juang2005discrete}.
 % Technical details EKF
 The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994sequential,
 evensen2003ensemble}. It is `deterministic', and is based on the `Ensemble Square Root Filter' of
-\textcite{whitaker2002ensemble}. It works by taking the state of the atmosphere from the
-56 instances of the GCM - which is the prediction by the model in Kalman filter terminology - and
+\textcite{whitaker2002ensemble}. It works by taking the state of the atmosphere from the 56
+instances of the GCM - which is the prediction by the model in Kalman filter terminology - and
 updating this prediction based on the pressure observations at that timestep. Each individual
 ensemble member is updated in such a way so as to keep the state of its atmosphere continuous,
-whilst still incorporating the pressure observations (with one slight caveat; see the last paragraph
-in the next section for details). To mitigate the effects of ``filter divergence'', whereby the
-state of the EKF becomes too dependent on the output of the model, and does not give enough weight
-to the observations, two methods are used. The first is to use covariance inflation, as described in
-\textcite{whitaker2004reanalysis}. The second is to use covariance localisation, as described in
-\textcite{houtekamer2001sequential}. 
+whilst still incorporating the pressure observations. To mitigate the effects of ``filter
+divergence'', whereby the state of the EKF becomes too dependent on the output of the model, and
+does not give enough weight to the observations, two methods are used. The first is to use
+covariance inflation, as described in \textcite{whitaker2004reanalysis}. The second is to use
+covariance localisation, as described in \textcite{houtekamer2001sequential}. 
 
 % CULLED
 % These are mentioned for completeness; a more detailed
@@ -451,7 +450,6 @@ The process by which estimates are produced involves three main steps:
     \item Use GCM to predict the state of the atmosphere at the next timestep (go to step two)
 \end{enumerate}
 
-% CULLABLE
 56 individual instances of the GCM are initialised with different climatological states taken from
 14 months before the start of the production period, i.e. the period over which estimates are
 produced. The instances are then run for 14 months, to ``reduce the effect of the initial condition
@@ -499,7 +497,7 @@ data being assimilated should not overly affect the conclusions of this study.
 % * neff2013
 % * emanuel2010
 
-\subsection{Representation of Hurricanes in the 20CR dataset}
+\subsection{Hurricanes in the 20CR dataset}
 
 In \textcite{neff2013analysis}, the path of the Galveston Hurricane of the 8\ts{th} September, 1900
 is analysed. The analysis finds that the hurricane is detectable through a minimum in the pressure
@@ -515,7 +513,7 @@ the pressure minimum.
     \centering
     \includegraphics[width=\textwidth]{figures/galveston_1900-9-7_18-00_em0}
     \caption{Vorticity and pressure fields over the Gulf of Mexico from September the 7\ts{th}, 1900
-        at 1800 UTC (taken from ensemble member 1). This shows the hurricane that would go on to hit
+        at 1800 UTC (ensemble member 1). This shows the hurricane that would go on to hit
         Galveston, Texas. The hurricane is clearly visible in both the vorticity and pressure fields.}
     \label{fig:galveston}
 \end{figure}
@@ -528,7 +526,7 @@ the pressure minimum.
 % the number of northern hemisphere tropical cyclones, along with a high correlation between the power
 % dissipation index from derived from the 20CR reanalysis and the best tracks from the same period.
 
-\section{IBTrACS Best Tracks Dataset}
+\section{IBTrACS Dataset}
 \label{sec:ibtracs}
 The International Best Track Archive for Climate Stewardship (IBTrACS)
 \parencite{knappInternational2010} aims to be a homogenised global collection of best tracks of
@@ -582,7 +580,7 @@ dates that fell within this range were considered when detecting hurricanes in t
     \includegraphics[width=\textwidth]{figures/yearly_hurr_dist}
     \caption{Hurricane distribution over the course of the year. The 1\ts{st} of June and the
     1\ts{st} of December are shown, these indicate the start and end of the analysis period in this
-study. }
+    study. }
 % CULLED: It can be seen that the vast majority of hurricanes fall within this period.
     \label{fig:yearly_hurr_dist}
 \end{figure}
@@ -634,7 +632,6 @@ for one decade, this represents around 36 days of processing time.
 \subsection{Wind Fields and Vorticity}
 \label{sec:vort}
 
-% CULLABLE 250
 In the 20CR data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used
 to calculate the vorticity and wind speeds. These are available at three different pressure levels:
 Near Surface Pressure Level (NSPL), \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were
@@ -666,7 +663,7 @@ The vorticities at the NSPL and \SI{850}{hPa} levels were calculated.
 \label{sec:methods_maxima_minima}
 
 For the vorticity fields, maxima are of primary interest as these represent grid cells where the
-wind is rotating most strongly. Conversely, for the Pressure at Sea Level (PSL) field, minima are of
+wind is rotating most strongly. Conversely, for the pressure at sea level field, minima are of
 primary interest. A maximum or minimum was defined as a cell whose value was greater or less than
 the value of all eight of its surrounding cells. Vorticity maxima play a vital role in deriving
 tracks from the 20CR data, and pressure minima are useful both for comparison with the best tracks
@@ -704,7 +701,7 @@ precise location of the vorticity maximum can be seen in the right figure.
     \centering
     \includegraphics[width=0.9\textwidth]{figures/katrina_data_proc}
     \caption{Three different views of Hurricane Katrina over the Gulf of Mexico as it appears in the
-        20CR on the 27\ts{th} August, 2005 at 1800 UTC (taken from ensemble member 1). The left
+        20CR on the 27\ts{th} August, 2005 at 1800 UTC (ensemble member 1). The left
         figure shows the raw 20CR wind fields with contours fitted based on the wind speed. The
         middle figure shows the corresponding vorticity field. The right figure shows the data after
         they have been downscaled to three times the original resolution.}
@@ -715,7 +712,7 @@ precise location of the vorticity maximum can be seen in the right figure.
     \centering
     \includegraphics[width=0.9\textwidth]{figures/katrina_max_mins}
     \caption{Vorticity and pressure maximum and minimum detection as shown for Hurricane Katrina,
-        on the 27\ts{th} August, 2005 at 1800 UTC (taken from ensemble member 1). Maxima are shown
+        on the 27\ts{th} August, 2005 at 1800 UTC (ensemble member 1). Maxima are shown
         by red dots, and minima by black crosses. The large number of vorticity maxima should be
         noted, which is why a vorticity cutoff as described in Section \ref{sec:tracking} is
         employed. A clear vorticity maximum and pressure minimum can be seen indicating the position
@@ -1145,10 +1142,9 @@ discard CDPs based on whether or not they pass a particular threshold test.
     \caption{Sensitivity and PPV are shown to vary with the vorticity threshold used for a threshold
         classifier (bottom). Their sum is shown in the top graph. For low vorticity threshold, high
         sensitivities are seen (because there are fewer FNs) and lower PPVs are seen (as there are
-        many FPs). As the threshold increases, the sensitivity decreases and the PPV increases as
-        the FNs increase and the FPs decrease. Their sum shows a clear maximum around the
-        intersection of the two individual lines, at a vorticity value of \SI{1e-4}{s^{-1}}. All
-        other threshold values are the same as in Table \ref{tab:threshold_values}. }
+        many FPs). Their sum shows a clear maximum around the intersection of the two individual
+        lines, at a vorticity value of \SI{1e-4}{s^{-1}}. All other threshold values are the same as
+        in Table \ref{tab:threshold_values}. }
     \label{fig:threshold_sens_ppv_vort}
 \end{figure}
 
@@ -1350,7 +1346,7 @@ periods, based on the start of aircraft reconnaissance (1944). Given the high $r
 is less than unity though, which implies that there are fewer estimated hurricane-timesteps than
 there are best tracks hurricane-timesteps over the whole period (although this effect is slightly
 reduced by the positive y-intercept). From analysing the two time periods separately, as in the
-second correlation plot, a clear distinction between the two periods can be seen, with the pre-1944
+second correlation plot, a distinction between the two periods can be seen, with the pre-1944
 estimated numbers clearly estimating more hurricanes than were seen in the best tracks database, and
 the reverse being true in the post-1944 period. The pre-1944 period has a gradient of \SI{1.04}{}
 and a y-intercept of \SI{15.31}{}. The post-1944 period has a slop of \SI{0.83}{} and a y-intercept
@@ -1359,7 +1355,7 @@ of \SI{-8.52}{}.
 \begin{figure}[hb!]
     \centering
     \includegraphics[width=\textwidth]{figures/20th_century_corr}
-    \caption{Correlation plots showing the whole of the 20\ts{th} century (left) and splitting the
+    \caption{Correlation plots showing the entire the 20\ts{th} century (left) and splitting the
     20\ts{th} century into pre-1944 and post-1944 (right). From the left plot, the high value for
     $r^2$ indicates good correlation between the two time series. From the right plot, the different
     gradients of the lines of best fit indicate that in the pre-1944 period the estimated tracks
@@ -1374,20 +1370,18 @@ of \SI{-8.52}{}.
 Figure \ref{fig:20th_century_hurricane_corr_split} shows a finer breakdown of the two series based
 on the four eras. The values of $r^2$ range between 0.68 to 0.80, meaning there is good correlation
 between the two time series within each era. This figure again shows that the number of estimated
-hurricane-timesteps in the pre-Panama Canal era is far higher than in the best tracks database, both
-due to the large positive y-intercept and the gradient which is greater than unity. Reasons for this
-are discussed in Section \ref{sec:freq_comparison}. In the Panama Canal era, the gradient is
-slightly below unity, and the y-intercept is small and positive, which means that the two time
-series are well matched. The most surprising era is the aircraft reconnaissance era, for which the
-gradient is substantially less than unity, and the y-intercept is very close to zero. This means
-that during the aircraft reconnaissance era, the estimated hurricane-timesteps were almost always
-lower than the best tracks hurricane-timesteps, with the effect becoming more pronounced as the
-hurricane-timesteps per year increases.  Reasons as to why this might be are discussed in Section
-\ref{sec:freq_comparison}. Finally, in the satellite era, the gradient is close to unity, and the
-y-intercept is negative, indicating that during this era the estimated hurricane-timesteps is
-systematically slightly lower than the best tracks hurricane-timesteps. The fact that it is less
-than unity, and the negative y-intercept, could be due to the underestimation of hurricanes in the
-early satellite era, as mentioned in regard to Figure \ref{fig:20th_century_hurricane_timesteps}.
+hurricane-timesteps in the pre-Panama Canal era is far higher than in the best tracks database.
+Reasons for this are discussed in Section \ref{sec:freq_comparison}. In the Panama Canal era, there
+is close to a one-to-one correlation between the two series. The most surprising era is the aircraft
+reconnaissance era, for which the gradient is substantially less than unity, and the y-intercept is
+very close to zero. This means that during the aircraft reconnaissance era, the estimated
+hurricane-timesteps were almost always lower than the best tracks hurricane-timesteps, with the
+effect becoming more pronounced as the hurricane-timesteps per year increases.  Reasons as to why
+this might be are discussed in Section \ref{sec:freq_comparison}. Finally, in the satellite era, the
+estimated hurricane-timesteps is systematically slightly lower than the best tracks
+hurricane-timesteps, as indicated by negative y-intercept of the linear regression. This
+could be due to the underestimation of hurricanes in the early satellite era, as mentioned in regard
+to Figure \ref{fig:20th_century_hurricane_timesteps}.
 
 % CULLED: 
 % The gradient being close to
@@ -1442,14 +1436,13 @@ Canal era for hurricane frequencies for best track and estimated track numbers b
 show significant downwards trends. However, the most significant change is shown by the estimated
 hurricane numbers in the satellite era from only the 20CR dataset, which has a $p$
 value of \SI{0.001}{}, and a positive gradient. Taken at face value this implies that there is
-a statistically significant positive trend over the final part of the 20\ts{th} century and start of
-the 21\ts{st} century in the number of estimated hurricane-timesteps, or a rise in the frequency of hurricanes
-since 1966. However, caution must be applied as there is also evidence that the number of estimated
-hurricane-timesteps was below what would be expected (see Figure
-\ref{fig:20th_century_hurricane_timesteps}), and therefore this rise could be due to underestimating
-how many hurricanes there were in the early satellite era, rather than a genuine signal. The same
-era in the best tracks number is not seen to show any significant rise, although the gradient of the
-line is positive. 
+a statistically significant positive trend over satellite era in the number of estimated
+hurricane-timesteps, or a rise in the frequency of hurricanes since 1966. However, caution must be
+applied as there is also evidence that the number of estimated hurricane-timesteps was below what
+would be expected (see Figure \ref{fig:20th_century_hurricane_timesteps}), and therefore this rise
+could be due to underestimating how many hurricanes there were in the early satellite era, rather
+than a genuine signal. The same era in the best tracks number is not seen to show any significant
+rise, although the gradient of the line is positive. 
 
 % \section{Hurricane Dissipated Power Index Over the 20\ts{th} century}
 
@@ -1496,14 +1489,14 @@ these metrics, with the temperature fields having good discriminatory power betw
 non-hurricanes.  However, there were many fields that I would have liked to have collected, but
 could not, due to constraints as to what is easily available to download from the 20CR portal for
 each ensemble member. These include the temperatures at \SI{700}{}, \SI{500}{} and \SI{300}{hPa},
-which are used to calculate the warm core criterion and temperature anomalies
-\parencite{bengtsson1995hurricane, yoshimura2006influence}. I would also have liked to have
-calculated the cyclone phase space parameters as described in \textcite{evans2003objective,
-hart2003cyclone}, but these require the geopotential heights of \SI{900}{}, \SI{600}{} and
-\SI{300}{hPa}, and these are not readily available for each ensemble member either.  Whilst it is
-possible to obtain these fields, the only way to do this is to download the entire state of the
-atmosphere as represented by the GCM, which would be prohibitively time consuming for this project,
-although these extra fields would have probably helped the classification procedure.
+which are used to calculate temperature anomalies \parencite{bengtsson1995hurricane,
+yoshimura2006influence}. I would also have liked to have calculated the cyclone phase space
+parameters as described in \textcite{evans2003objective, hart2003cyclone}, but these require the
+geopotential heights of \SI{900}{}, \SI{600}{} and \SI{300}{hPa}, and these are not readily
+available for each ensemble member either.  Whilst it is possible to obtain these fields, the only
+way to do this is to download the entire state of the atmosphere as represented by the GCM, which
+would be prohibitively time consuming for this project, although these extra fields would have
+probably helped the classification procedure.
 
 % CULLED:, although the geopotential heights of \SI{1000}{}, \SI{500}{} and \SI{200}{hPa} are.
 
@@ -1518,9 +1511,9 @@ identify tracks. It had a few modifications, as described in Section \ref{sec:tr
 lacked the sophistication of a tracking algorithm such as the one described in
 \textcite{hodges1994general, hodges1999adaptive}. In Section \ref{sec:matching}, it was
 shown that the nearest neighbour tracking algorithm was capable of tracking storm systems
-successfully, due to the high degree of matching between the derived tracks and the best tracks, and an
-optimal configuration for the tracking was chosen based on how well the derived tracks matched the
-best tracks. The suitability of the nearest neighbour tracking algorithm is supported by the low
+successfully, due to the high degree of matching between the derived tracks and the best tracks, and
+an optimum configuration for the tracking was chosen based on how well the derived tracks matched
+the best tracks. The suitability of the nearest neighbour tracking algorithm is supported by the low
 number of missed hurricanes in each year, around 4 \% over 1990 to 2009, showing that the majority
 of hurricanes recorded in the best tracks were present in the derived tracks. 
 
@@ -1528,10 +1521,10 @@ However, there were some configuration parameters that were not adjusted when wo
 configuration produced optimum tracks, such as the cutoff vorticity and distance described in Section
 \ref{sec:tracking}. These may have influenced how well the derived tracks matched the best tracks,
 and it would have been good to investigate the effects of using different values for these
-parameters. This could be done using the general framework used in this study, which makes it easy
-to objectively compare the degree of matching between the derived tracks and best tracks, as
-described in Section \ref{sec:matching}. It would also allow for testing other tracking
-algorithms, provided they could be made to produce data in the correct format. 
+parameters. This could be done using the framework used in this study, which makes it easy to
+objectively compare the degree of matching between the derived tracks and best tracks, as described
+in Section \ref{sec:matching}. It would also allow for testing other tracking algorithms, provided
+they could be made to produce data in the correct format. 
 
 A more advanced tracking algorithm would almost certainly have produced better tracks. Referring to
 the flowchart in Figure \ref{fig:hurricane_detection_proc}, it is clear that the extra field
@@ -1542,7 +1535,6 @@ vorticity maxima lay, and may also have meant that fewer hurricanes were missed 
 could have helped to improve the reported values for sensitivity and PPV, although I believe the
 changes suggested in Section \ref{sec:improving_classification} for collecting more fields
 would yield greater improvements.
-
 
 \section{Comparison Between Best Track and Estimated Hurricane Frequencies}
 \label{sec:freq_comparison}
@@ -1559,13 +1551,13 @@ the aircraft reconnaissance era. Both of these will be considered in turn.
 The estimated hurricane-timesteps for the pre-Panama Canal era, 1890 - 1914, is higher than the best
 tracks hurricane-timesteps. This could be an indication that there were missed hurricanes in the
 best tracks dataset over this era. This is interesting because it fits in with results from previous
-studies, that have taken a different approach to evaluating the reliability of best tracks datasets
+studies that have taken a different approach to evaluating the reliability of best tracks datasets
 in the pre-satellite era. Through analysis of correlation between Sea Surface Temperatures (SSTs)
 and hurricane counts over the 20\ts{th} century, \textcite{vecchi2008estimates} have argued that
 there are indeed missing hurricanes in the pre-satellite era (including the pre-Panama Canal era).
-Indeed, they suggest in their study that an adjustment should be applied to hurricane frequencies in
+They suggest in their study that an adjustment should be applied to hurricane frequencies in
 the HURDAT database before 1966 (HURDAT is the primary source of information for storms in the North
-Atlantic for IBTrACS, see Section \ref{sec:ibtracs}). This adjustment changes for each year, but for
+Atlantic for IBTrACS, see Section \ref{sec:ibtracs}). This adjustment changes for each year: for
 the period from 1890 to 1914 it varies between 2.3 and 0.4 ``missing'' storms per year. This figure
 is not directly comparable with the values in this study, due to a different methodology on counting
 hurricanes - hurricane-timesteps were used in this study, whereas total storms were used for the
@@ -1573,30 +1565,31 @@ adjustment in \textcite{vecchi2008estimates}. It does however indicate that the 
 this study could well be genuine, and offers another way of estimating how many hurricanes were
 missed in the pre-satellite era.
 
-Other studies have reach broadly the same conclusion. \textcite{landsea2007counting} finds that the
-number of hurricanes was underestimated in best tracks in the early 20\ts{th} century through
-comparison of hurricanes that made landfall to recorded hurricanes. \textcite{mann2007evidence} find
-evidence for a ``modest undercount bias'', through use of a statistical model that links Atlantic
-hurricane counts to climatic state variables. \textcite{chang2007number} reach a similar conclusion
-through a consideration of hurricanes that made landfall, or got sufficiently close to land to be
-detected. They find that 2.1 hurricanes per year may have been missed over the period 1904 to 1913.
+% CULLED:
+% Other studies have reach broadly the same conclusion. \textcite{landsea2007counting} finds that the
+% number of hurricanes was underestimated in best tracks in the early 20\ts{th} century through
+% comparison of hurricanes that made landfall to recorded hurricanes. \textcite{mann2007evidence} find
+% evidence for a ``modest undercount bias'', through use of a statistical model that links Atlantic
+% hurricane counts to climatic state variables. \textcite{chang2007number} reach a similar conclusion
+% through a consideration of hurricanes that made landfall, or got sufficiently close to land to be
+% detected. They find that 2.1 hurricanes per year may have been missed over the period 1904 to 1913.
 
 \subsection{Hurricane Frequencies in the Aircraft Reconnaissance Era}
 Section \ref{sec:hurr_freq_in_each_era} indicates that a number of hurricanes were missed in the
-estimated hurricane-timesteps counts over the aircraft reconnaissance era. This cannot be explained
+estimated hurricane-timesteps over the aircraft reconnaissance era. This cannot be explained
 by examining the literature on missing hurricanes, as none of these studies claim that hurricanes
 have been overcounted from 1944 to 1965. Although the results were not presented above, different
 classifiers were run over the course of the 20\ts{th} century, and the results were broadly similar
-to the results presented, in that there were fewer estimated hurricane-timesteps in the aircraft
-reconnaissance era than best tracks hurricane-timesteps. This points to something going awry in the
+to the results presented, in that there were fewer estimated than best tracks hurricane-timesteps in
+the aircraft reconnaissance era. This points to something going awry in the
 tracking procedure, or perhaps a large number of weak hurricanes that were long in duration over
 this era. This would have had the effect of the classifier classifying them as not being hurricanes,
 even though they were, thus skewing the estimated hurricane-timestep numbers downwards. 
 
-This is certainly an area which deserved more investigation and research, as it has implications
-for the trends discussed in the next section, as well as casting doubts on the missing hurricanes
-discussed in the previous section. This research could involve the use of different tracking
-algorithms, as discussed in Section \ref{sec:discussion_tracking_algs}.
+This is certainly an area which deserved more investigation, as it has implications for the trends
+discussed in the next section, as well as casting doubts on the missing hurricanes discussed in the
+previous section. This research could involve the use of different tracking algorithms, as discussed
+in Section \ref{sec:discussion_tracking_algs}.
 
 \section{Trends in Hurricane Frequencies}
 % Point out numerous problems with trend analysis in hurricane frequency counts. Explain that trend
@@ -1651,25 +1644,25 @@ the satellite era could be the reason behind this trend.
 In this study a method for the detection of hurricanes in the North Atlantic basin in the 20\ts{th}
 Century Reanalysis (20CR) project was described. The procedure worked by deriving a set of tracks
 from the locations of vorticity maxima in the 20CR dataset. A modified nearest neighbour tracking
-algorithm was used. Optimal configuration parameters for this algorithm were found by matching the
+algorithm was used. Optimum configuration parameters for this algorithm were found by matching the
 derived tracks to best tracks taken from the IBTrACS best tracks database. The framework for
 comparing different tracking algorithms was general and could be applied to different tracking
 algorithms.
 
-Using the optimum tracks, extra fields were collected along the length of each track. These fields,
-and the information from matching the derived and best tracks, were then used to train
-four supervised machine learning classification algorithms. They were trained on even years from
-1990 to 2009. These algorithms were validated against the odd years from the same period.
-Performance metrics were compared for the different algorithms. The Stochastic Gradient Descent
-classifier was found to perform best for the purposes of this study. However, a different classifier
-could be chosen with different performance characteristics if the main goal of the study was e.g. to
-have high certainty that a predicted hurricane was actually a hurricane.
+Using the optimum tracks, extra fields were collected. These fields, and the information from
+matching the derived and best tracks, were then used to train four supervised machine learning
+classification algorithms on the even years from 1990 to 2009. These algorithms were
+validated against the odd years from the same period. Performance metrics were compared for the
+different algorithms. The Stochastic Gradient Descent classifier was found to perform best for the
+purposes of this study. However, a different classifier could be chosen with different performance
+characteristics if the main goal of the study was e.g. to have high certainty that a predicted
+hurricane was actually a hurricane.
 
 This hurricane detection procedure was only trained and validated over a period when reliable best
 tracks are known to exist. However, once it has been trained, it can be used over any period for
 which there are data in the 20CR dataset. It can thus be used to provide an almost independent
-record of the hurricane frequency over the course of the 20\ts{th} century (see Section
-\ref{sec:ispd} for why it is not fully independent).
+record of the hurricane frequency over the 20\ts{th} century (see Section \ref{sec:ispd} for why it
+is not fully independent).
 
 The hurricane detection procedure was then run from 1890 to 2009. This allowed a comparison of the
 frequency of hurricanes, as measured by the hurricane-timesteps, from the best tracks record and
@@ -1678,7 +1671,7 @@ the era from 1890 to 1914, in agreement with other studies \parencite{vecchi2008
 landsea2007counting}. The estimated record was found to be missing hurricanes in the period from
 1944 to 1965. The reason for this was not ascertained, and is deserving of further study.
 
-A downwards trend in the hurricane frequency over 1890 to 1914 was discovered in both the best
+A downward trend in the hurricane frequency over 1890 to 1914 was discovered in both the best
 tracks and estimated records, and reasons for this were discussed. An upward trend in only the
 estimated hurricane frequency over 1966 to 2009 was found. The most likely reason from this was
 given as the undercounting of hurricanes at the start of this era in the estimated record. Another
