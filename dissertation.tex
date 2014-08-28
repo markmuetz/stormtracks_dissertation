@@ -78,7 +78,7 @@
 A procedure for the detection of hurricanes in the 20\ts{th} Century Reanalysis Project dataset is
 developed. Tracks are derived from the dataset by tracking vorticity maxima over time. These derived
 tracks are matched against best tracks taken from the International Best Track Archive for Climate
-Stewardship (IBTrACS) best tracks dataset. Six different tracking configurations are evaluated:
+Stewardship (IBTrACS) best tracks database. Six different tracking configurations are evaluated:
 using the vorticity at 0.995 times the surface and \SI{850}{hPa} pressure levels and using the
 original resolution data, data downscaled by cubic interpolation to two and three times the original
 resolution. It is found that using downscaling to three times the resolution provides a better match
@@ -94,14 +94,14 @@ on classification success and error metrics. It is found that a Stochastic Gradi
 classifier performs best based on these metrics.
 
 The hurricane detection procedure is run over the course of the 20\ts{th} century, and a comparison
-between the estimated number of hurricanes and the number as recorded in the IBTrACS dataset is
+between the estimated number of hurricanes and the number as recorded in the IBTrACS database is
 performed. It is found that there is good correlation between the two time series, and that there
 are significant discrepancies between the two series between 1890 to 1914 and 1945 to 1965. Between
 1890 and 1914, the estimated hurricane count is higher than the best tracks count. Between 1945 and
 1965, fewer estimated hurricanes are found than best tracks hurricanes. 
 
-A downwards trend in both the estimated and best tracks hurricanes is detected from 1890 to 1914. An
-upwards trend in the number of hurricanes from 1966 to 2009 is also detected from the estimated
+A downward trend in both the estimated and best tracks hurricanes is detected from 1890 to 1914. An
+upward trend in the number of hurricanes from 1966 to 2009 is also detected from the estimated
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
@@ -228,7 +228,7 @@ assimilates information from IBTrACS it cannot be said to be totally independent
 % Discuss different approaches.
 % Detection: Reanalyses.
 % List some previous attempts to detect hurr/tropical cyclones in reanalyses.
-% Talk about the primary difference: the existence of best tracks datasets.
+% Talk about the primary difference: the existence of best tracks databases.
 
 Numerous studies have looked into the detection of hurricanes, both in the output of GCMs and in
 global reanalysis datasets. Several reasons exist for wanting to detect hurricanes in the output of
@@ -319,7 +319,7 @@ following objectives:
 \end{itemize}
 
 The second goal will be met by running this procedure over the course of the 20\ts{th} century, then
-calculating aggregate statistics about the number of hurricanes over this duration. A comparison
+calculating aggregate statistics about the number of hurricanes over this period. A comparison
 will then be performed between the estimated number of hurricanes from the 20CR dataset and the
 IBTrACS database, as well as looking for trends in both time series.
 
@@ -482,7 +482,7 @@ years, and so on.
 The pressure data that is used by the 20CR comes from the International Surface Pressure Databank
 version 2 (ISPDv2) \parencite{yin2008international}. This takes its data from over 40 international
 agencies, and combines them into one usable databank. One particularly notable data source is the
-IBTrACS dataset used in this study (see Section \ref{sec:ibtracs}). This is relevant because this
+IBTrACS database used in this study (see Section \ref{sec:ibtracs}). This is relevant because this
 study treats these two data sources as being independent, although this is not the case. However,
 due to the data assimilation process, and all the other factors that go into making the reanalysis
 data, such as the GCM and every other source of pressure data, it is thought that the effect of this
@@ -506,7 +506,7 @@ In \textcite{neff2013analysis}, the path of the Galveston Hurricane of the 8\ts{
 is analysed. The analysis finds that the hurricane is detectable through a minimum in the pressure
 field, even though the mean pressure field was used. They find that the track derived from the 20CR
 for this hurricane was systematically to the north-east of the corresponding best track (taken from
-the IBTrACS dataset). This study points to the fact that even hurricanes as far back as the
+the IBTrACS database). This study points to the fact that even hurricanes as far back as the
 beginning of the 20\ts{th} century are well represented. Figure \ref{fig:galveston} shows the
 pressure and vorticity fields for one ensemble member and one date of this hurricane. In this
 figure, the 2\textdegree\ resolution of the data is clearly visible, as is the vorticity maximum and
@@ -529,7 +529,7 @@ the pressure minimum.
 % the number of northern hemisphere tropical cyclones, along with a high correlation between the power
 % dissipation index from derived from the 20CR reanalysis and the best tracks from the same period.
 
-\section{IBTrACS Dataset}
+\section{IBTrACS Database}
 \label{sec:ibtracs}
 The International Best Track Archive for Climate Stewardship (IBTrACS)
 \parencite{knappInternational2010} aims to be a homogenised global collection of best tracks of
@@ -538,7 +538,7 @@ Meteorological Centers (RSMCs) and Tropical Cyclone Warning Centres (TCWCs), and
 together, removing duplicates and trying to detect common discrepancies, such as dates being different
 by one day and the positions between tracks not being the same.
 
-The dataset contains data for each track at 6 hourly time intervals (taken at 0000, 0600, 1200, 1800
+The database contains data for each track at 6 hourly time intervals (taken at 0000, 0600, 1200, 1800
 UTC daily). It includes data on position, wind speed and pressure. It also includes information on
 whether each individual point is a hurricane or not, and this information was used as part of the
 classification process described in Section \ref{sec:classification}. It is split into separate
@@ -546,7 +546,7 @@ basins, and in this study only the North Atlantic basin will be used. The primar
 data for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical}.
 
 % CULLED
-% indeed there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset.
+% indeed there are ``no new storms in the NA or EP basins'' in the IBTrACS database.
 
 Figure \ref{fig:hurr_per_year} shows the hurricane-timesteps per year, where a hurricane-timestep is
 defined as being one individual recorded hurricane per 6-hour timestep in the best tracks database.
@@ -557,7 +557,7 @@ the total hurricane-timesteps.
 Following \textcite{vecchi2008estimates}, four historical eras are shown in this figure, henceforth
 called the pre-Panama Canal (1890 - 1914), Panama Canal (1915 - 1943), aircraft reconnaissance (1944
 - 1965) and satellite (1966 - 2009) eras.  These are of significance to the number of observed
-hurricanes in the best tracks dataset. Before the opening of the Panama Canal, shipping was
+hurricanes in the best tracks database. Before the opening of the Panama Canal, shipping was
 mostly concentrated in the northern and eastern tropical Atlantic, and along the east coast of North
 America. This meant that there were fewer ships in the Gulf of Mexico, an active hurricane area, and
 consequently there is thought to be a gap in the recorded hurricanes in this period from this area.
@@ -600,7 +600,7 @@ dates that fell within this range were considered when detecting hurricanes in t
 The hurricane detection procedure forms the basis of the rest of this study. It is a multi-step
 procedure which logically follows the flowchart shown in Figure \ref{fig:hurricane_detection_proc}.
 The procedure consists of separate steps, starting from the data in the 20CR and IBTrACS
-datasets, and proceeding through the steps until detected hurricanes are found. 
+databases, and proceeding through the steps until detected hurricanes are found. 
 
 \begin{figure}[ht!]
     \centering
@@ -647,7 +647,7 @@ vorticity, $\omega$, is given by:
     \label{eqn:vorticity}
 \end{equation}
 
-The surface of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$
+The radius of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$
 denote the latitude and longitude coordinates in radians. $u_{i, j}$ denotes the longitudinal wind
 speed at grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using the
 approximation: 
@@ -662,7 +662,7 @@ approximation:
 
 The vorticities at the NSPL and \SI{850}{hPa} levels were calculated.
 
-\subsection{Maxima and Minima detection}
+\subsection{Maxima and Minima Detection}
 \label{sec:methods_maxima_minima}
 
 For the vorticity fields, maxima are of primary interest as these represent grid cells where the
@@ -694,11 +694,11 @@ position of the vorticity maxima will be demonstrated in Section \ref{sec:matchi
 \subsection{Data Processing Results}
 
 Figure \ref{fig:katrina_data_proc} shows the progression of the data from its raw form, to a derived
-vorticity, and then downscaled to three times the original resolution vorticity field. Figure
+vorticity, and then downscaled to three times the original resolution vorticity field.  The
+2\textdegree\ resolution of the 20CR data is clearly visible in the middle figure. The more precise
+location of the vorticity maximum can be seen in the right figure.  Figure
 \ref{fig:katrina_max_mins} shows an example vorticity and pressure field taken from around Hurricane
 Katrina, and the corresponding maxima for the vorticity and minima for the pressure fields.
-The 2\textdegree\ resolution of the 20CR data is clearly visible in the middle figure. The more
-precise location of the vorticity maximum can be seen in the right figure.
 
 \begin{figure}[hb!]
     \centering
@@ -757,18 +757,18 @@ vorticity maxima merging and splitting. The algorithm worked as follows:
 \begin{enumerate}
     \item Detect all vorticity maxima for the first timestep. If two maxima are less than the cutoff
         distance apart, combine both maxima, taking the strength and position of the strongest of
-        the two maxima
-    \item Make each of the vorticity maxima in the first timestep the beginning of a derived track
+        the two maxima.
+    \item Make each of the vorticity maxima in the first timestep the beginning of a derived track.
         % CULLED: (whose length could end up being only one)
     \item Detect all vorticity maxima in the second timestep, again combining close weaker maxima
         into stronger. 
     \item Calculate nearest neighbour in the second timestep to first timestep, and set this as the
-        next member of the derived track
-    \item Move onto the third timestep and repeat the process
+        next member of the derived track.
+    \item Move onto the third timestep and repeat the process.
 \end{enumerate}
 
 Whilst this algorithm is less sophisticated that that of \textcite{hodges1994general}, it was found
-to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS dataset, and
+to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS database, and
 almost all of the best tracks that were hurricanes (Section \ref{sec:matching}). 
 
 % CULLED: 
@@ -936,21 +936,21 @@ to use this information to classify each point of each track as either being a h
 These points will be knows as cyclone data points (CDPs) and for a typical year there are around
 \SI{100000}{} of these points, spread across the 56 ensemble members.
 
-% TODO: definition of classification.
-Classification is the process of taking a dataset and splitting it up into various categories based
-on the attributes of each item in the dataset. For the purposes of hurricane classification, this is
-a binary classification, i.e. a CDP is either a hurricane or it is not. More fine-grained approaches
-are possible, such as splitting each CDP into a category from the Saffir-Simpson hurricane scale
-\parencite{simpson1974hurricane}, but in this analysis the only concern was trying to correctly
-categorise whether or not a given CDP was a hurricane. In classification terminology, each CDP
-represents one sample, and the different fields for each CDP are known as features for that sample.
+Classification is the process of deciding which category a new data point belongs to, based on a
+training dataset of data points whose categories are known. For the purposes of hurricane
+classification, this is a binary classification, i.e. a CDP is either a hurricane or it is not. More
+fine-grained approaches are possible, such as splitting each CDP into a category from the
+Saffir-Simpson hurricane scale \parencite{simpson1974hurricane}, but in this analysis the only
+concern was trying to correctly categorise whether or not a given CDP was a hurricane. In
+classification terminology, each CDP represents one sample, and the different fields for each CDP
+are known as features for that sample.
 
 Given that each derived track has also been matched to a best track, it is also possible to use the
-information from the best tracks dataset about whether the point on the best track is a hurricane or
+information from the best tracks database about whether the point on the best track is a hurricane or
 not as an objective standard for whether or not the corresponding point on the derived track
 represents a hurricane. This is represented visually in Figure \ref{fig:cdp_2005_with_hurrs}, which
 shows every CDP for 2005, as well as whether the individual point has been matched to a
-hurricane in the best tracks dataset or not. Missed hurricanes are hurricanes which are present in
+hurricane in the best tracks database or not. Missed hurricanes are hurricanes which are present in
 the best tracks database, but which were not in the CDP for the derived track. 
 There were relatively few of these, around 4\% over the years 1990 to 2009. 
 
@@ -1001,9 +1001,8 @@ possible results of an individual classification. These are:
 
 When classifying a dataset, the collection of these results can be represented visually with a Venn
 diagram, as shown in Figure \ref{fig:tf_np_venn}. They can also be represented in tabular form in an
-Error Matrix. An example of an Error Matrix
-can be seen in Table \ref{tab:tf_np_table}, which shows the successes and failures of a simple
-classifier for a subset of the data.
+Error Matrix. An example of an Error Matrix can be seen in Table \ref{tab:tf_np_table}, which shows
+the successes and failures of a classifier for a subset of the data.
 
 % CULLED: (also called a Contingency Table or Confusion Matrix)
 
@@ -1238,8 +1237,8 @@ as the training dataset: 2.14 million samples.
 
 From the performance metrics shown in Table \ref{tab:classifier_performance_metrics} and Figure
 \ref{fig:ppv_and_fpr_vs_sens}, there is clearly some difference in performance between the different
-classifiers. The LDC classifier performs least well on on sensitivity, and poorly on PPV, therefore
-it is not deemed suitable for classification in this context. The QDC categoriser performs
+classifiers. The LDA classifier performs least well on on sensitivity, and poorly on PPV, therefore
+it is not deemed suitable for classification in this context. The QDA categoriser performs
 particularly well on sensitivity, but is worst for PPV and FPR. This does not preclude its use for
 classification; if it were important to not miss as many hurricanes as possible, and a high number
 of FPs was acceptable, than it may be a suitable classifier. The two
@@ -1273,13 +1272,13 @@ to use.
         \multicolumn{1}{|c|}{Threshold} & 0.639 & 0.702 & \SI{8.38e-3}{} & 0.670 & 0.681 & \SI{8.82e-3}{} \\
 % cal: 0.6177172275238574, 0.6129645204498022, 0.012078950156953441
 % val: 0.6312659737604361, 0.6053164722412835, 0.011579432259338635
-        \multicolumn{1}{|c|}{LDC} & 0.618 & 0.612 & \SI{12.08e-3}{} & 0.631 & 0.605 & \SI{11.58e-3}{} \\
+        \multicolumn{1}{|c|}{LDA} & 0.618 & 0.612 & \SI{12.08e-3}{} & 0.631 & 0.605 & \SI{11.58e-3}{} \\
 % cal: 0.7484618282270216, 0.5963358969549177, 0.015689997268261573
 % val: 0.7647299369568922, 0.5755725973992665, 0.015864258395292107
-        \multicolumn{1}{|c|}{QDC} & 0.748 & 0.596 & \SI{15.69e-3}{} & 0.765 & 0.576 & \SI{15.86e-3}{} \\
+        \multicolumn{1}{|c|}{QDA} & 0.748 & 0.596 & \SI{15.69e-3}{} & 0.765 & 0.576 & \SI{15.86e-3}{} \\
 % cal: 0.6370385484681065, 0.7388724035608308, 0.006972251953776264
 % val: 0.6369398534673709, 0.7170643750479552, 0.007070274695750501
-        \multicolumn{1}{|c|}{SGDC} & 0.637 & 0.739 & \SI{6.97e-3}{} & 0.640 & 0.717 & \SI{7.07e-3}{} \\
+        \multicolumn{1}{|c|}{SGD} & 0.637 & 0.739 & \SI{6.97e-3}{} & 0.640 & 0.717 & \SI{7.07e-3}{} \\
 % cal: 0.6629363385233551, 0.6684761965054444, 0.010181801566909607 
 % val: 0.6819219628556824, 0.6619035805838088, 0.009799161057981525
         % CULLED: \multicolumn{1}{|c|}{QDC/Thresh.} & 0.663 & 0.668 & \SI{10.18e-3}{} & 0.682 & 0.662 & \SI{9.79e-3}{} \\
@@ -1297,7 +1296,7 @@ to use.
 \label{sec:hurr_freq}
 
 Figure \ref{fig:20th_century_hurricane_timesteps} shows a comparison of the number of
-hurricane-timesteps (as defined in Section \ref{sec:ibtracs}) taken from the IBTrACS dataset, and
+hurricane-timesteps (as defined in Section \ref{sec:ibtracs}) taken from the IBTrACS database, and
 calculated from the 20CR dataset. To calculate the estimate for the number of hurricane-timesteps
 (henceforth ``estimated hurricane-timesteps''), the detection procedure was run over each year of
 the period from 1890 to 2009, and for each ensemble member. This was used to work out a value for
@@ -1332,9 +1331,9 @@ reconnaissance and early satellite eras.
     \caption{(top) The hurricane-timesteps per year as taken from the IBTrACS best tracks database
         (red), and the mean across ensemble members of the estimated values taken from the 20CR
         dataset (blue dashed). The blue shaded range shows the difference between the maximum and maximum
-        taken from the ensemble members. The division between four eras: pre-Panama Canal, Panama
-        Canal, aircraft reconnaissance and satellite are shown with dashed black vertical lines.
-        (bottom) The estimated value subtracted from the best tracks value for each year. 
+        taken from the ensemble members. The divisions between four eras are shown with dashed black
+        vertical lines. (bottom) The estimated value subtracted from the best tracks value for each
+        year. 
         % CULLED: A negative value means that the estimation is larger than the best tracks value.
     }
     \label{fig:20th_century_hurricane_timesteps}
@@ -1351,8 +1350,8 @@ reduced by the positive y-intercept). From analysing the two time periods separa
 second correlation plot, a distinction between the two periods can be seen, with the pre-1944
 estimated numbers clearly estimating more hurricanes than were seen in the best tracks database, and
 the reverse being true in the post-1944 period. The pre-1944 period has a gradient of \SI{1.04}{}
-and a y-intercept of \SI{15.31}{}. The post-1944 period has a slop of \SI{0.83}{} and a y-intercept
-of \SI{-8.52}{}.
+and a y-intercept of \SI{15.31}{}. The post-1944 period has a gradient of \SI{0.83}{} and a
+y-intercept of \SI{-8.52}{}.
 
 \begin{figure}[hb!]
     \centering
@@ -1404,7 +1403,7 @@ to Figure \ref{fig:20th_century_hurricane_timesteps}.
 \label{sec:trends_freq}
 
 For the four eras in question, it is interesting to note whether there are any trends in the numbers
-of hurricanes, both in the best tracks dataset, and in the estimated numbers. This is done by
+of hurricanes, both in the best tracks database, and in the estimated numbers. This is done by
 fitting a straight line to the time series, and performing a two-sided test on the $p$ value of the
 fitted line, as in \textcite{vecchi2008estimates, emanuel2010tropical}. The $p$ values for the
 different eras are shown in Table \ref{tab:era_p_value}.
@@ -1429,16 +1428,15 @@ different eras are shown in Table \ref{tab:era_p_value}.
 \end{table}
 
 \newpage
-The statistical significance level is chosen to be $p = 0.05$.
-This test is used to see whether the null hypothesis that the time series in question is not
-changing (i.e. its gradient is zero) can be rejected. This is the same as was used in
-\textcite{vecchi2008estimates}. Based on this test for significance, three of the time series over
-the eras in Table \ref{tab:era_p_value} show statistically significant trends. The pre-Panama
-Canal era for hurricane frequencies for best track and estimated track numbers both
-show significant downwards trends. However, the most significant change is shown by the estimated
-hurricane numbers in the satellite era from only the 20CR dataset, which has a $p$
-value of \SI{0.001}{}, and a positive gradient. Taken at face value this implies that there is
-a statistically significant positive trend over satellite era in the number of estimated
+The statistical significance level is chosen to be $p = 0.05$.  This test is used to see whether the
+null hypothesis that the time series in question is not changing (i.e. its gradient is zero) can be
+rejected. This is the same as was used in \textcite{vecchi2008estimates}. Based on this test for
+significance, three of the time series over the eras in Table \ref{tab:era_p_value} show
+statistically significant trends. The pre-Panama Canal era shows significant downward trends for
+both the best tracks and estimated hurricane numbers. However, the most significant change is shown
+by the estimated hurricane numbers in the satellite era from only the 20CR dataset, which has a $p$
+value of \SI{0.001}{}, and a positive gradient. Taken at face value this implies that there is a
+statistically significant positive trend over satellite era in the number of estimated
 hurricane-timesteps, or a rise in the frequency of hurricanes since 1966. However, caution must be
 applied as there is also evidence that the number of estimated hurricane-timesteps was below what
 would be expected (see Figure \ref{fig:20th_century_hurricane_timesteps}), and therefore this rise
@@ -1555,8 +1553,8 @@ the aircraft reconnaissance era. Both of these will be considered in turn.
 \subsection{Hurricane Frequencies in the Pre-Panama Canal Era}
 The estimated hurricane-timesteps for the pre-Panama Canal era, 1890 - 1914, is higher than the best
 tracks hurricane-timesteps. This could be an indication that there were missed hurricanes in the
-best tracks dataset over this era. This is interesting because it fits in with results from previous
-studies that have taken a different approach to evaluating the reliability of best tracks datasets
+best tracks database over this era. This is interesting because it fits in with results from previous
+studies that have taken a different approach to evaluating the reliability of best tracks databases
 in the pre-satellite era. Through analysis of correlation between Sea Surface Temperatures (SSTs)
 and hurricane counts over the 20\ts{th} century, \textcite{vecchi2008estimates} have argued that
 there are indeed missing hurricanes in the pre-satellite era (including the pre-Panama Canal era).
@@ -1611,8 +1609,8 @@ difficult. However, \textcite{vecchi2008estimates} look at the period from 1878 
 two important details about the pre-Panama Canal era. The first is that there were ``high values''
 in the late 1800s, which they caution could be due to greater uncertainties in the best tracks
 record. The second is that there was a minimum from 1910 - 1930. Both these taken together would
-mean that looking at the 1890 to 1914 period is likely to sea a downward trend, as there is a period
-of high values at the start, and a period of low values at the end. That these downwards trends were
+mean that looking at the 1890 to 1914 period is likely to see a downward trend, as there is a period
+of high values at the start, and a period of low values at the end. That these downward trends were
 seen in both the best track and estimated hurricane-timesteps indicates that the signal is real,
 although this could be a consequence of the two datasets not being fully independent, as detailed in
 Section \ref{sec:ispd}.
@@ -1646,7 +1644,7 @@ the satellite era could be the reason behind this trend.
 % classifiers have different strengths and weaknesses, and that these can be picked in accordance
 % with what is required.
 
-In this study a method for the detection of hurricanes in the North Atlantic basin in the 20\ts{th}
+In this study, a method for the detection of hurricanes in the North Atlantic basin in the 20\ts{th}
 Century Reanalysis (20CR) project was described. The procedure worked by deriving a set of tracks
 from the locations of vorticity maxima in the 20CR dataset. A modified nearest neighbour tracking
 algorithm was used. Optimum configuration parameters for this algorithm were found by matching the
