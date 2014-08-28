@@ -105,7 +105,7 @@ upwards trend in the number of hurricanes from 1966 to 2009 is also detected fro
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
-\textbf{Word count:} 12023 % 28/08/14 16:08
+\textbf{Word count:} 12000 % 28/08/14 16:28
 \end{center}
 
 \newpage
@@ -617,15 +617,15 @@ computational efficiency. The code for this project is all available at the foll
 https://github.com/markmuetz/stormtracks/. The code follows the structure set out in the flowchart
 closely, with Python modules called c20data, tracking and matching. The Python project also contains
 infrastructure code for allowing concurrent processing on the UCL computers, where the bulk of the
-processing was done, following a simple master/slave pattern, with one computer designated as the
+processing was done. This followed a simple master/slave pattern, with one computer designated as the
 master, farming out jobs to multiple slave computers that would carry out the processing, whether it
 be e.g. matching or extra field collection. 
 
 There were constraints on the available disk space on the UCL computers, so the processing was
 batched into decades, with the 20CR data for one decade downloaded, the processing run, and the
 results gathered, before deleting that decade's data and moving onto the next one.  Bearing in mind
-one decade's worth of 20CR data takes up about \SI{112}{GB} of disk space, downloading all of these
-data and processing it took about 12 hours, even with the processing spread across multiple
+one decade's worth of 20CR data takes up about \SI{112}{GB} of disk space, downloading and
+processing these data took about 12 hours, even with the processing spread across multiple
 computers. Therefore the complete run over the period from 1890 to 2009 took around six days. Given
 that the processing was run on 12 computers, and accounted for roughly half of the 12 hours spent
 for one decade, this represents around 36 days of processing time.
@@ -668,7 +668,7 @@ The vorticities at the NSPL and \SI{850}{hPa} levels were calculated.
 For the vorticity fields, maxima are of primary interest as these represent grid cells where the
 wind is rotating most strongly. Conversely, for the pressure at sea level field, minima are of
 primary interest. A maximum or minimum was defined as a cell whose value was greater or less than
-the value of all eight of its surrounding cells. Vorticity maxima play a vital role in deriving
+the values of all eight of its surrounding cells. Vorticity maxima play a vital role in deriving
 tracks from the 20CR data, and pressure minima are useful both for comparison with the best tracks
 data and classification of the tracks.
 
@@ -676,7 +676,7 @@ data and classification of the tracks.
 
 The vorticity field was downscaled to a finer resolution. This was done to minimise the so called
 ``staircase effect'' \parencite{hodges1994general}, whereby tracks are seen to follow the grid cells
-at the resolution of the 20CR data (an example of this ``staircase effect'' can be seen in Figure
+at the resolution of the 20CR data (an example of this can be seen in Figure
 \ref{fig:katrina_individual_match_em7}).  This downscaling was accomplished using a cubic spline
 interpolation which takes into account the spherical nature of the globe, and the data were
 downscaled to two and three times their original resolutions in both longitude and latitude, leading
@@ -729,9 +729,9 @@ precise location of the vorticity maximum can be seen in the right figure.
 From initial experimentation, it was found that tracking on minima of the pressure field did not
 produce suitable tracks for identifying storm systems. This was due to the pressure field being
 subject to synoptic scale disturbances that mean that minima may not be present due to the
-surrounding synoptic gradient of this field. Whilst it is possible to apply high pass filtering to
-remove these disturbances, it was decided to follow \textcite{reed1988evaluation,
-thorncroft2001african} and produce derived tracks from the 20CR data based on vorticity maxima.
+surrounding synoptic gradient of this field. Consequently, it was decided to follow
+\textcite{reed1988evaluation, thorncroft2001african} and produce derived tracks from the 20CR data
+based on vorticity maxima.
 
 % TODOIMPROVE: This section is confusing on re-reading it. I think I need to make it clearer that I'm going to
 % compare different configurations.
@@ -767,10 +767,9 @@ vorticity maxima merging and splitting. The algorithm worked as follows:
     \item Move onto the third timestep and repeat the process
 \end{enumerate}
 
-Whilst this algorithm is considerably less sophisticated that that of \textcite{hodges1994general},
-it was found to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS
-dataset, and almost all of the best tracks that were hurricanes (Section
-\ref{sec:matching}). 
+Whilst this algorithm is less sophisticated that that of \textcite{hodges1994general}, it was found
+to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS dataset, and
+almost all of the best tracks that were hurricanes (Section \ref{sec:matching}). 
 
 % CULLED: 
 % A discussion of other tracking algorithms can be found in Section
@@ -1474,10 +1473,10 @@ that study was almost twice as fine as the resolution used in this.
 It is possibly to calculate values of PPV from the data in figures in \textcite{walsh1997objective},
 although this is not done explicitly in that study. The highest value obtained is \SI{0.57}{}, which
 is again lower than the values of \SI{0.74}{} (training) and \SI{0.72}{} (validation) seen in this
-study for the SGD classifier. It should be pointed out that only two months, September 1989 and
-October 1992, were analysed for one ensemble member there, compared with two decades with 56
-ensemble members here. Therefore, due to the larger sample size, the reliability of the values in
-this study should be subject to less uncertainty.
+study for the SGD classifier. It should be pointed out that only two months with one ensemble member
+were analysed there, compared with two decades with 56 ensemble members here. Therefore, due to the
+larger sample size, the reliability of the values in this study should be subject to less
+uncertainty.
 
 These two comparisons demonstrate the power of being able to perform classification after having
 collected all the data, as well as the suitability of supervised machine learning techniques for
