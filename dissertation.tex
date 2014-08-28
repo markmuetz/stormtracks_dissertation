@@ -102,7 +102,7 @@ upwards trend in the number of hurricanes from 1966 to 2009 is also detected fro
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
-\textbf{Word count:} 12250 % 11094 + 1156 (captions) 26/08/14 14:19
+\textbf{Word count:} 11925 % 28/08/14 10:48
 \end{center}
 
 \newpage
@@ -167,19 +167,18 @@ primary data source, such as the IBTrACS database used in this study
 \parencite{knappInternational2010}, or the tropical cyclone database from the National Hurricane
 Center \parencite[HURDAT;][]{jarvinen1984tropical}. These databases collect information from a
 variety of different sources: land-based stations, ships, aircraft reconnaissance and satellite
-images. Due to some of these sources not being available over the course of the 20ts{th} century,
+images. Due to some of these sources not being available over the course of the 20\ts{th} century,
 these databases suffer from some problems when going into the middle and early 20\ts{th} century,
 such as the lack of satellite data before the 1970s, and the lack of reliable aircraft
-reconnaissance data before the mid 1940s \parencite[see Section \ref{sec:ibtracs} for more
-details]{chang2007number}. 
+reconnaissance data before the mid 1940s \parencite{chang2007number}. 
 
 Accordingly, in this study, the approach taken is a different one. Instead of using the numbers
 compiled by various agencies as the primary source of information on hurricanes, the primary data
-will be taken from reanalysis data, specifically the 20\ts{th} Century Reanalysis (20CR) Project
-\parencite{compoTwentieth2011}. Hurricanes will be detected in these data, and the detection
+will be taken from global reanalysis data, specifically the 20\ts{th} Century Reanalysis (20CR)
+Project \parencite{compoTwentieth2011}. Hurricanes will be detected in these data, and the detection
 procedure will be trained and validated on recent data (from 1990 to 2009), where reliable best
-tracks exist. Once the detection procedure has been trained, it can be used to run over the whole of
-the 20\ts{th} century, providing an objective measure of the number of hurricanes in each year. This
+tracks exist. Once the detection procedure has been trained, it can be used to run over the entire
+20\ts{th} century, providing an objective measure of the number of hurricanes in each year. This
 will allow for an estimation of the hurricane frequency that is not solely based on the best tracks
 records, and therefore less susceptible to the changes in these best track records over time. This
 estimation will be almost independent of the best tracks records, although given the 20CR project
@@ -231,17 +230,15 @@ assimilates information from IBTrACS it cannot be said to be totally independent
 Numerous studies have looked into the detection of hurricanes, both in the output of GCMs and in
 global reanalysis datasets. Several reasons exist for wanting to detect hurricanes in the output of
 GCMs. Often the goal is to look into the effects of climate change with a warming climate
-\parencite{bengtsson1996will, sugi2002influence, yoshimura2006influence}. When running this sort of
+\parencite{bengtsson1996will, sugi2002influence}. When running this sort of
 analysis, there is no objective measure of whether or not an individual detection of a hurricane is
 correct or not, although often tests are done to make sure that the resulting climatologies are
-realistic. This is in contrast to running the detection using the output of a GCM that is part of a
-historical reanalysis dataset, where it is possible to match the detected hurricane to a given
+realistic. This is in contrast to running the detection using a
+reanalysis dataset, where it is possible to match the detected hurricane to a given
 tracks in a given best track database, as was done in \textcite{walsh1997objective}. Detection of
 hurricanes can also be used to compare the climatologies in different reanalysis projects, as was
 done in \textcite{trigo2006climatology}. The detection of hurricanes in climatological datasets
-taken either from reanalysis datasets and output from GCMs is technically similar. The main
-difference is when using reanalysis projects it is possible to look at historical best tracks
-records to verify whether a hurricane was indeed present.
+taken either from reanalysis datasets and output from GCMs is otherwise technically similar.
 
 There are two closely related approaches to detecting hurricanes in climatological datasets. The
 first is to examine the dataset at every timestep, looking for a cell or cells which meet certain
@@ -257,9 +254,9 @@ see whether they represent hurricanes or not. Normally, a time duration of the t
 than a certain duration as well, again typically 1.5 days. These tracks can yield extra information
 about the hurricanes, such as where they were formed, which is important in deriving details about
 cyclogenesis \parencite{marchok2002ncep}. Useful information about the fate of the cyclone can also
-be found, such as whether it undergoes an extratropical transition \parencite{hart2001climatology,
-studholme2014objective}. This is the approach taken by \textcite{hodges1994general,
-hodges1999adaptive, camargo2002improving}, and is also the approach that will be used in this study.
+be found, such as whether it undergoes an extratropical transition
+\parencite{studholme2014objective}. This is the approach taken by \textcite{thorncroft2001african,
+camargo2002improving}, and is also the approach that will be used in this study.
 
 Both these approaches rely on thresholds being set for the criteria in advance of running the
 detection procedure, although there may be some sensitivity analysis done on these thresholds as in
@@ -284,9 +281,11 @@ changing these thresholds is a similar approach to \textcite{walsh1997objective}
 numbers of false and missing tropical cyclones over September 1989 and October 1992, and
 investigated the changes in these number due to changing e.g. the vorticity threshold. The results
 of this study will be compared against the results of \textcite{walsh1997objective} in Section
-\ref{sec:classification_success}. It bears repeating that this approach is only possible because
-this study is running the hurricane detection over a historical reanalysis dataset, otherwise this
-would not be possible, as there is no objective standard by which to judge success.
+\ref{sec:classification_success}. 
+
+% It bears repeating that this approach is only possible because
+% this study is running the hurricane detection over a historical reanalysis dataset, otherwise this
+% would not be possible, as there is no objective standard by which to judge success.
 
 \section{Goals and Objectives}
 % Objectives/Project Structure.
@@ -301,19 +300,19 @@ frequencies over the course of the 20\ts{th} century. These goals will be met by
 following objectives:
 
 \begin{itemize}
-    \item develop a tracking algorithm that is capable of producing tracks derived from the 20CR
-    \item match the derived tracks to the tracks in the IBTrACS best tracks database
-    \item compare different tracking algorithm configuration, and choose the optimum tracking
+    \item Develop a tracking algorithm that is capable of producing tracks derived from the 20CR
+    \item Match the derived tracks to the tracks in the IBTrACS best tracks database
+    \item Compare different tracking algorithm configuration, and choose the optimum tracking
         algorithm based on the overall distance between the tracks it produces and the best tracks.
-    \item collect extra information for each of the points in the optimum tracks, such as
+    \item Collect extra information for each of the points in the optimum tracks, such as
         temperature at \SI{850}{hPa}
-    \item train different classification algorithms to correctly predict whether each point is a
+    \item Train different classification algorithms to correctly predict whether each point is a
         hurricane or not, by using the extra information, along with the information about whether a
-        particular point corresponds with a hurricane or not
-    \item choose the classification algorithm which performs best on success and error metrics, and
+        particular point is matched to a hurricane
+    \item Choose the classification algorithm which performs best on success and error metrics, and
         this process will form the hurricane detection procedure
-    \item run this procedure over the course of the 20\ts{th} century
-    \item calculate aggregate statistics about the number of hurricanes over this duration
+    \item Run this procedure over the course of the 20\ts{th} century
+    \item Calculate aggregate statistics about the number of hurricanes over this duration
     \item perform a comparison between the estimated number of hurricanes from the 20CR dataset and
         the IBTrACS database
 \end{itemize}
@@ -338,7 +337,7 @@ with results pertinent to the following sections in that chapter. Chapter
 \ref{chap:results_analysis} will then look into the results of running the procedure over the course
 of the 20\ts{th} century.  Chapter \ref{chap:discussion} will then discuss these results in the
 wider context of hurricane detection and trends over the 20\ts{th} century, and Chapter
-\ref{chap:conclusion} will provide a summary and conclusion of the findings. This deviates slightly
+\ref{chap:conclusion} will provide a conclusion of the findings. This deviates slightly
 from the traditional dissertation structure due to the desire to present the hurricane detection
 procedure in a logical manner where the subsequent sections depend on the results of the previous
 sections.
@@ -356,38 +355,45 @@ sections.
 % * 56 ensemble members
 The 20\ts{th} Century Reanalysis Project (20CR) is a project whose aim is to produce a consistent
 best estimate of the state of the atmosphere by including information from a variety of different
-sources using data assimilation \parencite{compoTwentieth2011}. Sea Surface Temperature (SST) and
+sources \parencite{compoTwentieth2011}. Sea Surface Temperature (SST) and
 sea ice data from the Hadley Centre Sea Ice and SST dataset \parencite{rayner2003global} are used to drive
-a GCM - the NCEP Global Forecast System \parencite{kanamitsu1989description, kanamitsu1991recent}.
+a GCM - the NCEP Global Forecast System \parencite{kanamitsu1989description}.
 This is combined with pressure observations from the International Surface Pressure Databank
 \parencite{yin2008international}, which are assimilated with the forecasts provided by the GCM by
 means of an Ensemble Kalman Filter (EKF). It provides estimates at a 2\textdegree\ spatial
-resolution, and on a 6-hour timestep, from 1871 to 2012 (more years will be added using the same
-process in due time). A level of consistency is ensured by using the same process from the beginning
-of the reanalysis to the end, and by using only SST, sea ice and pressure data. This avoids the
-problems seen in other reanalysis projects, such as ERA-40 \parencite{uppala2005era}, which
-incorporate as much data as possible. This biases more recent years, as e.g. satellite data from the
-1970s onwards provides far more observations than exist before this period. Due to the use of an
-EKF, it is also possible for the 20CR to provide estimates for the uncertainty of each of its
-estimates at each timestep, although this information is not used as part of this study.
+resolution, and on a 6-hour timestep, from 1871 to 2012 (more years will be added in due time). A
+level of consistency is ensured by using the same process from the beginning of the reanalysis to
+the end, and by using only SST, sea ice and pressure data. This avoids the problems seen in other
+reanalysis projects, such as ERA-40 \parencite{uppala2005era}, which incorporate as much data as
+possible. This biases more recent years, as e.g. satellite data from the 1970s onwards provides far
+more observations than exist before this period. 
+
+% CULLED
+% Due to the use of an EKF, it is also possible for
+% the 20CR to provide estimates for the uncertainty of each of its estimates at each timestep,
+% although this information is not used as part of this study.
 
 % necessity of analysing single EM (ref compo2011)
 The GCM and EKF are run with 56 ensemble members, meaning that for every timestep there are 56
-estimates for the state of the atmosphere. An individual ensemble member consists of a GCM instance,
-whose output will be updated in the presence of pressure observations as detailed in Section
-\ref{sec:technical_details}. According to \textcite{compoTwentieth2011}, individual tracking of
-storms is best done through tracking them in individual ensemble members, instead of looking at the
-ensemble mean. This is because the ensemble mean, in the presence of only a few observations,
-exhibits less synoptic variability. This is to say that in the absence of observations, each GCM
-instance acts almost independently of the others. Thus when the mean of the ensemble members is
-taken, an atmospheric feature that is present in all of GCM instances, but in slightly different
-locations, may not be as evident. Therefore it is important that the individual ensemble members are
-used for detection of atmospheric features such as hurricanes, and that is what is done in this
-study. Consequently, the analysis carried out in this study had to be repeated 56 times, and this
-provides the classification algorithms used in Section \ref{sec:classification} far more samples
-than if the ensemble mean or only one ensemble member had been used. It also allows for the use of
-aggregate statistics from all of the ensemble members to be generated, such as the spread shown in
-Figure \ref{fig:20th_century_hurricane_timesteps}.
+estimates for the state of the atmosphere. An individual ensemble member consists of a GCM instance.
+According to \textcite{compoTwentieth2011}, individual tracking of storms is best done through
+tracking them in individual ensemble members, instead of looking at the ensemble mean. This is
+because the ensemble mean, in the presence of only a few observations, exhibits less synoptic
+variability. This is to say that in the absence of observations, each GCM instance acts almost
+independently of the others. Thus when the mean of the ensemble members is taken, an atmospheric
+feature that is present in all of GCM instances, but in slightly different locations, may not be as
+evident. Therefore it is important that the individual ensemble members are used for detection of
+atmospheric features such as hurricanes, and that is what is done in this study. Consequently, the
+analysis carried out in this study had to be repeated 56 times, and this provides the classification
+algorithms used in Section \ref{sec:classification} far more samples than if the ensemble mean or
+only one ensemble member had been used. 
+
+% CULLED
+% , whose output will be updated in the presence of pressure observations as detailed in Section
+% \ref{sec:technical_details}
+% It also allows for the use of aggregate statistics from all
+% of the ensemble members to be generated, such as the spread shown in Figure
+% \ref{fig:20th_century_hurricane_timesteps}.
 
 \subsection{Technical Details}
 \label{sec:technical_details}
@@ -397,32 +403,38 @@ Figure \ref{fig:20th_century_hurricane_timesteps}.
 % Technical details on GCM
 \subsubsection{GCM}
 The GCM used for the reanalysis was the NCEP Global Forecast System
-\parencite{kanamitsu1989description, kanamitsu1991recent}, with
+\parencite{kanamitsu1989description}, with
 parameterisation as specified by \textcite{saha2006ncep}. The version used in the reanalysis was
 slightly modified to permit time varying \ce{CO2} and volcanic aerosols. These, along with incoming
 radiation, were used as specified in \textcite{saha2010ncep}. The model was run at a horizontal
 resolution of T62 and a vertical resolution of 28 vertical hybrid sigma-pressure levels as described
-by \textcite{juang2005discrete}. This horizontal resolution is between the T42 and T106 resolutions
-analysed in \textcite{bengtsson1995hurricane}, and therefore should be capable of producing
-hurricane-type vortices, as the T42 model in that study was found to be capable of producing
-vortices, although it was noted that these vortices were of lower intensity and that their overall
-structure was less realistic than in the T106 GCM.
+by \textcite{juang2005discrete}. 
+
+% CULLED
+% This horizontal resolution is between the T42 and T106 resolutions
+% analysed in \textcite{bengtsson1995hurricane}, and therefore should be capable of producing
+% hurricane-type vortices, as the T42 model in that study was found to be capable of producing
+% vortices, although it was noted that these vortices were of lower intensity and that their overall
+% structure was less realistic than in the T106 GCM.
 
 \subsubsection{EKF}
 % Technical details EKF
 The EKF is similar to the Monte Carlo approximation proposed by \textcite{evensen1994sequential,
 evensen2003ensemble}. It is `deterministic', and is based on the `Ensemble Square Root Filter' of
-\textcite{whitaker2002ensemble}. It works by taking the atmospheric state of the atmosphere from the
-56 instances of the GCM, the prediction by the model in Kalman filter terminology, and updating this
-prediction based on the pressure observations at that timestep. Each individual ensemble member is
-updated in such a way so as to keep the state of its atmosphere continuous, whilst still
-incorporating the pressure observations (with one slight caveat; see the last paragraph in the next
-section for details). To mitigate the effects of ``filter divergence'', whereby the state of the EKF
-becomes too dependent on the output of the model, and does not give enough weight to the
-observations, two methods are used. The first is to use covariance inflation, as described in
+\textcite{whitaker2002ensemble}. It works by taking the state of the atmosphere from the
+56 instances of the GCM - which is the prediction by the model in Kalman filter terminology - and
+updating this prediction based on the pressure observations at that timestep. Each individual
+ensemble member is updated in such a way so as to keep the state of its atmosphere continuous,
+whilst still incorporating the pressure observations (with one slight caveat; see the last paragraph
+in the next section for details). To mitigate the effects of ``filter divergence'', whereby the
+state of the EKF becomes too dependent on the output of the model, and does not give enough weight
+to the observations, two methods are used. The first is to use covariance inflation, as described in
 \textcite{whitaker2004reanalysis}. The second is to use covariance localisation, as described in
-\textcite{houtekamer2001sequential}. These are mentioned for completeness; a more detailed
-description is given in \textcite{compoTwentieth2011}.
+\textcite{houtekamer2001sequential}. 
+
+% CULLED
+% These are mentioned for completeness; a more detailed
+% description is given in \textcite{compoTwentieth2011}.
 
 % Assimilates the observations and the output from the GCM using an EKF to provide an estimate as to
 % the state of the atmosphere at each timestep
@@ -436,6 +448,7 @@ The process by which estimates are produced involves three main steps:
     \item Use GCM to predict the state of the atmosphere at the next timestep (go to step two)
 \end{enumerate}
 
+% CULLABLE
 56 individual instances of the GCM are initialised with different climatological states taken from
 14 months before the start of the production period, i.e. the period over which estimates are
 produced. The instances are then run for 14 months, to ``reduce the effect of the initial condition
@@ -451,26 +464,32 @@ pressure observations at the new timestep.
 % Consistency of each EM not an issue (ref compo2011)
 This continual predict-and-assimilate process repeats for 5 years. After 5 years, another ensemble
 of 56 GCM instances (which have already been spun up) will take over the production for another 5
-years, and so on. It should be noted that this 5 year period leads to a discontinuity in the data:
-every 5 years on the 1\ts{st} of January starting from 1876, the individual ensemble members will
-not be continuous. This is not important for this study, because there are very few hurricanes in
-the Atlantic over the December-January divide. However, it would be more important if one were
-looking at tropical cyclones over the Pacific, when this is an active period.
+years, and so on. 
+
+% CULLED
+% It should be noted that this 5 year period leads to a discontinuity in the data:
+% every 5 years on the 1\ts{st} of January starting from 1876, the individual ensemble members will
+% not be continuous. This is not important for this study, because there are very few hurricanes in
+% the Atlantic over the December-January divide. However, it would be more important if one were
+% looking at tropical cyclones over the Pacific, when this is an active period.
 
 \subsection{International Surface Pressure Databank}
 \label{sec:ispd}
-The pressure data that is used by 20CR comes from the International Surface Pressure Databank
+The pressure data that is used by the 20CR comes from the International Surface Pressure Databank
 version 2 (ISPDv2) \parencite{yin2008international}. This takes its data from over 40 international
 agencies, and combines them into one usable databank. One particularly notable data source is the
 IBTrACS dataset used in this study (see Section \ref{sec:ibtracs}). This is relevant because this
 study treats these two data sources as being independent, although this is not the case. However,
 due to the data assimilation process, and all the other factors that go into making the reanalysis
-data such as the GCM and every other source of pressure data, it is thought that the effect of this
-data being assimilated should not overly affect the conclusions of this study. Indeed, in Section
-\ref{sec:extra_field_collection}, where a comparison is made between a derived track and a best
-track, the surprising aspect is the weak correlation of the resulting pressures, which suggests that
-the IBTrACS best track pressure data is not solely responsible for the pressure along the track's
-course.
+data, such as the GCM and every other source of pressure data, it is thought that the effect of this
+data being assimilated should not overly affect the conclusions of this study. 
+
+% CULLED
+% Indeed, in Section
+% \ref{sec:extra_field_collection}, where a comparison is made between a derived track and a best
+% track, the surprising aspect is the weak correlation of the resulting pressures, which suggests that
+% the IBTrACS best track pressure data is not solely responsible for the pressure along the track's
+% course.
 
 % Results summary and usage for hurricane detection:
 % * compo2011
@@ -520,14 +539,16 @@ UTC daily). It includes data on position, wind speed and pressure. It also inclu
 whether each individual point is a hurricane or not, and this information was used as part of the
 classification process described in Section \ref{sec:classification}. It is split into separate
 basins, and in this study only the North Atlantic (NA) basin will be used. The primary source of
-data for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical},
-indeed there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset.
+data for this basin is the Atlantic Hurricane Database \parencite[HURDAT;][]{jarvinen1984tropical}.
 
-Figure \ref{fig:hurr_per_year} shows the hurricane timesteps per year, where a hurricane timestep is
+% CULLED
+% indeed there are ``no new storms in the NA or EP basins'' in the IBTrACS dataset.
+
+Figure \ref{fig:hurr_per_year} shows the hurricane-timesteps per year, where a hurricane-timestep is
 defined as being one individual recorded hurricane per 6-hour timestep in the best tracks database.
-This means that one hurricane track over the course of the day counts as four hurricane timesteps,
+This means that one hurricane track over the course of the day counts as four hurricane-timesteps,
 and if there are multiple hurricane tracks active in one timestep then each one will count towards
-the total hurricane timesteps. 
+the total hurricane-timesteps. 
 
 Following \textcite{vecchi2008estimates}, four historical eras are shown in this figure, henceforth
 called the pre-Panama Canal (1890 - 1914), Panama Canal (1915 - 1943), aircraft reconnaissance (1944
@@ -543,7 +564,7 @@ the entire basin could be covered, and this began in 1966 \parencite{landsea2007
 \begin{figure}[hb!]
     \centering
     \includegraphics[width=\textwidth]{figures/hurr_per_year}
-    \caption{Hurricane timesteps from 1890 to 2009.}
+    \caption{Hurricane-timesteps from 1890 to 2009.}
     \label{fig:hurr_per_year}
 \end{figure}
 
@@ -558,7 +579,8 @@ dates that fell within this range were considered when detecting hurricanes in t
     \includegraphics[width=\textwidth]{figures/yearly_hurr_dist}
     \caption{Hurricane distribution over the course of the year. The 1\ts{st} of June and the
     1\ts{st} of December are shown, these indicate the start and end of the analysis period in this
-study. It can be seen that the vast majority of hurricanes fall within this period.}
+study. }
+% CULLED: It can be seen that the vast majority of hurricanes fall within this period.
     \label{fig:yearly_hurr_dist}
 \end{figure}
 
@@ -573,8 +595,8 @@ study. It can be seen that the vast majority of hurricanes fall within this peri
 
 The hurricane detection procedure forms the basis of the rest of this study. It is a multi-step
 procedure which logically follows the flowchart shown in Figure \ref{fig:hurricane_detection_proc}.
-The procedure consists of separate logical steps, starting from the data in the 20CR and IBTrACS
-datasets, and proceeding through a series of steps until detected hurricanes are found. 
+The procedure consists of separate steps, starting from the data in the 20CR and IBTrACS
+datasets, and proceeding through the steps until detected hurricanes are found. 
 
 \begin{figure}[ht!]
     \centering
@@ -589,34 +611,33 @@ The computer code developed to perform these processes was all written in Python
 helper methods for calculating vorticity as in Section \ref{sec:vort}, which were written in C for
 computational efficiency. The code for this project is all available at the following location:
 https://github.com/markmuetz/stormtracks/. The code follows the structure set out in the flowchart
-closely, with Python modules called c20data, tracking and matching, although the flowchart
-represents a simplification of the code. The Python project also contains infrastructure code for
-allowing concurrent processing on the UCL computers, where the bulk of the processing was done,
-following a simple master/slave pattern, with one computer designated as the master, farming out
-jobs to multiple slave computers that would carry out the processing, whether it be e.g. matching or
-extra field collection. 
+closely, with Python modules called c20data, tracking and matching. The Python project also contains
+infrastructure code for allowing concurrent processing on the UCL computers, where the bulk of the
+processing was done, following a simple master/slave pattern, with one computer designated as the
+master, farming out jobs to multiple slave computers that would carry out the processing, whether it
+be e.g. matching or extra field collection. 
 
-There were constraints on the available disk space on the UCL computers, so the
-processing was batched into decades, with the 20CR data for one decade downloaded, the processing
-run, and the results gathered, before deleting that decade's data and moving onto the next one.
-Bearing in mind one decade's worth of 20CR data takes up about \SI{112}{GB} of disk space,
-downloading all of these data and processing it took about 12 hours, even with the processing spread
-across multiple computers. Therefore the complete run over the period from 1890 to 2009 took around
-six days, notwithstanding the various failures and problems hit along the way. Given that the
-processing was run on 12 computers, and accounted for roughly half of the 12 hours spent for one
-decade, this represents around 36 days of processing time.
+There were constraints on the available disk space on the UCL computers, so the processing was
+batched into decades, with the 20CR data for one decade downloaded, the processing run, and the
+results gathered, before deleting that decade's data and moving onto the next one.  Bearing in mind
+one decade's worth of 20CR data takes up about \SI{112}{GB} of disk space, downloading all of these
+data and processing it took about 12 hours, even with the processing spread across multiple
+computers. Therefore the complete run over the period from 1890 to 2009 took around six days. Given
+that the processing was run on 12 computers, and accounted for roughly half of the 12 hours spent
+for one decade, this represents around 36 days of processing time.
 
 \section{Data Processing}
 
 \subsection{Wind Fields and Vorticity}
 \label{sec:vort}
 
+% CULLABLE 250
 In the 20CR data, the longitudinal and latitudinal wind fields, $u$ and $v$ respectively, were used
 to calculate the vorticity and wind speeds. These are available at three different pressure levels:
 Near Surface Pressure Level (NSPL), \SI{850}{hPa} and \SI{250}{hPa}. The \SI{250}{hPa} fields were
 only used to determine whether or not they were suitable for tracking of hurricanes, and it was
-found that they did not produce suitable tracks, and were not further used (see Section
-\ref{sec:matching}). The formula for vorticity, $\omega$, is given by:
+found that they did not produce suitable tracks, and were not further used. The formula for
+vorticity, $\omega$, is given by:
 
 \begin{equation}
     \omega = \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}
@@ -625,8 +646,8 @@ found that they did not produce suitable tracks, and were not further used (see 
 
 The surface of the earth, $R_e$, is taken as its mean radius of \SI{6371}{km}, and $\phi$, $\lambda$
 denote the latitude and longitude coordinates in radians. $u_{i, j}$ denotes the longitudinal wind
-speed at grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using a
-2\ts{nd} order approximation: 
+speed at grid cell $i, j$. Then $\omega$ can approximated on the surface of the Earth using the
+approximation: 
 
 % Calculation in code is a little different because it uses degrees instead of radians:
 % More like vorticity = du / (2 * dlon * cos(lat * pi / 180) * Earth_circ / 360) - dv / ((2 * dlat) * Earth_circ / 360)
@@ -650,7 +671,7 @@ data and classification of the tracks.
 
 \subsection{Downscaling of Data}
 
-The vorticity field was downscaled to a finer resolution. This was done to minimisethe so called
+The vorticity field was downscaled to a finer resolution. This was done to minimise the so called
 ``staircase effect'' \parencite{hodges1994general}, whereby tracks are seen to follow the grid cells
 at the resolution of the 20CR data (an example of this ``staircase effect'' can be seen in Figure
 \ref{fig:katrina_individual_match_em7}).  This downscaling was accomplished using a cubic spline
@@ -717,8 +738,11 @@ levels, and for the one, two and three times the actual 20CR resolution, yieldin
 possible configurations for the tracking. These various configurations were compared, and the
 results can be seen in Section \ref{sec:matching}. Maxima that were below a cutoff value
 of \SI{2.5e-5}{s^{-1}} were not used as part of the tracking algorithm, as these represent weak maxima
-that are unlikely to be part of even tropical storms. This is similar to the ``relaxed threshold
-criteria'' used in \textcite{camargo2002improving}.
+that are unlikely to be part of even tropical storms. 
+
+% CULLED
+% This is similar to the ``relaxed threshold
+% criteria'' used in \textcite{camargo2002improving}.
 
 The tracking algorithm used was a simple nearest neighbour tracking algorithm, with a modification
 that counted two or more vorticity maxima that were sufficiently close as being part of the same storm
@@ -732,7 +756,7 @@ vorticity maxima merging and splitting. The algorithm worked as follows:
         distance apart, combine both maxima, taking the strength and position of the strongest of
         the two maxima
     \item Make each of the vorticity maxima in the first timestep the beginning of a derived track
-        (whose length could end up being only one)
+        % CULLED: (whose length could end up being only one)
     \item Detect all vorticity maxima in the second timestep, again combining close weaker maxima
         into stronger. 
     \item Calculate nearest neighbour in the second timestep to first timestep, and set this as the
@@ -743,8 +767,11 @@ vorticity maxima merging and splitting. The algorithm worked as follows:
 Whilst this algorithm is considerably less sophisticated that that of \textcite{hodges1994general},
 it was found to produce sufficiently good tracks to pick up most of the best tracks in the IBTrACS
 dataset, and almost all of the best tracks that were hurricanes (Section
-\ref{sec:matching}). A discussion of other tracking algorithms can be found in Section
-\ref{sec:discussion_tracking_algs}.
+\ref{sec:matching}). 
+
+% CULLED: 
+% A discussion of other tracking algorithms can be found in Section
+% \ref{sec:discussion_tracking_algs}.
 
 \section{Matching}
 \label{sec:matching}
@@ -760,9 +787,12 @@ one ensemble member and best track is shown in Figure \ref{fig:katrina_individua
 This shows how the cumulative and mean distances between a derived track (from ensemble member 8)
 and a best track are calculated. All matching tracks across all the ensemble members for each of the
 different configurations for Hurricane Katrina are shown in Figure
-\ref{fig:katrina_six_tracking_configs}. This shows a typical hurricane that makes landfall. The
-``staircase effect'' is shown by the derived track, whereby it is limited to moving from grid cell
-to cell. The good match between the derived and best track is clear.
+\ref{fig:katrina_six_tracking_configs}. Katrina started as a tropical depression to the East of
+Florida, and then strengthened over the Gulf of Mexico, where it became a hurricane. This section of
+the best track is particularly well matched in all of the figures, indicating that it is easier to
+track hurricanes and stronger storms in general due to their more pronounced natures. The tighter
+grouping of the higher resolution derived tracks around the best track can also be seen, indicating
+that they may be providing a better track. 
 
 \begin{figure}[hb!]
     \centering
@@ -771,8 +801,9 @@ to cell. The good match between the derived and best track is clear.
         Katrina. The derived track was generated from the \SI{850}{hPa} pressure level using the
         original resolution and ensemble member 8. The match between the best track and the derived
         track is shown using yellow lines, which show the distance between the two tracks at each
-        timestep. The cumulative distance is the sum of these distances, and the mean distance is
-        the cumulative distance divided by the number of matches.
+        timestep. 
+        % CULLED: The cumulative distance is the sum of these distances, and the mean distance is
+        % the cumulative distance divided by the number of matches.
     }
     \label{fig:katrina_individual_match_em7}
 \end{figure}
@@ -782,12 +813,7 @@ to cell. The good match between the derived and best track is clear.
     \includegraphics[width=4.5in]{figures/katrina_six_tracking_configs}
     \caption{The six different tracking configurations tested for their fit with the best track of
         Hurricane Katrina. Each of the individual figures shows all of the tracks across the
-        different ensemble members that were matched with Hurricane Katrina. Katrina started as a
-        tropical depression to the East of Florida, and then strengthened over the Gulf of Mexico,
-        where it became a hurricane. This section of the best track is particularly well matched in all
-        of the figures, indicating that it is easier to track hurricanes and stronger storms in general due
-        to their more pronounced natures. The tighter grouping of the higher resolution derived tracks
-        around the best track can also be seen, indicating that they may be providing a better track. }
+        different ensemble members that were matched with Hurricane Katrina.}
     \label{fig:katrina_six_tracking_configs}
 \end{figure}
 
@@ -857,13 +883,14 @@ obtain further variables from the 20CR dataset. These variables were:
         maximum to the wind speed maximum.
     \item \textbf{Convective available potential energy:} a measure of atmospheric instability.
     \item \textbf{Atmospheric water vaopur content:} amount of water vapour held by the atmosphere.
-    \item \textbf{Relative humidity at the NSPL:} Initial experimentation showed that this field was
-        not useful for hurricane detection so it was not collected for all years.
+        % CULLED:
+    % \item \textbf{Relative humidity at the NSPL:} Initial experimentation showed that this field was
+        % not useful for hurricane detection so it was not collected for all years.
 \end{enumerate}
 
 Figure \ref{fig:katrina_best_derived_comparison} shows the derived pressure and maximum wind speed
 for Katrina, plotted with the equivalent variables for the matching best track. From this figure, it
-is clear that there is far more spread in both pressure and maximum wind speed for the best
+is clear that there is far more range in both pressure and maximum wind speed for the best
 track than there is for the derived track. This is to be expected, as the 20CR data is at a
 resolution that will reduce the relative values of e.g. the maximum wind speed, as discussed in
 \textcite{walsh2007objectively}. However, to more fully test this, the values of all pressures and maximum wind
@@ -905,7 +932,7 @@ Now that for each ensemble member a number of tracks have been derived from the 
 extra fields have been collected using the tracks' positions at different timesteps, it is possible
 to use this information to classify each point of each track as either being a hurricane or not.
 These points will be knows as cyclone data points (CDPs) and for a typical year there are around
-100000 of these points, spread across the 56 ensemble members.
+\SI{100000}{} of these points, spread across the 56 ensemble members.
 
 % TODO: definition of classification.
 Classification is the process of taking a dataset and splitting it up into various categories based
@@ -930,10 +957,12 @@ which the classification algorithms can be trained, and by which their performan
 Once the classifiers have been trained, and their performance validated, they can then be used to
 classify new data based on the training they have undergone. This training process, where features
 from a set of samples are matched against a gold standard, is known as supervised machine learning.
-This is in contrast to other types of machine learning where there is no objective gold standard by
-which to train the algorithms, known as unsupervised machine learning. An example of unsupervised
-machine learning can be seen in \textcite{studholme2014objective}, where a K-means clustering
-algorithm is used to determine the extratropical transition of cyclones.
+
+% CULLED:
+% This is in contrast to other types of machine learning where there is no objective gold standard by
+% which to train the algorithms, known as unsupervised machine learning. An example of unsupervised
+% machine learning can be seen in \textcite{studholme2014objective}, where a K-means clustering
+% algorithm is used to determine the extratropical transition of cyclones.
 
 \begin{figure}[hb!]
     \centering
@@ -970,9 +999,11 @@ possible results of an individual classification. These are:
 
 When classifying a dataset, the collection of these results can be represented visually with a Venn
 diagram, as shown in Figure \ref{fig:tf_np_venn}. They can also be represented in tabular form in an
-Error Matrix (also called a Contingency Table or Confusion Matrix). An example of an Error Matrix
+Error Matrix. An example of an Error Matrix
 can be seen in Table \ref{tab:tf_np_table}, which shows the successes and failures of a simple
 classifier for a subset of the data.
+
+% CULLED: (also called a Contingency Table or Confusion Matrix)
 
 \begin{figure}[hb!]
     \centering
@@ -994,9 +1025,9 @@ classifier for a subset of the data.
         Classification Positive & \SI{40587}{} & \SI{14344}{} \\
         Classification Negative & \SI{23125}{} & \SI{2042954}{} \\
     \end{tabular}
-    \caption{Shows the number of True Positives, False Positives, False Negatives and True Negatives
-        for the calibration run with the Stochastic Gradient Descent classifier described later in this
-        section. }
+    \caption{Error Matrix showing the number of True Positives, False Positives, False Negatives and
+        True Negatives for the training run with the Stochastic Gradient Descent classifier described
+        later in this section. }
     \label{tab:tf_np_table}
 \end{table}
 
@@ -1008,18 +1039,17 @@ particular classifier performs at various tasks. Of these metrics, three will be
 project:
 
 \begin{enumerate}
-    \item \textbf{Sensitivity:} This is defined as $\frac{TP}{TP + FN}$. In this context, it gives a
-        measure of how many hurricanes are correctly detected from all the actual hurricanes. 1
-        represents a perfect sensitivity.
-    \item \textbf{Positive Predictive Value (PPV):} This is defined as $\frac{TP}{TP + FP}$. In this
-        context, it gives a measure of how many of the predicted hurricanes from the classification
-        algorithm are actually hurricanes. 1 represents a perfect PPV.
-    \item \textbf{False Positive Rate (FPR):} This is defined as $\frac{FP}{FP + TN}$. In this
-        context, it gives a measure of the detection rate of all actual hurricanes. 0 represents a
-        perfect FPR.
+    \item \textbf{Sensitivity:} This is defined as $\frac{TP}{TP + FN}$. It gives a measure of how
+        many hurricanes are correctly detected from all the actual hurricanes. 1 represents a
+        perfect sensitivity.
+    \item \textbf{Positive Predictive Value (PPV):} This is defined as $\frac{TP}{TP + FP}$. It
+        gives a measure of how many of the predicted hurricanes from the classification algorithm
+        are actually hurricanes. 1 represents a perfect PPV.
+    \item \textbf{False Positive Rate (FPR):} This is defined as $\frac{FP}{FP + TN}$. It gives a
+        measure of the detection rate of all actual hurricanes. 0 represents a perfect FPR.
 \end{enumerate}
 
-Sensitivity is often plotted against FPR to make a Receiver Operator Characteristic plot (ROC plot).
+Sensitivity is often plotted against FPR to make a Receiver Operator Characteristic (ROC)  plot.
 ROC plots are useful for determining which particular classifier is considered to perform best over
 a given training and validation dataset. The top left corner of this plot represents perfect
 classification. Another plot which will be used in this project is a plot of Sensitivity against
@@ -1115,7 +1145,7 @@ discard CDPs based on whether or not they pass a particular threshold test.
         many FPs). As the threshold increases, the sensitivity decreases and the PPV increases as
         the FNs increase and the FPs decrease. Their sum shows a clear maximum around the
         intersection of the two individual lines, at a vorticity value of \SI{1e-4}{s^{-1}}. All
-        other threshold values are the same as in Table \ref{tab:threshold_values} }
+        other threshold values are the same as in Table \ref{tab:threshold_values}. }
     \label{fig:threshold_sens_ppv_vort}
 \end{figure}
 
@@ -1142,7 +1172,7 @@ The implementations of these algorithms in the Python library scikit-learn were 
 % How this works. Its relation to SVM.
 Stochastic Gradient Descent (SGD) classifiers are an efficient class of classifiers that can scale
 to 2 million samples, and are thus suitable for the problem in this project
-\parencite{singer07pegasos, bottou2008tradeoffs}. This makes them more suitable than e.g. a Support
+\parencite{shalevshwartz07pegasos, bottou2008tradeoffs}. This makes them more suitable than e.g. a Support
 Vector Machine (SVM) classifier \parencite{cortes1995support}, to which they are closely related.
 SVM classifiers typically only scale to around \SI{10e5}{} samples and therefore would not scale to
 the number of samples used in this study. To understand the essentials of how an SGD classifier
@@ -1163,18 +1193,21 @@ This allows SGD classifiers to scale to far more samples than their SVM counterp
 solving the same underlying problem (albeit possibly less optimally).
 
 Again, the scikit-learn implementation for this classifier was used \parencite{scikitLearn2011}.
-This particular classifier is sensitive to feature scaling, which is where a larger absolute range
-for e.g. pressure than vorticity leads to the classification being unduly biased towards this
-feature. Therefore the input features must be scaled before the classifier is trained with this
-dataset, and likewise any data to be classified must be scaled using this same scaling as was used
-for the training dataset. Dataset scaling was provided by the scikit-learn library.
 
-\subsubsection{Combining Classifiers}
-With some of the classifiers, it was clear from examination of the output that they performed well
-apart from producing FPs in areas of e.g. low vorticity or low temperature at \SI{850}{hPa}.
-Therefore it made sense to use e.g. an SGD classifier in conjunction with a threshold classifier.
-The result of this is to reduce the number of FPs, and increase the number of TNs by the same
-amount. This has the effect of increasing the PPV and FPR, but at the expense of the sensitivity.
+% CULLED:
+% This particular classifier is sensitive to feature scaling, which is where a larger absolute range
+% for e.g. pressure than vorticity leads to the classification being unduly biased towards this
+% feature. Therefore the input features must be scaled before the classifier is trained with this
+% dataset, and likewise any data to be classified must be scaled using this same scaling as was used
+% for the training dataset. Dataset scaling was provided by the scikit-learn library.
+
+% CULLED
+% \subsubsection{Combining Classifiers}
+% With some of the classifiers, it was clear from examination of the output that they performed well
+% apart from producing FPs in areas of e.g. low vorticity or low temperature at \SI{850}{hPa}.
+% Therefore it made sense to use e.g. an SGD classifier in conjunction with a threshold classifier.
+% The result of this is to reduce the number of FPs, and increase the number of TNs by the same
+% amount. This has the effect of increasing the PPV and FPR, but at the expense of the sensitivity.
 
 \subsection{Classifier Performance}
 
@@ -1208,16 +1241,19 @@ classifiers. The LDC classifier performs least well on on sensitivity, and poorl
 it is not deemed suitable for classification in this context. The QDC categoriser performs
 particularly well on sensitivity, but is worst for PPV and FPR. This does not preclude its use for
 classification; if it were important to not miss as many hurricanes as possible, and a high number
-of FPs was acceptable, than it may be a suitable classifier. Indeed, coupled with a threshold
-classifier (``QDC/Thresh.''), it performs well on both sensitivity and PPV metrics. The two
+of FPs was acceptable, than it may be a suitable classifier. The two
 remaining classifiers, the threshold and the SGD, perform similarly well on sensitivity, but the SGD
 classifier outperforms the threshold classifier on the PPV, therefore it is chosen as the classifier
 to use.
 
+% CULLED:
+% Indeed, coupled with a threshold
+% classifier (``QDC/Thresh.''), it performs well on both sensitivity and PPV metrics. 
+
 \begin{figure}[hb!]
     \centering
     \includegraphics[width=\textwidth]{figures/ppv_and_fpr_vs_sens}
-    \caption{Classifier performance shown for calibration (top) and validation (bottom) datasets,
+    \caption{Classifier performance shown for training (top) and validation (bottom) datasets,
         showing PPV vs sensitivity (left) and FPR vs sensitivity - Receiver Operating Characteristic
         plot (ROC plot, right). Note that x-axis on the ROC plots only goes from 0 to 0.1. }
     \label{fig:ppv_and_fpr_vs_sens}
@@ -1245,7 +1281,7 @@ to use.
         \multicolumn{1}{|c|}{SGDC} & 0.637 & 0.739 & \SI{6.97e-3}{} & 0.640 & 0.717 & \SI{7.07e-3}{} \\
 % cal: 0.6629363385233551, 0.6684761965054444, 0.010181801566909607 
 % val: 0.6819219628556824, 0.6619035805838088, 0.009799161057981525
-        \multicolumn{1}{|c|}{QDC/Thresh.} & 0.663 & 0.668 & \SI{10.18e-3}{} & 0.682 & 0.662 & \SI{9.79e-3}{} \\
+        % CULLED: \multicolumn{1}{|c|}{QDC/Thresh.} & 0.663 & 0.668 & \SI{10.18e-3}{} & 0.682 & 0.662 & \SI{9.79e-3}{} \\
         \hline
     \end{tabular}
     \caption{Performance metrics for each of the classifiers.}
@@ -1259,45 +1295,47 @@ to use.
 \section{Hurricane Frequencies Over the 20\ts{th} Century}
 \label{sec:hurr_freq}
 
-Figure \ref{fig:20th_century_hurricane_timesteps} shows a comparison of the number of hurricane
-timesteps (as defined in Section \ref{sec:ibtracs}) taken from the IBTrACS dataset, and calculated
-from the 20CR dataset. To calculate the estimate for the number of hurricane timesteps (henceforth
-``estimated hurricane timesteps''), the detection procedure was run over each year of the period from
-1890 to 2009, and for each ensemble member. This was used to work out a value for the predicted
-number of hurricane timesteps for each year, with one value per ensemble member. The sensitivity and
-PPV from the years 1990 to 2009 (the training and validation period combined) were used in the
-formula given in Section \ref{sec:estimated_hurricanes}, to give the estimated hurricane timesteps
-for each year. This was done by multiplying each predicted number of hurricane timesteps by the PPV
-divided by the sensitivity, or a factor of $\frac{0.728}{0.637} = 1.143$ . The maximum and minimum
-numbers of estimated hurricane timesteps in any ensemble member were used to plot the light blue
-area, and the mean of the ensemble members was plotted using the blue dashed line.
+Figure \ref{fig:20th_century_hurricane_timesteps} shows a comparison of the number of
+hurricane-timesteps (as defined in Section \ref{sec:ibtracs}) taken from the IBTrACS dataset, and
+calculated from the 20CR dataset. To calculate the estimate for the number of hurricane-timesteps
+(henceforth ``estimated hurricane-timesteps''), the detection procedure was run over each year of
+the period from 1890 to 2009, and for each ensemble member. This was used to work out a value for
+the predicted number of hurricane-timesteps for each year, with one value per ensemble member. The
+sensitivity and PPV from the years 1990 to 2009 (the training and validation period combined) were
+used in the formula given in Section \ref{sec:estimated_hurricanes}, to give the estimated
+hurricane-timesteps for each year. This was done by multiplying each predicted number of
+hurricane-timesteps by the PPV divided by the sensitivity, or a factor of $\frac{0.728}{0.637} =
+1.143$ . The maximum and minimum numbers of estimated hurricane-timesteps in any ensemble member
+were used to plot the light blue area, and the mean of the ensemble members was plotted using the
+blue dashed line.
 
 For the results of this chapter it is useful to use the four eras described in Section
 \ref{sec:ibtracs}. These were the pre-Panama Canal (1890 - 1914), Panama Canal (1915 - 1943),
-aircraft reconnaissance (1944 - 1965) and satellite (1966 - 2009) eras. Results will be presented in
+aircraft reconnaissance (1944 - 1965) and satellite (1966 - 2009) eras. Results will be presented
 with reference to these eras.
 
 From the top graph in Figure \ref{fig:20th_century_hurricane_timesteps}, there is clearly a marked
 correlation between the two time series. There is also a suggestion of a discrepancy between the two
 time series in the pre-Panama Canal era and the aircraft reconnaissance era, with the estimated
-hurricane timesteps being greater in the pre-Panama Canal era, and fewer in the
+hurricane-timesteps being greater in the pre-Panama Canal era, and fewer in the
 aircraft reconnaissance era. This is borne out by the bottom graph in Figure 
-\ref{fig:20th_century_hurricane_timesteps}, which shows the best tracks hurricane timesteps minus the
-estimated hurricane timesteps. Here there is a clear sign that the best tracks hurricane timesteps
-is substantially lower than the estimated hurricane timesteps in the pre-Panama Canal era. It is
-also evident that the best tracks hurricane timesteps is substantially larger in the aircraft
+\ref{fig:20th_century_hurricane_timesteps}, which shows the best tracks hurricane-timesteps minus the
+estimated hurricane-timesteps. Here there is a clear sign that the best tracks hurricane-timesteps
+is substantially lower than the estimated hurricane-timesteps in the pre-Panama Canal era. It is
+also evident that the best tracks hurricane-timesteps is substantially larger in the aircraft
 reconnaissance and early satellite eras.
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth]{figures/20th_century_hurricane_timesteps}
-    \caption{(top) The hurricane timesteps per year as taken from the IBTrACS best tracks database
+    \caption{(top) The hurricane-timesteps per year as taken from the IBTrACS best tracks database
         (red), and the mean across ensemble members of the estimated values taken from the 20CR
         dataset (blue dashed). The blue shaded range shows the difference between the maximum and maximum
         taken from the ensemble members. The division between four eras: pre-Panama Canal, Panama
         Canal, aircraft reconnaissance and satellite are shown with dashed black vertical lines.
-        (bottom) The estimated value subtracted from the best tracks value for each year. A negative
-        value means that the estimation is larger than the best tracks value.}
+        (bottom) The estimated value subtracted from the best tracks value for each year. 
+        % CULLED: A negative value means that the estimation is larger than the best tracks value.
+    }
     \label{fig:20th_century_hurricane_timesteps}
 \end{figure}
 
@@ -1306,8 +1344,8 @@ Figure \ref{fig:20th_century_hurricane_corr} shows the correlation of the two ti
 over the whole of the time period, and second by splitting the time period into two roughly equal
 periods, based on the start of aircraft reconnaissance (1944). Given the high $r^2$ value of
 \SI{0.63}{} shown in the first correlation plot, these series are very well correlated. The gradient
-is less than unity though, which implies that there are fewer estimated hurricane timesteps than
-there are best tracks hurricane timesteps over the whole period (although this effect is slightly
+is less than unity though, which implies that there are fewer estimated hurricane-timesteps than
+there are best tracks hurricane-timesteps over the whole period (although this effect is slightly
 reduced by the positive y-intercept). From analysing the two time periods separately, as in the
 second correlation plot, a clear distinction between the two periods can be seen, with the pre-1944
 estimated numbers clearly estimating more hurricanes than were seen in the best tracks database, and
@@ -1333,23 +1371,25 @@ of \SI{-8.52}{}.
 Figure \ref{fig:20th_century_hurricane_corr_split} shows a finer breakdown of the two series based
 on the four eras. The values of $r^2$ range between 0.68 to 0.80, meaning there is good correlation
 between the two time series within each era. This figure again shows that the number of estimated
-hurricane timesteps in the pre-Panama Canal era is far higher than in the best tracks database, both
+hurricane-timesteps in the pre-Panama Canal era is far higher than in the best tracks database, both
 due to the large positive y-intercept and the gradient which is greater than unity. Reasons for this
 are discussed in Section \ref{sec:freq_comparison}. In the Panama Canal era, the gradient is
 slightly below unity, and the y-intercept is small and positive, which means that the two time
 series are well matched. The most surprising era is the aircraft reconnaissance era, for which the
 gradient is substantially less than unity, and the y-intercept is very close to zero. This means
-that during the aircraft reconnaissance era, the estimated hurricane timesteps were almost always
-lower than the best tracks hurricane timesteps, with the effect becoming more pronounced as the
-hurricane timesteps per year increases.  Reasons as to why this might be are discussed in Section
+that during the aircraft reconnaissance era, the estimated hurricane-timesteps were almost always
+lower than the best tracks hurricane-timesteps, with the effect becoming more pronounced as the
+hurricane-timesteps per year increases.  Reasons as to why this might be are discussed in Section
 \ref{sec:freq_comparison}. Finally, in the satellite era, the gradient is close to unity, and the
-y-intercept is negative, indicating that during this era the estimated hurricane timesteps is
-systematically slightly lower than the best tracks hurricane timesteps. The gradient being close to
-unity is to be expected given that the classification was trained on data from the last two decades
-from this era.  The fact that it is less than unity, and the negative y-intercept, could be due to
-the underestimation of hurricanes in the early satellite era, as mentioned in regard to Figure
-\ref{fig:20th_century_hurricane_timesteps}.
+y-intercept is negative, indicating that during this era the estimated hurricane-timesteps is
+systematically slightly lower than the best tracks hurricane-timesteps. The fact that it is less
+than unity, and the negative y-intercept, could be due to the underestimation of hurricanes in the
+early satellite era, as mentioned in regard to Figure \ref{fig:20th_century_hurricane_timesteps}.
 
+% CULLED: 
+% The gradient being close to
+% unity is to be expected given that the classification was trained on data from the last two decades
+% from this era.  
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth]{figures/20th_century_corr_split}
@@ -1385,12 +1425,12 @@ different eras are shown in Table \ref{tab:era_p_value}.
         \hline
     \end{tabular}
     \caption{Values of gradient and $p$ value of the linear regression for the best tracks and
-    estimated hurricane timestep and hurricane timestep time series, for each of the four eras.}
+    estimated hurricane-timestep and hurricane-timestep time series, for each of the four eras.}
     \label{tab:era_p_value}
 \end{table}
 
 \newpage
-The test for statistical significance employed in this study is to test to see if $p \leq 0.05$.
+The statistical significance level is chosen to be $p = 0.05$.
 This test is used to see whether the null hypothesis that the time series in question is not
 changing (i.e. its gradient is zero) can be rejected. This is the same as was used in
 \textcite{vecchi2008estimates}. Based on this test for significance, three of the time series over
@@ -1400,9 +1440,9 @@ show significant downwards trends. However, the most significant change is shown
 hurricane numbers in the satellite era from only the 20CR dataset, which has a $p$
 value of \SI{0.001}{}, and a positive gradient. Taken at face value this implies that there is
 a statistically significant positive trend over the final part of the 20\ts{th} century and start of
-the 21\ts{st} century in the number of estimated hurricane timesteps, or a rise in the frequency of hurricanes
+the 21\ts{st} century in the number of estimated hurricane-timesteps, or a rise in the frequency of hurricanes
 since 1966. However, caution must be applied as there is also evidence that the number of estimated
-hurricanes timesteps was below what would be expected (see Figure
+hurricane-timesteps was below what would be expected (see Figure
 \ref{fig:20th_century_hurricane_timesteps}), and therefore this rise could be due to underestimating
 how many hurricanes there were in the early satellite era, rather than a genuine signal. The same
 era in the best tracks number is not seen to show any significant rise, although the gradient of the
@@ -1454,17 +1494,18 @@ non-hurricanes.  However, there were many fields that I would have liked to have
 could not, due to constraints as to what is easily available to download from the 20CR portal for
 each ensemble member. These include the temperatures at \SI{700}{}, \SI{500}{} and \SI{300}{hPa},
 which are used to calculate the warm core criterion and temperature anomalies
-\parencite{bengtsson1995hurricane, bengtsson1996will, walsh1997objective, yoshimura2006influence}. I
-would also have liked to have collected the cyclone phase space parameters as described in
-\textcite{evans2003objective, hart2003cyclone}, but these require the geopotential heights of
-\SI{900}{}, \SI{600}{} and \SI{300}{hPa}, and these are not readily available for each ensemble
-member either, although the geopotential heights of \SI{1000}{}, \SI{500}{} and \SI{200}{hPa} are.
-Whilst it is possible to obtain these fields, the only way to do this is to download the entire
-state of the atmosphere as represented by the GCM, which would prohibitively time consuming for this
-project, although these extra fields would have probably helped the classification procedure.
+\parencite{bengtsson1995hurricane, yoshimura2006influence}. I would also have liked to have
+calculated the cyclone phase space parameters as described in \textcite{evans2003objective,
+hart2003cyclone}, but these require the geopotential heights of \SI{900}{}, \SI{600}{} and
+\SI{300}{hPa}, and these are not readily available for each ensemble member either.  Whilst it is
+possible to obtain these fields, the only way to do this is to download the entire state of the
+atmosphere as represented by the GCM, which would be prohibitively time consuming for this project,
+although these extra fields would have probably helped the classification procedure.
+
+% CULLED:, although the geopotential heights of \SI{1000}{}, \SI{500}{} and \SI{200}{hPa} are.
 
 \subsection{Tracking Algorithms}
-\label{sec:discussion_tracking_algs}.
+\label{sec:discussion_tracking_algs}
 % Modifications that were considered: changing other configuration parameters, Kalman Filter based
 % tracker. Explain how testing framework would have allowed changes to be compared automatically,
 % and to judge the success of these changes. Say that using an algorithm such as Hodges' could also
@@ -1491,7 +1532,7 @@ algorithms, provided they could be made to produce data in the correct format.
 
 A more advanced tracking algorithm would almost certainly have produced better tracks. Referring to
 the flowchart in Figure \ref{fig:hurricane_detection_proc}, it is clear that the extra field
-detection, and the classification does not depend on how the tracks are produced. Therefore it
+detection and the classification do not depend on how the tracks are produced. Therefore it
 should be straightforward to use a more sophisticated tracking algorithm, such as the one used in
 \textcite{thorncroft2001african}. Better tracks would have lead to better estimation of where the
 vorticity maxima lay, and may also have meant that fewer hurricanes were missed each year. This
@@ -1505,15 +1546,15 @@ would yield greater improvements.
 
 % Compare hurricane freqs freqemanuel2010tropical. Mention best tracks correction in
 % vecchi2008estimates, and explain that the numbers that I found were in line 
-Overall, there was a good correlation between the best tracks and estimated hurricane timesteps, as
+Overall, there was a good correlation between the best tracks and estimated hurricane-timesteps, as
 indicated by the value of $r^2 = 0.63$. From Section \ref{sec:hurr_freq_in_each_era}, the two most
-striking results were that there were more estimated than best tracks hurricane timesteps in the
-pre-Panama Canal era, and that there were fewer estimated than best tracks hurricane timesteps in
+striking results were that there were more estimated than best tracks hurricane-timesteps in the
+pre-Panama Canal era, and that there were fewer estimated than best tracks hurricane-timesteps in
 the aircraft reconnaissance era. Both of these will be considered in turn.
 
 \subsection{Hurricane Frequencies in the Pre-Panama Canal Era}
-The estimated hurricane timesteps for the pre-Panama Canal era, 1890 - 1914, is higher than the best
-tracks hurricane timesteps. This could be an indication that there were missed hurricanes in the
+The estimated hurricane-timesteps for the pre-Panama Canal era, 1890 - 1914, is higher than the best
+tracks hurricane-timesteps. This could be an indication that there were missed hurricanes in the
 best tracks dataset over this era. This is interesting because it fits in with results from previous
 studies, that have taken a different approach to evaluating the reliability of best tracks datasets
 in the pre-satellite era. Through analysis of correlation between Sea Surface Temperatures (SSTs)
@@ -1524,7 +1565,7 @@ the HURDAT database before 1966 (HURDAT is the primary source of information for
 Atlantic for IBTrACS, see Section \ref{sec:ibtracs}). This adjustment changes for each year, but for
 the period from 1890 to 1914 it varies between 2.3 and 0.4 ``missing'' storms per year. This figure
 is not directly comparable with the values in this study, due to a different methodology on counting
-hurricanes - hurricane timesteps were used in this study, whereas total storms were used for the
+hurricanes - hurricane-timesteps were used in this study, whereas total storms were used for the
 adjustment in \textcite{vecchi2008estimates}. It does however indicate that the discrepancy found in
 this study could well be genuine, and offers another way of estimating how many hurricanes were
 missed in the pre-satellite era.
@@ -1539,15 +1580,15 @@ detected. They find that 2.1 hurricanes per year may have been missed over the p
 
 \subsection{Hurricane Frequencies in the Aircraft Reconnaissance Era}
 Section \ref{sec:hurr_freq_in_each_era} indicates that a number of hurricanes were missed in the
-estimated hurricane timesteps counts over the aircraft reconnaissance era. This cannot be explained
+estimated hurricane-timesteps counts over the aircraft reconnaissance era. This cannot be explained
 by examining the literature on missing hurricanes, as none of these studies claim that hurricanes
-have been overcounted from 1944 to 1965. Although it was not shown above, different classifiers were
-run over the course of the 20\ts{th} century, and the results were broadly similar to the results
-presented, in that there were fewer estimated hurricane timesteps in the aircraft reconnaissance era
-than best tracks hurricane timesteps. This points to something going awry in the tracking procedure,
-or perhaps a large number of weak hurricanes that were long in duration over this era. This would
-have had the effect of the classifier classifying them as not being hurricanes, even though they
-were, thus skewing the estimated hurricane timestep numbers downwards. 
+have been overcounted from 1944 to 1965. Although the results were not presented above, different
+classifiers were run over the course of the 20\ts{th} century, and the results were broadly similar
+to the results presented, in that there were fewer estimated hurricane-timesteps in the aircraft
+reconnaissance era than best tracks hurricane-timesteps. This points to something going awry in the
+tracking procedure, or perhaps a large number of weak hurricanes that were long in duration over
+this era. This would have had the effect of the classifier classifying them as not being hurricanes,
+even though they were, thus skewing the estimated hurricane-timestep numbers downwards. 
 
 This is certainly an area which deserved more investigation and research, as it has implications
 for the trends discussed in the next section, as well as casting doubts on the missing hurricanes
@@ -1558,11 +1599,11 @@ algorithms, as discussed in Section \ref{sec:discussion_tracking_algs}.
 % Point out numerous problems with trend analysis in hurricane frequency counts. Explain that trend
 % found is probably spurious. Links to climate change and how it is quite interesting.
 Two statistically significant trends were identified in Section \ref{sec:trends_freq}. The first was
-found in both the best tracks and estimated hurricane timesteps, and the second in just the
-estimated hurricane timesteps. Both will be considered in this section.
+found in both the best tracks and estimated hurricane-timesteps, and the second in just the
+estimated hurricane-timesteps. Both will be considered in this section.
 
 \subsection{Downward Trend in the Pre-Panama Canal Era}
-The downward trends of -4.93 (best track) and -5.41 (estimated) hurricane timesteps per year was
+The downward trends of -4.93 (best track) and -5.41 (estimated) hurricane-timesteps per year was
 found to be statistically significant in both cases. This represents a downward trend from 1890 to
 1914. Few studies have looked at this exact time span, so direct comparisons with the literature are
 difficult. However, \textcite{vecchi2008estimates} look at the period from 1878 to 2006, and mention
@@ -1571,7 +1612,7 @@ in the late 1800s, which they caution could be due to greater uncertainties in t
 record. The second is that there was a minimum from 1910 - 1930. Both these taken together would
 mean that looking at the 1890 to 1914 period is likely to sea a downward trend, as there is a period
 of high values at the start, and a period of low values at the end. That these downwards trends were
-seen in both the best track and estimated hurricane timesteps indicates that the signal is real,
+seen in both the best track and estimated hurricane-timesteps indicates that the signal is real,
 although this could be a consequence of the two datasets not being fully independent, as detailed in
 Section \ref{sec:ispd}.
 
@@ -1579,7 +1620,7 @@ Section \ref{sec:ispd}.
 
 The fact that no statistically significant rise was found in the best tracks frequencies is of
 interest, as other studies have found a rise over similar periods \parencite{goldenberg2001recent,
-holland2007heightened}. However, although they both use best tracks information to work draw their
+holland2007heightened}. However, although they both use best tracks information to draw their
 conclusions, their methodology is substantially different to this study:
 \textcite{goldenberg2001recent} look at ``major hurricanes'', or hurricanes that are category 3 and
 above on the Saffir-Simpson scale; \textcite{holland2007heightened} use a moving average technique
