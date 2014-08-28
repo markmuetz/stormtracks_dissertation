@@ -1257,8 +1257,8 @@ to use.
     \centering
     \includegraphics[width=\textwidth]{figures/ppv_and_fpr_vs_sens}
     \caption{Classifier performance shown for training (top) and validation (bottom) datasets,
-        showing PPV vs sensitivity (left) and FPR vs sensitivity - Receiver Operating Characteristic
-        plot (ROC plot, right). Note that x-axis on the ROC plots only goes from 0 to 0.1. }
+        showing PPV vs sensitivity (left) and ROC plot (right). Note that x-axis on the ROC plots only
+        goes from 0 to 0.1. }
     \label{fig:ppv_and_fpr_vs_sens}
 \end{figure}
 
@@ -1686,8 +1686,47 @@ possible reason could have been the impact of global warming on the hurricane fr
 North Atlantic Basin.
 
 % Not included in word count.
+% <= 500 words.
 \addcontentsline{toc}{chapter}{Auto-critique}
 \chapter*{Auto-critique}
+
+The original goal of this dissertation was to adapt a method developed by Dr.~Qingling Wu for
+detected ocean eddies to detect hurricanes. This excited me because it would have been a novel
+method for detecting hurricanes. It also interested me because it would involve both hurricanes and
+climate models, two topics which have fascinated me over the course of the MSc in Environmental
+Modelling.
+
+Unfortunately, after discussing the problem of detecting hurricanes using Dr.~Wu's method, it became
+apparent that it would not work as well for atmospheric anomalies as it does for ocean eddies. This
+was because typically there are far fewer pressure highs and lows than there are sea surface height
+anomalies, hundreds as opposed to thousands. Dr.~ Chris Brierley had already suggested looking into
+the algorithm in \textcite{walsh1997objective}, so experimenting with this algorithm and perhaps
+adapting it became my primary goal.
+
+Whilst looking into existing algorithms, I thought that it might be a good idea to try setting the
+various thresholds in the algorithm after the main bulk of the processing had been done. This would
+allow one to quickly find the optimum value of these thresholds, without having to redo the
+processing. This paved the way to the threshold classifier, and then the problem of classification
+as a branch of machine learning in general, which ended up forming a major part of this project.
+Although tracking is not integral to this approach, it reduces the amount of processing needed to be
+done in terms of extra field collection, and thus was a natural fit with the direction the project
+was taking.
+
+After the hurricane detection procedure had been developed, the technical challenge of running it
+over each ensemble member for the entire 20\ts{th} century took up a lot of time. One potential way
+I could have sped up this process would have been to use only one or a handful of ensemble members.
+This would have given me more time to analyse the results over the course of 20\ts{th} century, and
+may have allowed me to go back and work out why the number of estimated hurricane-timesteps was
+lower than the best tracks number in during the 1950s and 1960s. Using a subset of ensemble members
+would have come with its own disadvantages though: it would have been more difficult to know that
+the results were representative of the full set, and the sample size for the classification training
+would have been smaller.
+
+The use of machine learning techniques and the analysis of hurricane trends through detection of
+hurricanes in a consistent reanalysis dataset strike me as the biggest strengths of this
+dissertation. The simple nature of the tracking algorithm was a key weakness. Also, in hurricane
+trend analysis, it is common to look at the Power Dissipation Index - the maximum wind speed cubed -
+as well as frequencies. Unfortunately I did not have space to include this analysis.
 
 % Harvard style bibliography.
 \addcontentsline{toc}{chapter}{References}
