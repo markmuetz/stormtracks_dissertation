@@ -102,7 +102,7 @@ upwards trend in the number of hurricanes from 1966 to 2009 is also detected fro
 number of hurricanes, although this may be due to detecting fewer hurricanes in the 1960s and 1970s.
 
 \begin{center}
-\textbf{Word count:} 11925 % 28/08/14 10:48
+\textbf{Word count:} 11985 % 28/08/14 10:48
 \end{center}
 
 \newpage
@@ -256,7 +256,9 @@ about the hurricanes, such as where they were formed, which is important in deri
 cyclogenesis \parencite{marchok2002ncep}. Useful information about the fate of the cyclone can also
 be found, such as whether it undergoes an extratropical transition
 \parencite{studholme2014objective}. This is the approach taken by \textcite{thorncroft2001african,
-camargo2002improving}, and is also the approach that will be used in this study.
+camargo2002improving}, and is also the approach that will be used in this study. It has the added
+benefit of reducing the amount of data that has to be collected at each timestep, as only points
+that lie on a valid track need to be considered.
 
 Both these approaches rely on thresholds being set for the criteria in advance of running the
 detection procedure, although there may be some sensitivity analysis done on these thresholds as in
@@ -274,14 +276,15 @@ temperature at the \SI{850}{hPa} pressure level are recorded for each point alon
 the matching of the tracks derived from the 20CR data and the best tracks, it is then possible to
 see which values of these fields correspond to hurricanes, and which do not. This allows for setting
 of the thresholds \textit{after} the bulk of the processing has been done, thus greatly speeding up
-the process of finding optimum values for these thresholds. It also permits the use of machine
-learning classification algorithms, which it is hoped will improve the accuracy of the hurricane
-detection, as measured by the number of true and false positives. Investigating the effect of
-changing these thresholds is a similar approach to \textcite{walsh1997objective}, who analysed the
-numbers of false and missing tropical cyclones over September 1989 and October 1992, and
-investigated the changes in these number due to changing e.g. the vorticity threshold. The results
-of this study will be compared against the results of \textcite{walsh1997objective} in Section
-\ref{sec:classification_success}. 
+the process of finding optimum values for these thresholds. This is facilitated by the use of a
+tracking first algorithm, as the amount of data that has to be collected for each
+timestep is reduced. It also permits the use of machine learning classification algorithms, which it
+is hoped will improve the accuracy of the hurricane detection, as measured by the number of true and
+false positives. Investigating the effect of changing these thresholds is a similar approach to
+\textcite{walsh1997objective}, who analysed the numbers of false and missing tropical cyclones over
+September 1989 and October 1992, and investigated the changes in these number due to changing e.g.
+the vorticity threshold. The results of this study will be compared against the results of
+\textcite{walsh1997objective} in Section \ref{sec:classification_success}. 
 
 % It bears repeating that this approach is only possible because
 % this study is running the hurricane detection over a historical reanalysis dataset, otherwise this
@@ -1644,6 +1647,43 @@ the satellite era could be the reason behind this trend.
 % of measuring performance of various classifiers/detection procedures. Explain that different
 % classifiers have different strengths and weaknesses, and that these can be picked in accordance
 % with what is required.
+
+In this study a method for the detection of hurricanes in the North Atlantic basin in the 20\ts{th}
+Century Reanalysis (20CR) project was described. The procedure worked by deriving a set of tracks
+from the locations of vorticity maxima in the 20CR dataset. A modified nearest neighbour tracking
+algorithm was used. Optimal configuration parameters for this algorithm were found by matching the
+derived tracks to best tracks taken from the IBTrACS best tracks database. The framework for
+comparing different tracking algorithms was general and could be applied to different tracking
+algorithms.
+
+Using the optimum tracks, extra fields were collected along the length of each track. These fields,
+and the information from matching the derived and best tracks, were then used to train
+four supervised machine learning classification algorithms. They were trained on even years from
+1990 to 2009. These algorithms were validated against the odd years from the same period.
+Performance metrics were compared for the different algorithms. The Stochastic Gradient Descent
+classifier was found to perform best for the purposes of this study. However, a different classifier
+could be chosen with different performance characteristics if the main goal of the study was e.g. to
+have high certainty that a predicted hurricane was actually a hurricane.
+
+This hurricane detection procedure was only trained and validated over a period when reliable best
+tracks are known to exist. However, once it has been trained, it can be used over any period for
+which there are data in the 20CR dataset. It can thus be used to provide an almost independent
+record of the hurricane frequency over the course of the 20\ts{th} century (see Section
+\ref{sec:ispd} for why it is not fully independent).
+
+The hurricane detection procedure was then run from 1890 to 2009. This allowed a comparison of the
+frequency of hurricanes, as measured by the hurricane-timesteps, from the best tracks record and
+estimated from the 20CR dataset. The best tracks record was found to have fewer hurricanes in it in
+the era from 1890 to 1914, in agreement with other studies \parencite{vecchi2008estimates,
+landsea2007counting}. The estimated record was found to be missing hurricanes in the period from
+1944 to 1965. The reason for this was not ascertained, and is deserving of further study.
+
+A downwards trend in the hurricane frequency over 1890 to 1914 was discovered in both the best
+tracks and estimated records, and reasons for this were discussed. An upward trend in only the
+estimated hurricane frequency over 1966 to 2009 was found. The most likely reason from this was
+given as the undercounting of hurricanes at the start of this era in the estimated record. Another
+possible reason could have been the impact of global warming on the hurricane frequencies in the
+North Atlantic Basin.
 
 % Not included in word count.
 \addcontentsline{toc}{chapter}{Auto-critique}
